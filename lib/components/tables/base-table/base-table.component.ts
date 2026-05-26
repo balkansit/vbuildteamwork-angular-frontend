@@ -147,8 +147,6 @@ export class BaseTableComponent<T> implements OnInit {
 
   selectedRow: T | null = null;
 
-  
-
   constructor(
     private dialog: MatDialog,
     private spinner: SpinnerLoadingService,
@@ -450,7 +448,10 @@ export class BaseTableComponent<T> implements OnInit {
 
   onDeleteConfirm(action: string) {
     if (action === 'confirm' && this.itemToDelete) {
+      this.showConfirm = false;
+
       const id = (this.itemToDelete as any).id;
+
       this.deleteItem(id)
         .pipe(
           withLoadingAndAlert(this.spinner, (a) => (this.alert = a), {
@@ -459,7 +460,6 @@ export class BaseTableComponent<T> implements OnInit {
             errorMessage: `Failed to delete ${this.resourceName}`,
           }),
           finalize(() => {
-            this.showConfirm = false;
             this.itemToDelete = null;
           })
         )
