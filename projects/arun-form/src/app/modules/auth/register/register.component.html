@@ -1,0 +1,78 @@
+<app-auth-layout [imageSrc]="'assets/images/intro-ben.png'" [imagePosition]="'left'" [layoutType]="'split'">
+  <div maincontent class="container-fluid mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+
+        <!-- Row 4: Alert -->
+        <div class="row mb-3" *ngIf="errorMessage">
+          <div class="col">
+            <app-bootstrap-alert [message]="errorMessage" type="danger" (close)="clearError()">
+            </app-bootstrap-alert>
+          </div>
+        </div>
+
+        <!-- Row 1: Logo -->
+        <div class="row mb-3">
+          <div class="col text-center">
+            <img [src]="imageSrc" class="logo img-fluid" alt="Logo" />
+          </div>
+        </div>
+
+        <!-- Row 2: Title -->
+        <div class="row mb-2">
+          <div class="col text-center">
+            <h3 class="login-title">
+              Create <span class="color-a">Account</span>
+            </h3>
+          </div>
+        </div>
+
+        <!-- Row 3: Subtext -->
+        <div class="row mb-4">
+          <div class="col text-center">
+            <p class="login-subtitle mb-1">India’s No.1 Medical Billing System.</p>
+            <p class="login-subtitle mb-1">Simplify your billing, save time, and focus on your customers.</p>
+            <p class="login-subtitle">Create your account today and take your business to the next level.</p>
+          </div>
+        </div>
+
+        <!-- Row 5: Phone Input -->
+        <div class="row g-2 mb-3">
+          <!-- <div class="col-md-3">
+            <bootstrap-dropdown [options]="[
+              { label: '(+91)', value: '+91' },
+            ]" [placeholder]="'Select'" [btnClass]="'w-100'" (valueChange)="selectCountryCode($event)">
+            </bootstrap-dropdown>
+          </div> -->
+
+          <div class="col p-0">
+            <bootstrap-form-input [type]="'number'" [(ngModel)]="phone" [placeholder]="'Phone number'"
+              [suffixIcon]="phone ? 'check-circle' : 'x-circle'">
+            </bootstrap-form-input>
+          </div>
+        </div>
+
+        <!-- Row 6: Submit Button -->
+        <div class="row mb-3">
+          <div class="col p-0">
+            <app-bootstrap-button [type]="'submit'" [variant]="'primary'" [width]="'100%'" [loading]="isLoading"
+              [disabled]="!phone" (clicked)="onSubmit()">
+              Send OTP
+            </app-bootstrap-button>
+          </div>
+        </div>
+
+        <!-- Row 7: Login Link -->
+        <div class="row">
+          <div class="col text-center">
+            <span>Already have an account?</span>
+            <a routerLink="/auth/login" class="ms-1">Login</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</app-auth-layout>

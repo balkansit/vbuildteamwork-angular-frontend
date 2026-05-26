@@ -1,0 +1,130 @@
+table th,
+table td {
+    vertical-align: middle;
+    padding: 0.55rem 0.75rem;
+}
+
+.billing-card {
+    border: 1px solid #e9ecef;
+    border-radius: 0.75rem;
+}
+
+.billing-card .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.billing-actions .btn {
+    min-width: 140px;
+}
+
+.billing-table-scroll {
+    max-height: 55vh;
+    overflow: auto;
+}
+
+.billing-table-scroll table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.billing-table-scroll::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.billing-table-scroll::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 8px;
+}
+
+.billing-table-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #94a3b8;
+}
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--sidebar-bg-color, #0d6efd);
+    color: #fff;
+    z-index: 10;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    min-width: 140px;
+}
+
+.table thead th:last-child {
+    min-width: 120px;
+}
+
+thead {
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+tbody td {
+    text-align: center;
+    min-width: 140px;
+}
+
+tbody td:first-child {
+    text-align: left;
+    min-width: 200px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #fbfdff;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f6f7fb;
+}
+
+tbody tr:hover {
+    background-color: #eef5ff;
+}
+
+tbody td.is-negative {
+    color: #dc3545;
+}
+
+tbody td.is-bold {
+    font-weight: bold;
+}
+
+input.form-control,
+select.form-select {
+    font-size: 0.875rem;
+    border-color: #e1e5eb;
+    box-shadow: none;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+    border-color: #6c9bf7;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--sidebar-bg-color, #0d6efd);
+    border-color: var(--sidebar-bg-color, #0d6efd);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #0a58ca;
+    border-color: #0a58ca;
+}
+
+.first-row {
+    background-color: #fff4e0 !important;
+}
+
+.first-row td {
+    font-weight: 600;
+    background: transparent !important;
+}
+
+.else-row td {
+    background-color: inherit !important;
+}

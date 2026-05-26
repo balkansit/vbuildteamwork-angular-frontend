@@ -1,0 +1,10 @@
+<div class="card">
+    <div class="card-body">
+        <app-base-table [title]="'Table List'" [subtitle]="'Manage Table'" [resourceName]="'Table'"
+            [tableColumns]="tableColumns" [fetchData]="fetchProducts" [getEditFormFields]="getEditFields"
+            [getViewFields]="getViewFields" [updateItem]="navigateToEdit" [deleteItem]="deleteProduct"
+            [addNavigateTo]="goToAdd" [inLineEdit]="false" [inLineView]="false" [filterColumns]="filterColumns"
+            (editItemClicked)="navigateToEdit($event)" (viewItemClicked)="navigateToView($event)" [showExport]="false">
+        </app-base-table>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.quantity-selector {
+    max-width: 140px;
+}
+
+.quantity-selector .btn {
+    width: 36px;
+    padding: 0;
+}
+
+.quantity-selector input {
+    min-width: 40px;
+    font-weight: 500;
+}

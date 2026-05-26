@@ -1,0 +1,64 @@
+<div class="div">
+
+
+  <div class="card mt-3">
+    <app-bootstrap-alert
+      *ngIf="!useModalAlert && alert?.showAlert"
+      [message]="alert?.description ?? null"
+      [type]="alert?.type ?? 'info'"
+      (close)="alert = null"
+    ></app-bootstrap-alert>
+    <div
+      class="card-body"
+      *ngIf="tableData && tableData.columns && tableData.columns.length > 0"
+    >
+      <app-base-table
+        [title]="tableName"
+        [subtitle]="currentDateDisplay"
+        [resourceName]="'Record'"
+        [data]="selectedTableData"
+        [tableColumns]="tableColumns"
+        [fetchData]="fetchTableData"
+        [getViewFields]="getViewFields"
+        [showCheckbox]="isAdmin"
+        [showBulkDelete]="isAdmin"
+        (bulkDeleteClicked)="bulkDeleteRecords($event)"
+        [showAddButton]="canShowAddButton"
+        [showCloseDay]="showCloseDayButton && (isAdmin || !isDayClosed)"
+        [showReopenDay]="isAdmin && isDayClosed"
+        [showActions]="canShowActionsColumn"
+        [hasEditRoles]="hasEditRoles"
+        [hasDeleteRoles]="hasDeleteRoles"
+        [deleteItem]="deleteRecord"
+        [inLineEdit]="false"
+        [inLineView]="true"
+        [filterColumns]="filterColumns"
+        (goToAddClicked)="openAddRecordModal()"
+        (editItemClicked)="openEditRecordModal($event)"
+        (viewItemClicked)="openViewModal($event)"
+        (closeDayClicked)="handleCloseDay()"
+        (reopenDayClicked)="handleReopenDay()"
+        [showExport]="false"
+      >
+      </app-base-table>
+    </div>
+  </div>
+
+
+
+  <div class="card p-5 mt-3">
+    <div
+      *ngIf="tableData?.columns?.length === 0"
+      class="alert alert-warning text-center mt-3 fw-bold font-size-30"
+    >
+      No data available for the selected table.
+    </div>
+
+    <div
+      *ngIf="tableId === 0"
+      class="alert alert-warning text-center mt-3 fw-bold"
+    >
+      Please select a table to view its data.
+    </div>
+  </div>
+</div>

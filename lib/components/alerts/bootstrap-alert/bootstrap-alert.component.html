@@ -1,0 +1,7 @@
+<div *ngIf="isVisible && message" class="alert alert-{{ type }} alert-dismissible fade show d-flex align-items-center" role="alert">
+  <i [class]="iconClass" style="margin-right: 0.5rem;"></i>
+  <div class="flex-grow-1">
+    {{ message }}
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button>
+</div>

@@ -1,0 +1,24 @@
+/* Scrollable area for dynamic rows */
+.scrollable-values {
+  max-height: 300px; /* control visible height */
+  overflow-y: auto;  /* vertical scroll */
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+/* Make form inside modal full width */
+:host ::ng-deep .mat-dialog-container {
+  width: 90vw !important; /* take 90% of viewport width */
+  max-width: 1000px !important; /* don’t exceed 1000px */
+}
+
+/* Better spacing for inputs */
+.scrollable-values .form-control {
+  font-size: 14px;
+  padding: 6px 10px;
+}
+
+/* Fix alignment of remove buttons */
+.scrollable-values .btn-danger {
+  padding: 6px;
+}

@@ -1,0 +1,8 @@
+.fw-600 {
+    font-weight: 600;
+}
+
+.form-select {
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+}

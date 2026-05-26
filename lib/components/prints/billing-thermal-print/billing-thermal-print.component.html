@@ -1,0 +1,174 @@
+<div class="billing-print-container" id="thermal-print-section">
+  <div class="thermal-bill-box">
+    <!-- Header -->
+    <div class="thermal-centered" *ngIf="printData?.settings?.showLogo && printData?.brandInfo?.logo">
+      <img [src]="printData?.brandInfo?.logo" alt="Logo" class="shop-logo" />
+    </div>
+    <div class="thermal-centered bold brand-name">{{ printData?.brandInfo?.name | uppercase }}</div>
+    <div class="thermal-centered small address">{{ printData?.brandInfo?.address }}</div>
+    <div class="thermal-centered small">{{ printData?.brandInfo?.phone }}</div>
+    <div class="thermal-centered small" *ngIf="printData?.brandInfo?.gstin">
+      GSTIN: {{ printData?.brandInfo?.gstin }}
+    </div>
+    <div class="thermal-centered small" *ngIf="printData?.brandInfo?.dlNo">
+      DL: {{ printData?.brandInfo?.dlNo }}
+    </div>
+
+    <hr class="thermal-hr" />
+
+    <div class="thermal-centered bold invoice-title">TAX INVOICE</div>
+
+    <hr class="thermal-hr" />
+
+    <!-- Bill & Customer Info (compact 3 rows) -->
+    <div class="info-grid compact">
+      <div class="info-pair">
+        <span>Bill No:</span>
+        <span>{{ printData?.billInfo?.billNo }}</span>
+      </div>
+      <div class="info-pair">
+        <span>Date:</span>
+        <span>{{ printData?.billInfo?.date }}</span>
+      </div>
+      <div class="info-pair" *ngIf="printData?.billInfo?.time">
+        <span>Time:</span>
+        <span>{{ printData?.billInfo?.time }}</span>
+      </div>
+      <div class="info-pair" *ngIf="printData?.billInfo?.cashierName">
+        <span>Cashier:</span>
+        <span>{{ printData?.billInfo?.cashierName }}</span>
+      </div>
+      <div class="info-pair" *ngIf="printData?.billInfo?.customerName">
+        <span>Customer:</span>
+        <span>{{ printData?.billInfo?.customerName }}</span>
+      </div>
+      <div class="info-pair" *ngIf="printData?.billInfo?.customerPhone">
+        <span>Phone:</span>
+        <span>{{ printData?.billInfo?.customerPhone }}</span>
+      </div>
+    </div>
+
+    <hr class="thermal-hr" />
+
+    <!-- Items Table -->
+    <table class="thermal-bill-table">
+      <thead>
+        <tr>
+          <th class="text-left">Item</th>
+          <th class="text-right">Qty</th>
+          <th class="text-right">Rate</th>
+          <th class="text-right">Amt</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of printData?.items">
+          <td class="text-left">
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-meta" *ngIf="item.batchNo || item.hsnCode">
+              <small *ngIf="item.hsnCode">HSN:{{ item.hsnCode }}</small>
+              <small *ngIf="item.batchNo">B:{{ item.batchNo }}</small>
+            </div>
+          </td>
+          <td class="text-right">{{ item.qty }}</td>
+          <td class="text-right">{{ item.rate | number:'1.2-2' }}</td>
+          <td class="text-right"><strong>{{ item.amount | number:'1.2-2' }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="thermal-hr" />
+
+    <!-- Summary (compact) -->
+    <div class="info-stack compact">
+      <div class="info-row">
+        <span>Subtotal:</span>
+        <span>₹{{ subtotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="discountAmount > 0">
+        <span>Discount:</span>
+        <span class="discount">-₹{{ discountAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="isTaxEnabled">
+        <span>Taxable:</span>
+        <span>₹{{ taxableAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="isTaxEnabled && printData?.taxInfo?.cgstAmount">
+        <span>CGST &#64; {{ printData?.taxInfo?.cgstPercent }}%:</span>
+        <span>₹{{ printData?.taxInfo?.cgstAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="isTaxEnabled && printData?.taxInfo?.sgstAmount">
+        <span>SGST &#64; {{ printData?.taxInfo?.sgstPercent }}%:</span>
+        <span>₹{{ printData?.taxInfo?.sgstAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="isTaxEnabled && printData?.taxInfo?.igstAmount">
+        <span>IGST &#64; {{ printData?.taxInfo?.igstPercent }}%:</span>
+        <span>₹{{ printData?.taxInfo?.igstAmount | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+
+
+    <hr class="thermal-hr thick" />
+
+    <div class="info-row grand-total">
+      <span>GRAND TOTAL:</span>
+      <span>₹{{ grandTotal | number:'1.2-2' }}</span>
+    </div>
+
+    <hr class="thermal-hr" />
+
+    <div class="info-row">
+      <span>Payment:</span>
+      <span>{{ printData?.billInfo?.paymentMode }}</span>
+    </div>
+
+    <div *ngIf="printData?.summary?.amountPaid">
+      <div class="info-row">
+        <span>Paid:</span>
+        <span>₹{{ printData?.summary?.amountPaid | number:'1.2-2' }}</span>
+      </div>
+      <div class="info-row" *ngIf="printData?.summary?.balance">
+        <span>Balance:</span>
+        <span>₹{{ printData?.summary?.balance | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <hr class="thermal-hr" />
+
+    <!-- Group-wise tax breakdown -->
+    <div class="tax-breakdown" *ngIf="printData?.items?.length && isTaxEnabled">
+      <div class="tax-breakdown-title">Tax Summary</div>
+      <table class="tax-breakdown-table">
+        <thead>
+          <tr>
+            <th class="text-left">GST %</th>
+            <th class="text-right">Taxable</th>
+            <th class="text-right">Tax Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let taxGroup of groupedTaxData">
+            <td class="text-left">{{ taxGroup.gstPercent }}%</td>
+            <td class="text-right">₹{{ taxGroup.taxable | number:'1.2-2' }}</td>
+            <td class="text-right">₹{{ taxGroup.taxAmount | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="thermal-centered" *ngIf="printData?.settings?.showFooter">
+      <div class="footer-text">{{ printData?.settings?.footerText || 'Thank you for your purchase!' }}</div>
+      <div class="visit-text">Visit Again!</div>
+    </div>
+
+    <!-- Terms -->
+    <div *ngIf="printData?.settings?.showTermsConditions && printData?.settings?.termsConditions">
+      <hr class="thermal-hr" />
+      <div class="thermal-centered small terms">
+        {{ printData?.settings?.termsConditions }}
+      </div>
+    </div>
+
+  </div>
+</div>

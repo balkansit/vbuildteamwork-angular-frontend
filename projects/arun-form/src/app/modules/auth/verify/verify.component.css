@@ -1,0 +1,124 @@
+.login-title {
+    font-size: 2rem;
+    font-weight: 650;
+    margin-bottom: 20px;
+    color: #333;
+    padding-left: 117px;
+
+}
+
+.logo {
+    width: 400px;
+    height: auto;
+    display: block;
+    padding-bottom: 40px;
+    margin: 0 auto;
+    padding-left: 119px;
+    padding-right: 90px;
+    
+    
+}
+
+.login-subtitle {
+    font-size: 1rem;
+    color: #555;
+    padding-left: 119px;
+    margin-bottom: 18px;
+}
+
+.color-a {
+    color: #69418B; /* or any color you prefer */
+}
+
+.mt-3 {
+    margin-top: 1rem;
+    padding-left: 119px;
+}
+
+.ms-1 {
+    margin-left: 0.25rem;
+    color: #69418B; /* or any color you prefer */
+}
+
+a {
+    color: #69418B;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #8842c5;
+    text-decoration: underline;
+}
+
+
+
+.col-md-10 {
+    width: 100%;
+    margin: 0 auto 15px auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px;
+    margin-bottom: 10px;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.col-md-11 {
+    width: 83%;
+    padding-left: 138px;
+    
+}
+
+.mt-3 button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mt-3 button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.btn-link.color-a {
+    top: 40px;
+    text-decoration: underline;
+    color: #69418B;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-link.color-a:hover {
+    color: #8842c5;
+    text-decoration: underline;
+}
+
+
+.main {
+    padding: 90px;
+    color: #69418B;
+}
+
+.tile {
+    color: #000000;
+}

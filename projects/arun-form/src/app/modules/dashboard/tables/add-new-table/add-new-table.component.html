@@ -1,0 +1,88 @@
+<div class="container-fluid">
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card p-3">
+        <h3 class="card-header">Add New Tables</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card p-3">
+
+        <div class="d-flex gap-5 align-items-center mb-3">
+
+          <app-bootstrap-button [variant]="'primary'" [type]="'submit'" [iconClass]="'fa fa-user'"
+            [iconPosition]="'prefix'" [customClass]="'my-custom-btn'" [width]="'160px'" (click)="openAddUser()">
+            Add New User
+          </app-bootstrap-button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card p-3">
+        <h1>Tables</h1>
+        <app-dynamic-form [title]="'Tables'" (submitted)="tableSubmit($event)" (formReady)="onFormReady($event)"
+          (openModal)="handleUsersModal($event)" [fields]="tableFields">
+        </app-dynamic-form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Columns Form Section -->
+  <div class="row mb-3" *ngIf="profileRecordId">
+    <div class="col">
+      <div class="card shadow-sm p-4">
+
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="mb-0">Table Columns</h3>
+          <button class="btn btn-primary btn-sm" (click)="addColumnForm()">
+            <i class="bi bi-plus-circle me-1"></i> Add Column
+          </button>
+        </div>
+
+        <!-- Dynamic Column Forms -->
+        <div *ngFor="let formFields of tableColumnForms; let i = index" class="mb-4">
+          <div class="card border-0 shadow-sm p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="mb-0">Column {{ i + 1 }}</h5>
+              <button class="btn btn-outline-danger btn-sm" (click)="removeColumnForm(i)"
+                *ngIf="tableColumnForms.length > 1">
+                <i class="bi bi-trash"></i> Delete
+              </button>
+            </div>
+
+            <!-- Column Form -->
+            <app-dynamic-form [title]="'Table Column ' + (i + 1)" [fields]="formFields"
+              (formReady)="onColumnFormReady($event, i)" (openModal)="onColumnOpenModal($event, i)">
+            </app-dynamic-form>
+          </div>
+        </div>
+
+        <!-- Dropdown Section -->
+        <div class="card shadow-sm border-0 p-3 mb-4">
+          <h5 class="mb-3">Table Dropdown</h5>
+          <app-dynamic-form [title]="'Table Dropdown'" [fields]="tableRecordFields"
+            (submitted)="tableRecordSubmit($event)" (formReady)="onDropdownFormReady($event)"
+            (openModal)="onDropdownOpenModal($event)">
+          </app-dynamic-form>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-end">
+          <button class="btn btn-primary" (click)="submitAllColumns()">
+            <i class="bi bi-check2-circle me-1"></i> Submit All
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

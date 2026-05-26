@@ -1,0 +1,12 @@
+mat-dialog-content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+.form-check-label {
+    font-weight: 500;
+}

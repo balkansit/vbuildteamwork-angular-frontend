@@ -1,0 +1,32 @@
+<div class="d-flex flex-wrap">
+  <div class="photo-box-wrapper" *ngFor="let photo of photos; let i = index">
+    <!-- Card container -->
+    <div class="card photo-card">
+      <div class="photo-box" (click)="triggerFileInput(i)">
+        <img *ngIf="photo?.preview_url || photo?.photo_url" [src]="photo.preview_url || photo.photo_url" alt="photo" />
+        <span *ngIf="!photo?.photo_url && !photo?.preview_url" class="placeholder-text">
+          Click to upload
+        </span>
+      </div>
+
+      <!-- Buttons below the photo -->
+      <div *ngIf="photo?.photo_url || photo?.preview_url" class="card-footer d-flex justify-content-center gap-2">
+        <button type="button" class="btn btn-danger btn-sm" (click)="removePhoto(i, $event)">
+          <i class="fa fa-trash"></i>
+        </button>
+
+        <button *ngIf="!acceptedPhotos[i]" type="button" class="btn btn-success btn-sm"
+          (click)="acceptPhoto(i, $event)">
+          <i class="fa fa-check"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add new photo box -->
+  <div class="photo-box add-box card" (click)="addPhotoBox()">+</div>
+</div>
+
+<input type="file" #fileInput accept="image/*,application/pdf" hidden (change)="onFileSelected($event)">
+
+<button class="btn btn-primary mt-3" *ngIf="showSubmitbtn" (click)="upload.emit()">Submit</button>

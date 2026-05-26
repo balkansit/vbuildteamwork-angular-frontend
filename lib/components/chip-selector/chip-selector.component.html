@@ -1,0 +1,30 @@
+<div class="chip-selector">
+  <div>
+    <label>Table:</label>
+    <select [(ngModel)]="selectedTable" (change)="onTableChange()">
+      <option *ngFor="let t of dropdownOptions" [ngValue]="t">{{ t.name }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Column:</label>
+    <select [(ngModel)]="selectedColumn" (change)="onColumnChange()">
+      <option *ngFor="let c of dropdownOptions2" [ngValue]="c">{{ c.name }}</option>
+    </select>
+  </div>
+
+  <div>
+     <label>Value:</label>
+    <input [(ngModel)]="newValue" [placeholder]="placeholder" />
+    <button class="add-btn" (click)="addChip()">Add</button>
+  </div>
+
+  <div class="chip-list">
+    <div *ngFor="let chip of selectedData" class="chip">
+      {{ chip.value }}
+      <button (click)="removeChip(chip)">×</button>
+    </div>
+  </div>
+
+  <button class="submit-btn" (click)="submitForm()">{{ buttonLabel }}</button>
+</div>

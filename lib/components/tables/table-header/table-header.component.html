@@ -1,0 +1,48 @@
+<div class="table-header">
+    <div class="table-header__title">
+        <div class="table-header__accent"></div>
+        <div>
+            <h2 class="table-header__heading">{{ title }}</h2>
+            <p *ngIf="subtitle" class="table-header__subtitle">{{ subtitle }}</p>
+        </div>
+    </div>
+
+    <div class="table-header__actions">
+        <app-bootstrap-button *ngIf="showExport" [variant]="'outline-light'" [type]="'button'" [width]="'auto'"
+            [disabled]="!canExport"
+            [customClass]="['header-btn', 'header-btn--ghost', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            (click)="export.emit()">
+            <i class="fas fa-file-export me-1"></i> Report
+        </app-bootstrap-button>
+
+        <app-bootstrap-button [variant]="'light'" [type]="'button'"
+            [customClass]="['header-btn', 'header-btn--muted', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            [iconPosition]="'prefix'" [width]="'auto'" (click)="refresh.emit()">
+            <i class="fas fa-sync-alt me-1"></i> Refresh
+        </app-bootstrap-button>
+
+        <app-bootstrap-button *ngIf="showCloseDay" [variant]="'outline-danger'" [type]="'button'"
+            [customClass]="['header-btn', 'header-btn--danger', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            [iconPosition]="'prefix'" [width]="'auto'" (click)="closeDay.emit()">
+            <i class="fas fa-door-closed me-1"></i> Close Day
+        </app-bootstrap-button>
+
+        <app-bootstrap-button *ngIf="showBulkDelete" [variant]="'outline-danger'" [type]="'button'"
+            [customClass]="['header-btn', 'header-btn--danger', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            [iconPosition]="'prefix'" [width]="'auto'" (click)="bulkDelete.emit()">
+            <i class="fas fa-trash-alt me-1"></i> Bulk Delete
+        </app-bootstrap-button>
+
+        <app-bootstrap-button *ngIf="showReopenDay" [variant]="'outline-success'" [type]="'button'"
+            [customClass]="['header-btn', 'header-btn--success', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            [iconPosition]="'prefix'" [width]="'auto'" (click)="reopenDay.emit()">
+            <i class="fas fa-unlock me-1"></i> Reopen Day
+        </app-bootstrap-button>
+
+        <app-bootstrap-button *ngIf="showAddButton" [variant]="'primary'" [type]="'button'"
+            [customClass]="['header-btn', 'header-btn--primary', elevation ? 'mat-elevation-z4' : ''].join(' ')"
+            [iconPosition]="'prefix'" [width]="'auto'" (click)="add.emit()">
+            <i class="fas fa-plus-circle me-1"></i> Add New
+        </app-bootstrap-button>
+    </div>
+</div>

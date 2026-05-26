@@ -1,0 +1,23 @@
+<div class="container-fluid py-3">
+    <!-- Top Form Section -->
+    <div class="card mb-3 p-3">
+        <ng-content select="[invoice-form]"></ng-content>
+    </div>
+
+    <!-- Main Content: Two Column Layout -->
+    <div class="row">
+        <!-- Left: Items Table -->
+        <div class="col-md-8">
+            <div class="card p-3">
+                <ng-content select="[invoice-items]"></ng-content>
+            </div>
+        </div>
+
+        <!-- Right: Summary -->
+        <div class="col-md-4">
+            <div class="card p-3">
+                <ng-content select="[invoice-summary]"></ng-content>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="form-group position-relative w-100" [ngClass]="customClass">
+    <label *ngIf="label" [for]="name" class="form-label input-label">
+        {{ label }}
+        <span *ngIf="required" class="text-danger">*</span>
+    </label>
+
+    <div class="input-group custom-input-group" [ngClass]="{
+      'is-invalid': errorMessage,
+      'is-focused': isFocused,
+      'is-disabled': disabled
+    }">
+        <div *ngIf="prefixIcon" class="input-group-text border-0 bg-transparent px-2">
+            <i class="fas" [ngClass]="prefixIcon"></i>
+        </div>
+
+        <input [attr.id]="name" [attr.name]="name" [type]="type" class="form-control border-0"
+            [placeholder]="placeholder" [value]="value" [disabled]="disabled" [required]="required"
+            [min]="min ?? null" [step]="step ?? null"
+            (input)="onInput($event)" (blur)="onBlur()" (change)="onInput($event)" (focus)="onFocus()" />
+
+        <div *ngIf="suffixIcon" class="input-group-text border-0 bg-transparent px-2">
+            <i class="fas" [ngClass]="suffixIcon"></i>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="invalid-feedback d-block">
+        {{ errorMessage }}
+    </div>
+</div>

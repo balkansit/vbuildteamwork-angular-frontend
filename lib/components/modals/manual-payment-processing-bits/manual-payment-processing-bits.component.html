@@ -1,0 +1,51 @@
+<div class="modal fade show d-block animated-modal" tabindex="-1" *ngIf="show"
+    style="background-color: rgba(0, 0, 0, 0.5);" (click)="handleAction('backdrop')">
+    <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+        <div class="modal-content p-4 position-relative animate__animated animate__fadeInDown">
+
+            <!-- Top Right Close -->
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+                (click)="handleAction('cancel')"></button>
+
+            <!-- Title -->
+            <h4 class="text-center mb-3">
+                <i [class]="statusIcon" style="margin-right: 0.5rem;"></i>
+                Payment Processing
+            </h4>
+
+            <!-- Description -->
+            <p class="text-muted text-center">{{ description }}</p>
+
+            <!-- Payment Method -->
+            <div class="text-center mb-3">
+                <img *ngIf="paymentMethodIcon" [src]="paymentMethodIcon" alt="Payment Method" width="60" height="60" />
+                <div class="mt-2">{{ paymentMethod | uppercase }}</div>
+            </div>
+
+            <!-- Amount to Pay -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-success">₹ {{ amount | number: '1.2-2' }}</h2>
+            </div>
+
+            <!-- Cash Payment Inputs -->
+            <div *ngIf="paymentMethod === 'cash'" class="mb-3">
+                <label>Amount Received</label>
+                <input type="number" class="form-control" [(ngModel)]="amountReceived" (input)="calculateBalance()" />
+                <div class="mt-2 text-muted">
+                    Balance to Return:
+                    <strong>₹ {{ balanceToReturn | number: '1.2-2' }}</strong>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-4 d-flex justify-content-center gap-2 flex-wrap">
+                <button class="btn btn-success" (click)="handleAction('payment-completed')">
+                    Payment Completed
+                </button>
+                <button class="btn btn-danger" (click)="handleAction('cancel')">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

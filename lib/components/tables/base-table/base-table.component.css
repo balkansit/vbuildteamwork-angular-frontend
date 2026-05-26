@@ -1,0 +1,714 @@
+/* ========================================
+   CONTAINER & LAYOUT STYLES
+   ======================================== */
+.content {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* ========================================
+   FILTER SECTION STYLES - MODERN COMPACT
+   ======================================== */
+.filter-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
+}
+
+.filter-section:hover {
+    border-color: #dee2e6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.filter-section .form-label {
+    color: #495057;
+    font-size: 0.875rem;
+}
+
+/* Compact filter input wrapper */
+.filter-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.filter-input-wrapper ::ng-deep bootstrap-form-input {
+    width: 100%;
+}
+
+.filter-input-wrapper ::ng-deep .form-control {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+    height: 34px;
+}
+
+.filter-input-wrapper ::ng-deep .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.15rem rgba(102, 126, 234, 0.15);
+}
+
+.form-select,
+.form-control {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.15rem rgba(102, 126, 234, 0.15);
+}
+
+.form-select-sm,
+.form-control-sm {
+    border-radius: 6px;
+    height: 34px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+/* Minimal clear button */
+.btn-outline-secondary {
+    border-color: #dee2e6;
+    color: #6c757d;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #6c757d;
+    color: #6c757d;
+    transform: scale(1.02);
+}
+
+.btn-outline-secondary:active {
+    background-color: #e9ecef;
+    border-color: #6c757d;
+}
+
+/* ========================================
+   SEARCH SECTION STYLES
+   ======================================== */
+.search-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ========================================
+   ACTION BUTTONS SECTION
+   ======================================== */
+.action-buttons-section {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   TABLE SECTION STYLES
+   ======================================== */
+.table-section {
+    padding: 0;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ========================================
+   TABLE SECTION STYLES
+   ======================================== */
+.table-section {
+    padding: 0;
+}
+
+.card {
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ========================================
+   MATERIAL TABLE WRAPPER
+   ======================================== */
+material-table {
+    display: block;
+    width: 100%;
+}
+
+material-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+/* ========================================
+   TABLE HEADER STYLES
+   ======================================== */
+material-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 1rem;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e9ecef;
+    text-align: left;
+    border-color: #e9ecef !important;
+}
+
+material-table th mat-sort-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+material-table th i {
+    color: #667eea;
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   TABLE BODY STYLES
+   ======================================== */
+material-table tbody tr {
+    border-bottom: 1px solid #f0f2f5;
+    transition: all 0.2s ease;
+}
+
+material-table tbody tr:hover {
+    background-color: #f8f9fa;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+material-table td {
+    padding: 0.875rem 1rem;
+    color: #2d3748;
+    font-size: 0.9375rem;
+    border-color: #f0f2f5 !important;
+    vertical-align: middle;
+}
+
+material-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========================================
+   CHECKBOX STYLES
+   ======================================== */
+material-table input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #667eea;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+material-table input[type="checkbox"]:hover {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+material-table input[type="checkbox"]:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+/* ========================================
+   BADGE & STATUS STYLES
+   ======================================== */
+material-table .badge {
+    width: auto;
+    height: auto;
+    padding: 0.35rem 0.65rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    background-color: #e9ecef;
+    color: #495057;
+    white-space: nowrap;
+}
+
+material-table .badge.bg-success {
+    background-color: #d1e7dd;
+    color: #0f5132;
+}
+
+material-table .badge.bg-danger {
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+material-table .badge.bg-warning {
+    background-color: #fff3cd;
+    color: #664d03;
+}
+
+material-table .badge.bg-info {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+material-table .badge.bg-primary {
+    background-color: #cfe2ff;
+    color: #084298;
+}
+
+/* ========================================
+   ALERT CELL STYLES
+   ======================================== */
+material-table [role="alert"] {
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border-left: 4px solid;
+    font-size: 0.875rem;
+}
+
+material-table .alert-success {
+    background-color: #d1e7dd;
+    border-color: #198754;
+    color: #0f5132;
+}
+
+material-table .alert-danger {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #842029;
+}
+
+material-table .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffc107;
+    color: #664d03;
+}
+
+material-table .alert-info {
+    background-color: #cfe2ff;
+    border-color: #0dcaf0;
+    color: #084298;
+}
+
+/* ========================================
+   BUTTON & LINK STYLES IN TABLE
+   ======================================== */
+material-table button[mat-button],
+material-table button.btn-primary {
+    background-color: #667eea;
+    color: #ffffff;
+    padding: 0.35rem 0.75rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+material-table button[mat-button]:hover,
+material-table button.btn-primary:hover {
+    background-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+material-table a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+material-table a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* ========================================
+   STICKY COLUMN STYLES
+   ======================================== */
+material-table .mat-column-actions,
+material-table .sticky-end {
+    position: sticky;
+    right: 0;
+    z-index: 10;
+    background-color: #ffffff;
+    padding: 0.5rem 0.75rem !important;
+}
+
+material-table tbody tr:hover .sticky-end {
+    background-color: #f8f9fa;
+}
+
+material-table td.mat-column-actions {
+    text-align: center;
+    padding: 0.5rem 0.75rem !important;
+}
+
+/* ========================================
+   ACTION MENU STYLES
+   ======================================== */
+.action-menu-button {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: #667eea;
+}
+
+.action-menu-button:hover {
+    background-color: #f0f2f5;
+    transform: scale(1.1);
+}
+
+.modern-menu {
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.modern-menu .mat-menu-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #495057;
+}
+
+.modern-menu .mat-menu-item:hover {
+    background-color: #f8f9fa;
+    color: #2d3748;
+}
+
+.modern-menu .mat-menu-item mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.menu-item-view mat-icon {
+    color: #0dcaf0 !important;
+}
+
+.menu-item-edit mat-icon {
+    color: #ffc107 !important;
+}
+
+.menu-item-delete mat-icon {
+    color: #dc3545 !important;
+}
+
+/* ========================================
+   PAGINATION WRAPPER
+   ======================================== */
+.pagination-wrapper {
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pagination-wrapper ::ng-deep .mat-paginator-container {
+    min-height: 45px;
+    padding: 0 1rem;
+    justify-content: flex-end;
+}
+
+.pagination-wrapper ::ng-deep .mat-paginator-page-size {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ========================================
+   EMPTY STATE STYLES
+   ======================================== */
+.alert-light {
+    background-color: #fffffb;
+    color: #664d03;
+    border-color: #ffecb5;
+}
+
+.alert-light h5 {
+    color: #664d03;
+    margin-top: 1rem;
+}
+
+.alert-light p {
+    margin-bottom: 0;
+}
+
+/* ========================================
+   MAT ICONS & BUTTONS
+   ======================================== */
+button[mat-icon-button] {
+    padding: 6px;
+    margin: 0 2px;
+    background: none;
+    border: none;
+}
+
+mat-menu {
+    min-width: 150px;
+}
+
+mat-icon {
+    vertical-align: middle;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+select,
+input {
+    width: auto !important;
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+.text-primary {
+    color: #667eea !important;
+}
+
+.text-info {
+    color: #0dcaf0 !important;
+}
+
+.text-success {
+    color: #198754 !important;
+}
+
+.text-warning {
+    color: #ffc107 !important;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.border-light-subtle {
+    border-color: #e9ecef !important;
+}
+
+.my-1 {
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+    .content {
+        padding: 0.5rem;
+    }
+
+    .filter-section,
+    .table-section {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .material-table {
+        font-size: 0.75rem;
+    }
+
+    .material-table th,
+    .material-table td {
+        padding: 0.5rem;
+    }
+
+    .pagination-wrapper ::ng-deep .mat-paginator-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card,
+.filter-section {
+    animation: slideInUp 0.3s ease-out;
+}
+
+/* ========================================
+   MAT-PAGINATOR STYLES (BOOTSTRAP THEME)
+   ======================================== */
+.pagination-wrapper {
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Base Paginator Styling */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator,
+.pagination-wrapper ::ng-deep .mat-paginator {
+    background-color: transparent;
+    font-family: var(--bs-body-font-family, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif);
+    font-size: 0.875rem;
+    color: #6c757d;
+    /* text-secondary */
+}
+
+/* Container Layout */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-container,
+.pagination-wrapper ::ng-deep .mat-paginator-container {
+    padding: 0.5rem 1rem;
+    min-height: auto;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Page Size Selector */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-page-size-label,
+.pagination-wrapper ::ng-deep .mat-paginator-page-size-label {
+    margin: 0 0.5rem 0 0;
+    color: #6c757d;
+    font-weight: normal;
+}
+
+.pagination-wrapper ::ng-deep .mat-mdc-form-field,
+.pagination-wrapper ::ng-deep .mat-form-field {
+    width: auto;
+}
+
+.pagination-wrapper ::ng-deep .mat-mdc-select-value,
+.pagination-wrapper ::ng-deep .mat-select-value {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Range Label */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-range-label,
+.pagination-wrapper ::ng-deep .mat-paginator-range-label {
+    margin: 0 1rem;
+    color: #495057;
+    /* text-dark */
+    font-weight: 600;
+}
+
+/* Navigation Buttons (Arrows) */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-next,
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-previous,
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-first,
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-last,
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-next,
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-previous,
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-first,
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-last {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 2px;
+    border-radius: 4px;
+    /* Bootstrap .rounded */
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+    color: #0d6efd;
+    /* primary blue */
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Button Hover State */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-next:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-previous:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-first:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-last:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-next:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-previous:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-first:hover:not([disabled]),
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-last:hover:not([disabled]) {
+    background-color: #e9ecef;
+    /* btn-light hover */
+    border-color: #dee2e6;
+    color: #0a58ca;
+    cursor: pointer;
+}
+
+/* Button Disabled State */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-next[disabled],
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-previous[disabled],
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-first[disabled],
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-navigation-last[disabled],
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-next[disabled],
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-previous[disabled],
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-first[disabled],
+.pagination-wrapper ::ng-deep .mat-paginator-navigation-last[disabled] {
+    opacity: 0.5;
+    background-color: #fff;
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #dee2e6;
+}
+
+/* Icons inside buttons */
+.pagination-wrapper ::ng-deep .mat-mdc-paginator-icon,
+.pagination-wrapper ::ng-deep .mat-paginator-icon {
+    width: 16px;
+    fill: currentColor;
+}

@@ -1,0 +1,43 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 6px 10px !important;
+  vertical-align: middle !important;
+  border: none !important; /* ✅ removes cell borders */
+}
+
+th {
+  background-color: #52637a !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa !important;
+}
+
+.table-primary {
+  background-color: #ffffff !important;
+}
+
+/* ✅ Optional: smooth hover effect */
+tr:hover {
+  background-color: #ffffff !important;
+}
+
+.alert {
+  font-size: 0.9rem;
+}
+
+/* ✅ Ensure no underline or divider lines anywhere */
+.mat-mdc-table,
+.mat-mdc-header-row,
+.mat-mdc-row {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+

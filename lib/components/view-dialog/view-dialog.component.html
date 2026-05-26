@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content>
+  <table class="table table-striped">
+    <tbody>
+      <tr *ngFor="let key of objectKeys(data.item)">
+        <th>{{ key.replace('_', ' ') | titlecase }}</th>
+        <td>{{ data.item[key] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="close()">Close</button>
+</div>

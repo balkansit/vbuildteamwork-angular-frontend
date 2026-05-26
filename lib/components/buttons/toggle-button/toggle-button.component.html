@@ -1,0 +1,9 @@
+<div class="btn-group" role="group">
+  <button *ngFor="let option of options" type="button" class="btn mat-elevation-z4" [ngClass]="{
+      'btn-primary': active === option.value,
+      'btn-light': active !== option.value
+    }" (click)="select(option)">
+    <i *ngIf="option.icon" class="fas" [ngClass]="option.icon"></i>
+    {{ option.label }}
+  </button>
+</div>

@@ -1,0 +1,10 @@
+<select class="form-select"
+        [ngClass]="btnClass"
+        [value]="value"
+        [disabled]="isDisabled"
+        (change)="handleChange($event)">
+  <option value="" disabled hidden>{{ placeholder }}</option>
+  <option *ngFor="let opt of options" [value]="opt.value">
+    {{ opt.label }}
+  </option>
+</select>

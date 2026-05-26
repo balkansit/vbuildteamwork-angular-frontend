@@ -1,0 +1,10 @@
+<ng-container [ngSwitch]="iconSet">
+    <!-- Material Icon -->
+    <mat-icon *ngSwitchCase="'mat'">{{ name }}</mat-icon>
+
+    <!-- FontAwesome CDN Icon -->
+    <i *ngSwitchCase="'fa'" class="fa" [ngClass]="'fa-' + name" aria-hidden="true"></i>
+
+    <!-- Default fallback: material icon -->
+    <mat-icon *ngSwitchDefault>{{ name }}</mat-icon>
+</ng-container>

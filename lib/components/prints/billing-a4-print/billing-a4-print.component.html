@@ -1,0 +1,191 @@
+<div class="billing-print-container" id="a4-print-section">
+  <div class="a4-bill-box">
+    <!-- Header Section -->
+    <div class="bill-header">
+      <div class="logo-section" *ngIf="printData?.settings?.showLogo && printData?.brandInfo?.logo">
+        <img [src]="printData?.brandInfo?.logo" alt="Logo" class="shop-logo" />
+      </div>
+      <div class="brand-info">
+        <h2 class="brand-name">{{ printData?.brandInfo?.name | uppercase }}</h2>
+        <p class="brand-address">{{ printData?.brandInfo?.address }}</p>
+        <div class="brand-contacts">
+          <span *ngIf="printData?.brandInfo?.phone">📞 {{ printData?.brandInfo?.phone }}</span>
+          <span *ngIf="printData?.brandInfo?.email">📧 {{ printData?.brandInfo?.email }}</span>
+        </div>
+        <div class="brand-licenses">
+          <span *ngIf="printData?.brandInfo?.gstin"><strong>GSTIN:</strong> {{ printData?.brandInfo?.gstin }}</span>
+          <span *ngIf="printData?.brandInfo?.fssai"><strong>FSSAI:</strong> {{ printData?.brandInfo?.fssai }}</span>
+          <span *ngIf="printData?.brandInfo?.dlNo"><strong>DL No:</strong> {{ printData?.brandInfo?.dlNo }}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Bill Info Section -->
+    <div class="bill-info-section">
+      <div class="bill-meta">
+        <div class="meta-row">
+          <span class="label">Bill No:</span>
+          <span class="value">{{ printData?.billInfo?.billNo }}</span>
+        </div>
+        <div class="meta-row">
+          <span class="label">Date:</span>
+          <span class="value">{{ printData?.billInfo?.date }}</span>
+        </div>
+        <div class="meta-row" *ngIf="printData?.billInfo?.time">
+          <span class="label">Time:</span>
+          <span class="value">{{ printData?.billInfo?.time }}</span>
+        </div>
+      </div>
+      <div class="bill-meta">
+        <div class="meta-row" *ngIf="printData?.billInfo?.cashierName">
+          <span class="label">Cashier:</span>
+          <span class="value">{{ printData?.billInfo?.cashierName }}</span>
+        </div>
+        <div class="meta-row">
+          <span class="label">Payment:</span>
+          <span class="value">{{ printData?.billInfo?.paymentMode }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="customer-info" *ngIf="printData?.billInfo?.customerName || printData?.billInfo?.customerPhone">
+      <div class="meta-row" *ngIf="printData?.billInfo?.customerName">
+        <span class="label">Customer:</span>
+        <span class="value">{{ printData?.billInfo?.customerName }}</span>
+      </div>
+      <div class="meta-row" *ngIf="printData?.billInfo?.customerPhone">
+        <span class="label">Phone:</span>
+        <span class="value">{{ printData?.billInfo?.customerPhone }}</span>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Items Table -->
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th class="text-left">Item</th>
+          <th class="text-center" *ngIf="printData?.items?.[0]?.hsnCode">HSN</th>
+          <th class="text-right">Qty</th>
+          <th class="text-right">Rate</th>
+          <th class="text-right" *ngIf="isTaxEnabled">Tax%</th>
+          <th class="text-right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of printData?.items; let i = index">
+          <td class="text-left">
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-meta" *ngIf="item.batchNo || item.expiryDate">
+              <small *ngIf="item.batchNo">Batch: {{ item.batchNo }}</small>
+              <small *ngIf="item.expiryDate">Exp: {{ item.expiryDate }}</small>
+            </div>
+          </td>
+          <td class="text-center" *ngIf="item.hsnCode"><small>{{ item.hsnCode }}</small></td>
+          <td class="text-right">{{ item.qty }}</td>
+          <td class="text-right">₹{{ item.rate | number:'1.2-2' }}</td>
+          <td class="text-right" *ngIf="isTaxEnabled">{{ item.taxRate }}%</td>
+          <td class="text-right"><strong>₹{{ item.amount | number:'1.2-2' }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="section-divider" />
+
+    <!-- Bill Summary -->
+    <div class="bill-summary">
+      <div class="summary-row">
+        <span class="label">Subtotal:</span>
+        <span class="value">₹{{ subtotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row" *ngIf="discountAmount > 0">
+        <span class="label">Discount <small *ngIf="printData?.summary?.discountPercent">({{
+            printData?.summary?.discountPercent }}%)</small>:</span>
+        <span class="value discount">- ₹{{ discountAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row taxable" *ngIf="isTaxEnabled">
+        <span class="label">Taxable Amount:</span>
+        <span class="value">₹{{ taxableAmount | number:'1.2-2' }}</span>
+      </div>
+
+      <!-- Tax Breakdown -->
+      <div class="tax-section" *ngIf="isTaxEnabled">
+        <div class="summary-row" *ngIf="printData?.taxInfo?.cgstAmount">
+          <span class="label">CGST {{ printData?.taxInfo?.cgstPercent }}%:</span>
+          <span class="value">₹{{ printData?.taxInfo?.cgstAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.taxInfo?.sgstAmount">
+          <span class="label">SGST {{ printData?.taxInfo?.sgstPercent }}%:</span>
+          <span class="value">₹{{ printData?.taxInfo?.sgstAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.taxInfo?.igstAmount">
+          <span class="label">IGST {{ printData?.taxInfo?.igstPercent }}%:</span>
+          <span class="value">₹{{ printData?.taxInfo?.igstAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.taxInfo?.cessAmount">
+          <span class="label">Cess {{ printData?.taxInfo?.cessPercent }}%:</span>
+          <span class="value">₹{{ printData?.taxInfo?.cessAmount | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <div class="summary-row" *ngIf="printData?.summary?.roundOff">
+        <span class="label">Round Off:</span>
+        <span class="value">₹{{ printData?.summary?.roundOff | number:'1.2-2' }}</span>
+      </div>
+
+      <hr class="total-divider" />
+
+      <div class="summary-row grand-total">
+        <span class="label">Grand Total:</span>
+        <span class="value">₹{{ grandTotal | number:'1.2-2' }}</span>
+      </div>
+
+      <div class="payment-info" *ngIf="printData?.summary?.amountPaid">
+        <div class="summary-row">
+          <span class="label">Amount Paid:</span>
+          <span class="value">₹{{ printData?.summary?.amountPaid | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.summary?.balance">
+          <span class="label">Balance:</span>
+          <span class="value">₹{{ printData?.summary?.balance | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bank Details -->
+    <div class="bank-details" *ngIf="printData?.settings?.showBankDetails && printData?.settings?.bankDetails">
+      <hr class="section-divider" />
+      <h4>Bank Details</h4>
+      <div class="bank-info">
+        <p *ngIf="printData?.settings?.bankDetails?.bankName"><strong>Bank:</strong> {{
+          printData?.settings?.bankDetails?.bankName }}</p>
+        <p *ngIf="printData?.settings?.bankDetails?.accountNo"><strong>A/C No:</strong> {{
+          printData?.settings?.bankDetails?.accountNo }}</p>
+        <p *ngIf="printData?.settings?.bankDetails?.ifsc"><strong>IFSC:</strong> {{
+          printData?.settings?.bankDetails?.ifsc }}
+        </p>
+        <p *ngIf="printData?.settings?.bankDetails?.upiId"><strong>UPI:</strong> {{
+          printData?.settings?.bankDetails?.upiId }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Terms & Conditions -->
+    <div class="terms" *ngIf="printData?.settings?.showTermsConditions && printData?.settings?.termsConditions">
+      <hr class="section-divider" />
+      <h4>Terms & Conditions</h4>
+      <p class="terms-text">{{ printData?.settings?.termsConditions }}</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="bill-footer" *ngIf="printData?.settings?.showFooter">
+      <hr class="section-divider" />
+      <p class="footer-text">{{ printData?.settings?.footerText || 'Thank you for your business!' }}</p>
+      <p class="visit-again">Visit Again!</p>
+    </div>
+
+  </div>
+</div>

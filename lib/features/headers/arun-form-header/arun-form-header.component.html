@@ -1,0 +1,47 @@
+<div class="header bg-color" style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <div class="header-left active">
+        <a routerLink="/" class="logo logo-normal">
+            <!-- <img [src]="logo" alt="" /> -->
+        </a>
+    </div>
+    <ul class="nav user-menu">
+
+        <li class="nav-item nav-searchinputs">
+            <!-- <h4 class="store-name">Life100 Medical - <span>Branch: Mayiladuthurai</span></h4> -->
+        </li>
+        <li class="nav-item dropdown has-arrow main-drop">
+            <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+                <span class="user-info">
+                    <span class="user-letter">
+                        <img src="assets/images/default-profile.jpg" alt="user avatar" class="img-fluid">
+                    </span>
+                    <span class="user-detail">
+                        <span class="user-name">{{ user?.name | titlecase }}</span>
+                        <span class="user-role">{{ user?.role_slug | titlecase }}</span>
+                    </span>
+                </span>
+            </a>
+            <div class="dropdown-menu menu-drop-user">
+                <div class="profilename">
+                    <div class="profileset">
+                        <span class="user-img">
+                            <img src="assets/images/default-profile.jpg" alt="">
+                            <span class="status online"></span></span>
+                        <div class="profilesets">
+                            <h6 style="margin: 0;">{{ user?.name | titlecase }}</h6>
+                            <h5>{{ user?.role_slug | titlecase }}</h5>
+                        </div>
+                    </div>
+                    <hr class="m-0">
+                    <a class="dropdown-item logout pb-0" href="javascript:void(0);" (click)="logout()">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

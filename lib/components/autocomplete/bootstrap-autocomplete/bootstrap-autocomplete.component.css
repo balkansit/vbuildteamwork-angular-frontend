@@ -1,0 +1,32 @@
+.dropdown-menu {
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.dropdown-item.disabled {
+    color: #6c757d;
+    pointer-events: none;
+}
+
+
+.dropdown-menu li a {
+    color: #212529;
+    text-decoration: none;
+}

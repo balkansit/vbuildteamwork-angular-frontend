@@ -1,0 +1,81 @@
+/* Modern Form Input Styles */
+.form-label {
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.375rem;
+    letter-spacing: 0.01em;
+}
+
+.form-label .text-danger {
+    margin-left: 2px;
+}
+
+.custom-input-group {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    background: #fff;
+    overflow: hidden;
+}
+
+.custom-input-group:hover {
+    border-color: #d1d5db;
+}
+
+.custom-input-group.is-focused {
+    border-color: var(--primary-color) !important;
+    border-width: 1.5px !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.custom-input-group.is-invalid {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.custom-input-group.is-disabled {
+    background-color: #f3f4f6 !important;
+    border-color: #e5e7eb !important;
+    cursor: not-allowed;
+}
+
+.custom-input-group.is-disabled .form-control {
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.custom-input-group.is-disabled .input-group-text {
+    color: #9ca3af;
+}
+
+.custom-input-group .form-control {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    height: auto;
+    line-height: 1.5;
+}
+
+.custom-input-group .form-control:focus {
+    outline: none;
+    box-shadow: none !important;
+}
+
+.custom-input-group .input-group-text {
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent;
+    color: #6b7280;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.875rem;
+}
+
+.invalid-feedback {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    color: var(--danger-color);
+}

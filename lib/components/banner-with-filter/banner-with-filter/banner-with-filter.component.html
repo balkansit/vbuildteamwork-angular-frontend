@@ -1,0 +1,60 @@
+<div
+  class="banner-area"
+  [style.background-image]="'url(' + bannerImage + ')'"
+>
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="banner-content text-center">
+      <h1>{{ bannerTitle }}</h1>
+      <p>{{ bannerDescription }}</p>
+      <div class="banner-btn">
+        <a routerLink="/about" class="default-btn btn-bg-one border-radius-5">
+          Read More
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter form -->
+<div *ngIf="showFilter" class="banner-form-area">
+  <div class="container">
+    <div class="banner-form">
+      <form (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-3">
+            <label>Location</label>
+            <select [(ngModel)]="selectedLocation" name="location" required>
+              <option value="" disabled>Select Location</option>
+              <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label>Check-in</label>
+            <input type="date" [(ngModel)]="checkInDate" name="checkIn" required />
+          </div>
+
+          <div class="col-md-3">
+            <label>Check-out</label>
+            <input type="date" [(ngModel)]="checkOutDate" name="checkOut" required />
+          </div>
+
+          <div class="col-md-2">
+            <label>Guests</label>
+            <select [(ngModel)]="guestCount" name="guests">
+              <option *ngFor="let g of guests" [value]="g">{{ g }}</option>
+            </select>
+          </div>
+
+          <div class="col-md-1 d-flex align-items-end">
+            <button type="submit" class="default-btn btn-bg-one border-radius-5 w-100">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

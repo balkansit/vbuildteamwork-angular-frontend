@@ -1,0 +1,42 @@
+<div class="container p-0 ">
+    <div class="row justify-content-center p-0">
+        <div class="col">
+            <!-- Login Form -->
+            <form [formGroup]="form" (ngSubmit)="submit()">
+                <ng-container *ngFor="let field of fields">
+                    <div class="mb-3">
+                        <label [for]="field.name" class="form-label">{{ field.label }}</label>
+                        <ng-container [ngSwitch]="field.type">
+                            <!-- Password Input -->
+                            <app-password-input *ngSwitchCase="'password'" [formControlName]="field.name"
+                                [placeholder]="field.placeholder ?? ''" [prefixIcon]="field.prefixIcon ?? ''"
+                                [errorMessage]="form.controls[field.name].invalid && (form.controls[field.name].dirty || form.controls[field.name].touched)
+                                ? field.label + ' is required': ''">
+                            </app-password-input>
+                            <!-- Default Input -->
+                            <bootstrap-form-input *ngSwitchDefault [type]="field.type" [formControlName]="field.name"
+                                [placeholder]="field.placeholder ?? ''" [prefixIcon]="field.prefixIcon ?? ''"
+                                [suffixIcon]="field.suffixIcon ?? ''"
+                                [errorMessage]="form.controls[field.name].invalid && 
+                                (form.controls[field.name].dirty || form.controls[field.name].touched)? field.label + ' is required': ''">
+                            </bootstrap-form-input>
+                        </ng-container>
+
+                        <div *ngIf="field.type === 'password' && !hideForgotPassword" class="text-end mt-1">
+                            <a routerLink="/">Forgot Password?</a>
+                        </div>
+
+                    </div>
+
+                </ng-container>
+
+
+                <!-- Submit Button -->
+                <app-bootstrap-button [type]="'submit'" [width]="'100%'" [loading]="isLoading"
+                    [disabled]="form.invalid">
+                    {{ buttonLabel }}
+                </app-bootstrap-button>
+            </form>
+        </div>
+    </div>
+</div>

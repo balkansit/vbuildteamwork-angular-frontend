@@ -1,0 +1,85 @@
+<h4 mat-dialog-title class="mb-3">{{ data.title }}</h4>
+
+<mat-dialog-content>
+    <!-- Date Range Section -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Report Period</label>
+        <select class="form-select" [(ngModel)]="filters.period">
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="custom">Custom Range</option>
+        </select>
+
+        <div *ngIf="filters.period === 'custom'" class="d-flex gap-2 mt-2">
+            <input type="date" class="form-control" [(ngModel)]="filters.from" placeholder="From" />
+            <input type="date" class="form-control" [(ngModel)]="filters.to" placeholder="To" />
+        </div>
+    </div>
+
+    <!-- Date Type -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Date Type</label>
+        <select class="form-select" [(ngModel)]="filters.dateType">
+            <option *ngFor="let dt of dateTypes" [value]="dt.key">{{ dt.label }}</option>
+        </select>
+    </div>
+
+    <!-- Select Fields -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Include Columns</label>
+        <div class="d-flex flex-wrap gap-2 mt-1">
+            <div *ngFor="let field of availableFields" class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="field.selected" [id]="field.key" />
+                <label class="form-check-label" [for]="field.key">{{ field.label }}</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group By -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Group By</label>
+        <select class="form-select" [(ngModel)]="filters.groupBy">
+            <option value="">None</option>
+            <option *ngFor="let f of availableFields" [value]="f.key">{{ f.label }}</option>
+        </select>
+    </div>
+
+    <!-- Sort By -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Sort By</label>
+        <select class="form-select" [(ngModel)]="filters.sortBy">
+            <option *ngFor="let f of availableFields" [value]="f.key">{{ f.label }}</option>
+        </select>
+    </div>
+
+    <!-- Output Format -->
+    <div class="mb-3">
+        <label class="fw-bold mb-1">Output Format</label>
+        <div class="d-flex flex-wrap gap-3">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="table" value="table" [(ngModel)]="filters.format" />
+                <label class="form-check-label" for="table">Preview</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="pdf" value="pdf" [(ngModel)]="filters.format" />
+                <label class="form-check-label" for="pdf">PDF</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="excel" value="excel" [(ngModel)]="filters.format" />
+                <label class="form-check-label" for="excel">Excel</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="csv" value="csv" [(ngModel)]="filters.format" />
+                <label class="form-check-label" for="csv">CSV</label>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<!-- Footer -->
+<mat-dialog-actions align="end" class="mt-3 d-flex gap-2">
+    <button class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button class="btn btn-primary" (click)="onGenerate()">Generate</button>
+</mat-dialog-actions>

@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+
+<div class="container-fluid">
+    <div class="row" (keydown)="onKeyDown($event)" tabindex="0" style="outline: none;">
+        <div class="col">
+            <div class="row bits-table-filterbox p-2" *ngIf="filterColumns.length > 0">
+                <div class="col d-flex gap-2">
+                    <ng-container *ngFor="let col of filterColumns">
+                        <ng-container [ngSwitch]="col.type">
+                            <!-- Text input filter -->
+                            <bootstrap-form-input *ngSwitchCase="'input'" [placeholder]="'Search ' + col.label"
+                                (keyup)="applyFilter($event, col.key)">
+                            </bootstrap-form-input>
+                            <!-- 
+                    Dropdown filter -->
+                            <select *ngSwitchCase="'dropdown'" class="form-select form-select-sm"
+                                (change)="applyFilter($event, col.key)">
+                                <option value="">All {{col.label}}</option>
+                                <option *ngFor="let opt of col.options" [value]="opt">{{opt}}</option>
+                            </select>
+
+                            <!-- <bootstrap-dropdown  [options]="getOptions(col.options)" [placeholder]="'Choose an option'"
+                        [btnClass]="'btn-primary'" (valueChange)="applyFilter($event, col.key)">
+                    </bootstrap-dropdown> -->
+                        </ng-container>
+                    </ng-container>
+                    <bootstrap-form-input *ngIf="showSearchInput" #searchInput placeholder="Global Search"
+                        (valueChange)="onSearch($event)">
+                    </bootstrap-form-input>
+                    <button class="btn btn-sm btn-secondary" style="min-width: 120px;" (click)="resetFilters()">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <mat-dialog-content>
+                <table mat-table [dataSource]="dataSource" style="width: 100%;">
+                    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+                        <th mat-header-cell *matHeaderCellDef>
+                            {{ columnHeaders[column] || column }} </th>
+                        <td mat-cell *matCellDef="let element"> {{ element[column] }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selectItem(row)"
+                        [class.selected-row]="dataSource.data.indexOf(row) === selectedRowIndex"
+                        style="cursor: pointer;">
+                    </tr>
+                </table>
+                <div *ngIf="dataSource.data.length === 0" class="alert alert-warning text-center mt-3">No data available
+                </div>
+                <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50, 100]"
+                    showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+
+            </mat-dialog-content>
+
+        </div>
+    </div>
+</div>

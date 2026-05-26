@@ -1,0 +1,19 @@
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show" style="background-color: rgba(0, 0, 0, 0.5);"
+    (click)="handleClose()">
+    <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+        <div class="modal-content p-4">
+
+            <!-- Header with Icon and Title -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <i *ngIf="iconClass" [class]="iconClass + ' me-2'" style="font-size: 1.2rem;"></i>
+                    <h5 class="modal-title mb-0">{{ title }}</h5>
+                </div>
+                <button type="button" class="btn-close" (click)="handleClose()"></button>
+            </div>
+
+            <!-- Projected Content -->
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

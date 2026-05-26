@@ -1,0 +1,24 @@
+<mat-dialog-content class="loading-container">
+    <div class="spinner-card">
+        <div class="spinner-wrapper" [style.--spinner-color]="data.color || 'var(--primary-color)'">
+            <!-- Modern spinning circle -->
+            <div class="modern-spinner">
+                <mat-spinner [diameter]="data.spinnerSize || 70"
+                             [strokeWidth]="data.strokeWidth || 8"
+                             [style.color]="data.color || 'var(--primary-color)'"></mat-spinner>
+            </div>
+
+            <!-- Pulse ring effect -->
+            <div class="pulse-ring"></div>
+        </div>
+
+        <div class="message-wrapper">
+            <p class="loading-message">{{ data.message || 'Loading, please wait' }}</p>
+            <div class="loading-dots">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

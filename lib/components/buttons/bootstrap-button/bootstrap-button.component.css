@@ -1,0 +1,379 @@
+/* Shared button styles */
+.btn {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: 12px;
+    padding: 0.6rem 1.05rem;
+    line-height: 1.5;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    transition: transform 150ms ease, box-shadow 180ms ease, background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    background: var(--btn-bg, transparent);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+}
+
+.btn:focus-visible {
+    outline: 2px solid rgba(99, 102, 241, 0.35);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+}
+
+/* Disabled */
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: default;
+}
+
+/* 3D Elevated effect base */
+.btn-elevated {
+    box-shadow:
+        0 6px 10px rgba(0, 0, 0, 0.15),
+        inset 0 -4px 6px rgba(255, 255, 255, 0.25);
+    transition: box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+.btn-elevated:active {
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 4px 6px rgba(0, 0, 0, 0.3);
+    transform: translateY(2px);
+}
+
+/* ==== Solid Variants ==== */
+
+/* Primary */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: var(--primary-hover-color);
+    border-color: var(--primary-hover-color);
+    color: var(--on-primary-color);
+}
+
+.btn-primary:active {
+    background-color: var(--primary-active-color);
+    border-color: var(--primary-active-color);
+}
+
+/* Secondary */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--on-secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: var(--secondary-hover-color);
+    border-color: var(--secondary-hover-color);
+    color: var(--on-secondary-color);
+}
+
+.btn-secondary:active {
+    background-color: var(--secondary-active-color);
+    border-color: var(--secondary-active-color);
+}
+
+/* Success */
+.btn-success {
+    background-color: var(--success-color);
+    color: var(--on-success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background-color: var(--success-hover-color);
+    border-color: var(--success-hover-color);
+    color: var(--on-success-color);
+}
+
+.btn-success:active {
+    background-color: var(--success-active-color);
+    border-color: var(--success-active-color);
+}
+
+/* Danger */
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--on-danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background-color: var(--danger-hover-color);
+    border-color: var(--danger-hover-color);
+    color: var(--on-danger-color);
+}
+
+.btn-danger:active {
+    background-color: var(--danger-active-color);
+    border-color: var(--danger-active-color);
+}
+
+/* Warning */
+.btn-warning {
+    background-color: var(--warning-color);
+    color: var(--on-warning-color);
+    border-color: var(--warning-color);
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+    background-color: var(--warning-hover-color);
+    border-color: var(--warning-hover-color);
+    color: var(--on-warning-color);
+}
+
+.btn-warning:active {
+    background-color: var(--warning-active-color);
+    border-color: var(--warning-active-color);
+}
+
+/* Info */
+.btn-info {
+    background-color: var(--info-color);
+    color: var(--on-info-color);
+    border-color: var(--info-color);
+}
+
+.btn-info:hover,
+.btn-info:focus {
+    background-color: var(--info-hover-color);
+    border-color: var(--info-hover-color);
+    color: var(--on-info-color);
+}
+
+.btn-info:active {
+    background-color: var(--info-active-color);
+    border-color: var(--info-active-color);
+}
+
+
+
+
+/* Link */
+.btn-link {
+    background-color: transparent;
+    border: none;
+    color: var(--link-color);
+    padding: 0;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+    color: var(--link-hover-color);
+    text-decoration: none;
+}
+
+/* ==== Outline Variants ==== */
+
+.btn-outline-primary {
+    background-color: rgba(99, 102, 241, 0.06);
+    color: var(--primary-color);
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+    background-color: var(--primary-hover-color);
+    color: var(--on-primary-color);
+    border-color: var(--primary-hover-color);
+}
+
+.btn-outline-primary:active {
+    background-color: var(--primary-active-color);
+    border-color: var(--primary-active-color);
+    color: var(--on-primary-color);
+}
+
+
+.btn-light {
+    background-color: #f8fafc;
+    color: #0f172a;
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+/* Similarly add outline styles for success, danger, warning, info, light, dark */
+
+.btn-outline-success {
+    background-color: rgba(34, 197, 94, 0.06);
+    color: var(--success-color);
+    border-color: rgba(34, 197, 94, 0.32);
+}
+
+.btn-outline-success:hover,
+.btn-outline-success:focus {
+    background-color: var(--success-hover-color);
+    color: var(--on-success-color);
+    border-color: var(--success-hover-color);
+}
+
+.btn-outline-success:active {
+    background-color: var(--success-active-color);
+    border-color: var(--success-active-color);
+    color: var(--on-success-color);
+}
+
+.btn-outline-danger {
+    background-color: rgba(239, 68, 68, 0.06);
+    color: var(--danger-color);
+    border-color: rgba(239, 68, 68, 0.32);
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:focus {
+    background-color: var(--danger-hover-color);
+    color: var(--on-danger-color);
+    border-color: var(--danger-hover-color);
+}
+
+.btn-outline-danger:active {
+    background-color: var(--danger-active-color);
+    border-color: var(--danger-active-color);
+    color: var(--on-danger-color);
+}
+
+.btn-outline-warning {
+    background-color: rgba(234, 179, 8, 0.08);
+    color: var(--warning-color);
+    border-color: rgba(234, 179, 8, 0.32);
+}
+
+.btn-outline-warning:hover,
+.btn-outline-warning:focus {
+    background-color: var(--warning-hover-color);
+    color: var(--on-warning-color);
+    border-color: var(--warning-hover-color);
+}
+
+.btn-outline-warning:active {
+    background-color: var(--warning-active-color);
+    border-color: var(--warning-active-color);
+    color: var(--on-warning-color);
+}
+
+.btn-outline-info {
+    background-color: rgba(59, 130, 246, 0.06);
+    color: var(--info-color);
+    border-color: rgba(59, 130, 246, 0.32);
+}
+
+.btn-outline-info:hover,
+.btn-outline-info:focus {
+    background-color: var(--info-hover-color);
+    color: var(--on-info-color);
+    border-color: var(--info-hover-color);
+}
+
+.btn-outline-info:active {
+    background-color: var(--info-active-color);
+    border-color: var(--info-active-color);
+    color: var(--on-info-color);
+}
+
+.btn-outline-light {
+    background-color: rgba(15, 23, 42, 0.03);
+    color: var(--text-primary-color);
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus {
+    background-color: var(--gray-200);
+    color: var(--text-primary-color);
+    border-color: var(--gray-200);
+}
+
+.btn-outline-light:active {
+    background-color: var(--gray-300);
+    border-color: var(--gray-300);
+    color: var(--text-primary-color);
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    color: var(--gray-900);
+    border-color: var(--gray-900);
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus {
+    background-color: var(--gray-800);
+    color: var(--text-light);
+    border-color: var(--gray-800);
+}
+
+.btn-outline-dark:active {
+    background-color: var(--gray-700);
+    border-color: var(--gray-700);
+    color: var(--text-light);
+}
+
+/* Disabled states for all */
+.btn:disabled,
+.btn.disabled {
+    background-color: var(--disabled-bg, var(--gray-200));
+    color: var(--disabled-text, var(--gray-500));
+    border-color: var(--disabled-bg, var(--gray-200));
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* Spinner styling inside button (optional) */
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Icon margin handled inline or here */
+.btn>i {
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Optionally add spacing for prefix/suffix icons */
+.btn>i.prefix {
+    margin-right: 0.5rem;
+}
+
+.btn>i.suffix {
+    margin-left: 0.5rem;
+}
+
+/* ==== Button Variants ==== */
+/* ... all your btn-primary, btn-outline-primary, etc. ... */
+
+/* ==== Active States ==== */
+
+/* Add other outline variants similarly */

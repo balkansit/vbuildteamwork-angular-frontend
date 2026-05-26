@@ -1,0 +1,150 @@
+<div class="invoice-details-wrapper" *ngIf="invoice">
+    <div class="card modern-details-card">
+        <!-- Gradient Header -->
+        <div class="details-header">
+            <div class="header-left">
+                <button type="button" class="back-btn" title="Go back" (click)="onBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="header-content">
+                    <h3>Invoice #{{ invoice.invoice_no }}</h3>
+                    <span class="status-badge-header" [class.bg-success]="invoice.status === 'paid'"
+                        [class.bg-primary]="invoice.status === 'sent'" [class.bg-warning]="invoice.status === 'draft'"
+                        [class.bg-danger]="invoice.status === 'cancelled'">
+                        <i class="fas" [class.fa-check-circle]="invoice.status === 'paid'"
+                            [class.fa-paper-plane]="invoice.status === 'sent'"
+                            [class.fa-pen]="invoice.status === 'draft'"
+                            [class.fa-ban]="invoice.status === 'cancelled'"></i>
+                        {{ invoice.status | titlecase }}
+                    </span>
+                </div>
+            </div>
+            <div class="header-buttons">
+                <button type="button" class="btn btn-light btn-sm fw-semibold" (click)="print()" title="Print Invoice">
+                    <i class="fas fa-print me-2"></i>Print
+                </button>
+                <button type="button" class="btn btn-light btn-sm fw-semibold" (click)="download()"
+                    title="Download PDF">
+                    <i class="fas fa-download me-2"></i>PDF
+                </button>
+                <button type="button" class="btn btn-primary btn-sm fw-semibold" (click)="edit()" title="Edit Invoice">
+                    <i class="fas fa-edit me-2"></i>Edit
+                </button>
+            </div>
+        </div>
+        <div class="card-body details-body">
+            <!-- Invoice Preview / Layout similar to PDF but HTML -->
+            <div class="row mb-4 pb-4 border-bottom">
+                <div class="col-sm-6">
+                    <h6 class="section-heading"><i class="fas fa-building me-2"></i>From:</h6>
+                    <div *ngIf="invoice.bill_from?.name; else defaultSeller">
+                        <strong>{{ invoice.bill_from.name }}</strong><br>
+                        <span style="white-space: pre-line;">{{ invoice.bill_from.address }}</span><br>
+                        <div *ngIf="invoice.bill_from.phone">Phone: {{ invoice.bill_from.phone }}</div>
+                        <div *ngIf="invoice.bill_from.email">Email: {{ invoice.bill_from.email }}</div>
+                    </div>
+                    <ng-template #defaultSeller>
+                        <strong>My Company LLC</strong><br>
+                        123 Business Rd
+                    </ng-template>
+                </div>
+                <div class="col-sm-6 text-sm-end">
+                    <h6 class="section-heading"><i class="fas fa-user me-2"></i>To:</h6>
+                    <div *ngIf="invoice.bill_to?.name; else defaultCustomer">
+                        <strong>{{ invoice.bill_to.name }}</strong><br>
+                        <span style="white-space: pre-line;">{{ invoice.bill_to.address }}</span><br>
+                        <div *ngIf="invoice.bill_to.phone">{{ invoice.bill_to.phone }}</div>
+                        <div *ngIf="invoice.bill_to.email">{{ invoice.bill_to.email }}</div>
+                    </div>
+                    <ng-template #defaultCustomer>
+                        <strong>Customer ID: {{ invoice.customer_id }}</strong><br>
+                    </ng-template>
+                    <div class="mt-3 p-3 rounded-2 bg-info bg-opacity-10">
+                        <div class="mb-2">
+                            <small class="text-muted text-uppercase fw-bold">Invoice Date</small>
+                            <div class="fw-semibold text-dark">{{ invoice.invoice_date | date:'medium' }}</div>
+                        </div>
+                        <div>
+                            <small class="text-muted text-uppercase fw-bold">Due Date</small>
+                            <div class="fw-semibold text-dark">{{ invoice.due_date | date:'medium' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive my-4">
+                <table class="table table-striped modern-items-table">
+                    <thead>
+                        <tr>
+                            <th class="center">#</th>
+                            <th>Item</th>
+                            <th class="right">Unit Cost</th>
+                            <th class="center">Qty</th>
+                            <th class="right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of invoice.items; let i = index">
+                            <td class="center">{{ i + 1 }}</td>
+                            <td class="left strong">{{ item.item_name }} <br><small>{{ item.description }}</small></td>
+                            <td class="right">{{ invoice.currency_code }} {{ item.unit_price | number:'1.2-2' }}</td>
+                            <td class="center">{{ item.quantity }}</td>
+                            <td class="right">{{ invoice.currency_code }} {{ item.total | number:'1.2-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-sm-5 ms-auto">
+                    <table class="table table-borderless modern-totals-table">
+                        <tbody>
+                            <tr>
+                                <td class="text-muted">Subtotal</td>
+                                <td class="text-end fw-semibold">{{ invoice.currency_code }} {{ invoice.sub_total |
+                                    number:'1.2-2' }}</td>
+                            </tr>
+                            <tr *ngIf="invoice.tax_total > 0">
+                                <td class="text-muted">Tax</td>
+                                <td class="text-end fw-semibold">{{ invoice.currency_code }} {{ invoice.tax_total |
+                                    number:'1.2-2' }}</td>
+                            </tr>
+                            <tr *ngIf="invoice.discount_total > 0" class="discount-row">
+                                <td class="text-danger">Discount</td>
+                                <td class="text-end fw-semibold text-danger">- {{ invoice.currency_code }} {{
+                                    invoice.discount_total | number:'1.2-2' }}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td class="fw-bold">Total Due</td>
+                                <td class="text-end"><span class="h5 text-success">{{ invoice.currency_code }} {{
+                                        invoice.grand_total | number:'1.2-2' }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div *ngIf="invoice.notes" class="mt-4 p-3 rounded-2 bg-warning bg-opacity-10">
+                <h6 class="text-muted text-uppercase mb-2 fw-bold"><i
+                        class="fas fa-sticky-note text-warning me-2"></i>Notes</h6>
+                <small class="text-dark">{{ invoice.notes }}</small>
+            </div>
+
+            <!-- Footer Text Section -->
+            <div *ngIf="invoice.footer_text" class="mt-4 text-center border-top pt-3">
+                <small class="text-muted fst-italic d-block">{{ invoice.footer_text }}</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="!invoice && !isLoading" class="alert alert-warning">
+    Invoice not found.
+</div>
+
+<div *ngIf="isLoading" class="text-center p-5">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+.photo-box-wrapper {
+  margin: 13px;
+}
+
+.photo-card {
+  width: 140px;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.photo-box {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder-text {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.add-box {
+  width: 140px;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: 2px dashed grey !important;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+}
+
+.card-footer {
+  padding: 5px;
+}

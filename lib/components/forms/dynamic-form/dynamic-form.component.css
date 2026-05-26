@@ -1,0 +1,125 @@
+/* Modern Dynamic Form Styles */
+.form-label {
+    font-size: 0.813rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.375rem;
+    letter-spacing: 0.01em;
+}
+
+.form-label .text-danger {
+    margin-left: 2px;
+}
+
+.row {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 0.75rem;
+}
+
+.custom-input-group {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+.custom-input-group:hover {
+    border-color: #d1d5db;
+}
+
+.custom-input-group.is-focused {
+    border-color: var(--primary-color) !important;
+    border-width: 1.5px !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.custom-input-group.is-invalid {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.custom-input-group.is-disabled {
+    background-color: #f3f4f6 !important;
+    border-color: #e5e7eb !important;
+    cursor: not-allowed;
+}
+
+.custom-input-group.is-disabled .form-control {
+    background-color: transparent !important;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.custom-input-group.is-disabled .input-group-text {
+    color: #9ca3af;
+}
+
+.form-control:disabled,
+.form-select:disabled {
+    background-color: #f3f4f6 !important;
+    border-color: #e5e7eb !important;
+    color: #6b7280 !important;
+    cursor: not-allowed !important;
+    opacity: 1 !important;
+}
+
+.custom-input-group .form-control,
+.custom-input-group .input-group-text {
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+}
+
+.custom-input-group .input-group-text {
+    color: #6b7280;
+    padding: 0.5rem 0.625rem;
+}
+
+.form-control,
+.form-select {
+    font-size: 0.875rem !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.5rem !important;
+    border: 1px solid #e5e7eb !important;
+    transition: all 0.2s ease !important;
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: #d1d5db !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color) !important;
+    border-width: 1.5px !important;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+    outline: none !important;
+}
+
+.invalid-feedback {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.border-bottom {
+    border-color: #e5e7eb !important;
+}
+
+/* Button Container */
+.mt-4 {
+    margin-top: 1.25rem !important;
+}
+
+.me-2 {
+    margin-right: 0.625rem !important;
+}

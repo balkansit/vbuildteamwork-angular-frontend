@@ -1,0 +1,243 @@
+/* Bits System Theme CSS
+   Author: Balkans IT Solutions Private Limited
+   License: MIT
+   Description: Modern IT Firm theme with vibrant gradients and premium glass morphism
+   Updated: January 2026 - Enhanced with gradient-rich modern UI
+*/
+
+:root {
+    /* ===== Primary Brand Colors (Tech Blue - Modern IT) ===== */
+    --primary-color: #2563eb;
+    /* Blue 600 - Confident, tech-forward primary */
+    --primary-hover-color: #1d4ed8;
+    /* Blue 700 - Darker on hover */
+    --primary-active-color: #1e40af;
+    /* Blue 800 - Pressed state */
+    --on-primary-color: #ffffff;
+    /* White text on primary */
+
+    /* ===== Secondary Brand Colors (Slate - UI Chrome) ===== */
+    --secondary-color: #64748b;
+    /* Slate 500 - Neutral secondary actions */
+    --secondary-hover-color: #475569;
+    /* Slate 600 */
+    --secondary-active-color: #334155;
+    /* Slate 700 */
+    --on-secondary-color: #ffffff;
+
+    /* ===== Accent Colors (Cyan - Highlights & CTAs) ===== */
+    --accent-color: #22d3ee;
+    /* Cyan 400 - Vibrant accent */
+    --accent-hover-color: #06b6d4;
+    /* Cyan 500 */
+    --accent-active-color: #0e7490;
+    /* Cyan 700 */
+    --on-accent-color: #062a33;
+    /* Cyan-900 text on cyan */
+
+    /* ===== Semantic Colors (Modern Palette) ===== */
+    --success-color: #10b981;
+    /* Emerald 500 */
+    --on-success-color: #062e24;
+    /* Emerald 900 */
+    --danger-color: #ef4444;
+    /* Red 500 */
+    --on-danger-color: #ffffff;
+    --warning-color: #f59e0b;
+    /* Amber 500 */
+    --on-warning-color: #1f2937;
+    /* Gray 900 */
+    --info-color: #3b82f6;
+    /* Blue 500 */
+    --on-info-color: #ffffff;
+
+    /* ===== Base Colors ===== */
+    --light-color: #ffffff;
+    --dark-color: #0f172a;
+    --white: #ffffff;
+
+    /* ===== Gray Scale Palette (Slate - Balanced & Modern) ===== */
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+
+    /* ===== Background & Surface Colors (Keep White) ===== */
+    --background-color: #ffffff;
+    /* Pure white app background */
+    --bg-light: #ffffff;
+    --sidebar-bg-color: #ffffff;
+    --table-bg-color: #ffffff;
+    --summary-bg-color: #f8fafc;
+    /* Very subtle gray for summary cards */
+    --surface-color: #ffffff;
+    --surface-elevated: #ffffff;
+
+    /* ===== Border Colors ===== */
+    --border-color: #e2e8f0;
+    /* Slate 200 */
+    --border-light: #f1f5f9;
+    /* Slate 100 */
+    --overview-border-color: #e2e8f0;
+    --table-border-color: #e2e8f0;
+
+    /* ===== Text Colors ===== */
+    --text-color: #111827;
+    /* Gray 900 - Dark for primary text */
+    --text-muted: #6b7280;
+    /* Gray 500 - Secondary text */
+    --table-header-color: #475569;
+    /* Slate 600 */
+    --sidebar-span-color: #334155;
+    /* Slate 700 */
+    --sidebar-active-span-color: #ffffff;
+
+    /* ===== Typography ===== */
+    --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-size-base: 14px;
+    /* Compact for enterprise data */
+    --font-size-lg: 16px;
+    --font-size-sm: 13px;
+    --font-size-xs: 12px;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --line-height-base: 1.5;
+
+    /* ===== Border Radius (Modern & Crisp) ===== */
+    --border-radius-sm: 6px;
+    /* 6px */
+    --border-radius-base: 8px;
+    /* 8px */
+    --border-radius-md: 12px;
+    /* 12px */
+    --border-radius-lg: 16px;
+    /* 16px */
+    --border-radius-xl: 20px;
+    /* 20px */
+    --border-radius-full: 9999px;
+    /* Pills & circles */
+
+    /* ===== Enhanced Shadows (Glass Morphism) ===== */
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --shadow-sm: 0 2px 4px 0 rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+    --shadow-base: 0 4px 8px 0 rgba(15, 23, 42, 0.08), 0 2px 4px 0 rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 16px -4px rgba(15, 23, 42, 0.10), 0 4px 8px -2px rgba(15, 23, 42, 0.06);
+    --shadow-lg: 0 12px 28px -6px rgba(15, 23, 42, 0.12), 0 8px 16px -4px rgba(15, 23, 42, 0.08);
+    --shadow-xl: 0 20px 40px -8px rgba(15, 23, 42, 0.16), 0 12px 24px -6px rgba(15, 23, 42, 0.10);
+    --shadow-2xl: 0 32px 64px -12px rgba(15, 23, 42, 0.20), 0 16px 32px -8px rgba(15, 23, 42, 0.12);
+
+    /* ===== Vibrant Gradient Patterns ===== */
+    --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #22d3ee 100%);
+    /* Indigo to Cyan - Hero actions */
+    --primary-gradient-soft: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(34, 211, 238, 0.08) 100%);
+    /* Subtle background version */
+    
+    --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #14b8a6 100%);
+    /* Cyan to Teal - Secondary CTAs */
+    --accent-gradient-soft: linear-gradient(135deg, rgba(34, 211, 238, 0.08) 0%, rgba(20, 184, 166, 0.08) 100%);
+    
+    --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    /* Emerald shades */
+    --success-gradient-soft: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
+    
+    --danger-gradient: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    /* Red shades */
+    --danger-gradient-soft: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%);
+    
+    --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    /* Amber shades */
+    --warning-gradient-soft: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.08) 100%);
+    
+    --info-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    /* Blue shades */
+    --info-gradient-soft: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.08) 100%);
+
+    /* Multi-color gradients for premium elements */
+    --rainbow-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    --sunset-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --ocean-gradient: linear-gradient(135deg, #667eea 0%, #22d3ee 100%);
+    --forest-gradient: linear-gradient(135deg, #56ccf2 0%, #2f80ed 100%);
+    
+    /* Glass morphism effects */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.08);
+    --glass-blur: blur(10px);
+
+    /* Gradient overlays for cards/surfaces */
+    --surface-gradient: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 1) 100%);
+    --card-gradient: linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(241, 245, 249, 0.6) 100%);
+    --header-gradient: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 252, 0.8) 100%);
+
+    /* ===== Layout Dimensions ===== */
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 64px;
+    --header-height: 64px;
+
+    /* ===== Transitions ===== */
+    --transition-base: 0.2s ease-in-out;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ===== Dark Mode Theme Overrides ===== */
+.theme-dark {
+    /* Dark surfaces with subtle gradients */
+    --background-color: #0b1220;
+    --surface-color: #0f172a;
+    --bg-light: #1a202c;
+    --sidebar-bg-color: #111827;
+    --table-bg-color: #0f172a;
+    --summary-bg-color: #1a202c;
+
+    /* Dark text */
+    --text-color: #e5e7eb;
+    /* Gray 200 */
+    --text-muted: #9ca3af;
+    /* Gray 400 */
+    --table-header-color: #d1d5db;
+    /* Gray 300 */
+    --sidebar-span-color: #d1d5db;
+
+    /* Dark borders */
+    --border-color: #1f2937;
+    /* Gray 800 */
+    --border-light: #111827;
+    /* Gray 900 */
+    --overview-border-color: #1f2937;
+    --table-border-color: #1f2937;
+
+    /* Adjusted brand colors for dark contrast */
+    --primary-color: #60a5fa;
+    /* Blue 400 - Lighter for dark mode */
+    --primary-hover-color: #3b82f6;
+    /* Blue 500 */
+    --primary-active-color: #2563eb;
+    /* Blue 600 */
+
+    --secondary-color: #9ca3af;
+    /* Gray 400 - Lighter secondary */
+    --secondary-hover-color: #d1d5db;
+    /* Gray 300 */
+
+    --accent-color: #22d3ee;
+    /* Cyan stays vibrant */
+    --accent-hover-color: #06b6d4;
+    /* Cyan 500 */
+
+    /* Glass morphism for dark mode */
+    --glass-bg: rgba(15, 23, 42, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* Dark gradient overlays */
+    --surface-gradient: linear-gradient(135deg, rgba(15, 23, 42, 1) 0%, rgba(11, 18, 32, 1) 100%);
+    --card-gradient: linear-gradient(145deg, rgba(15, 23, 42, 1) 0%, rgba(26, 32, 44, 0.6) 100%);
+}

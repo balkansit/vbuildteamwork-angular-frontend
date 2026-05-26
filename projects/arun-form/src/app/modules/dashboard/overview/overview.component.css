@@ -1,0 +1,221 @@
+.dash-widget {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  background: #fff;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  padding: 20px;
+}
+
+span .dash-widget.dash1 .dash-widgetimg span {
+  background: rgba(40, 199, 111, .12)
+}
+
+.dash-widget.dash2 .dash-widgetimg span {
+  background: rgba(0, 207, 232, .12)
+}
+
+.dash-widget.dash3 .dash-widgetimg span {
+  background: rgba(234, 84, 85, .12)
+}
+
+.dash-widget .dash-widgetcontent {
+  margin-left: 20px
+}
+
+.dash-widget .dash-widgetcontent h5 {
+  color: #092c4c;
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 5px
+}
+
+.dash-widget .dash-widgetcontent h6 {
+  font-weight: 400;
+  font-size: 20px;
+  color: #67748e;
+  width: 100%;
+  margin-bottom: 0
+}
+
+.dash-widget .dash-widgetimg span {
+  width: 48px;
+  height: 48px;
+  background: rgba(249, 110, 111, .12);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  border-radius: 50px
+}
+
+.dash-count {
+  background: white;
+  color: #fff;
+  min-height: 98px;
+  width: 100%;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: space-between;
+  margin: 0 0 25px;
+  padding: 20px
+}
+
+
+
+.dash-count h4 {
+  color: #3d3d3d;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 5px
+}
+
+.dash-count h5 {
+  color: #424242;
+  font-size: 14px
+}
+
+.dash-count .dash-imgs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: all .5s ease;
+  -ms-transition: all .5s ease;
+  transition: all .5s ease
+}
+
+.dash-count .dash-imgs img {
+  width: 50px;
+  height: 50px
+}
+
+.dash-count .dash-imgs i {
+  font-size: 36px;
+  color: #3b3b3b
+}
+
+.dash-count .dash-imgs svg {
+  width: 50px;
+  height: 50px
+}
+
+.dash-count:hover .dash-imgs {
+  transform: scale(1.25);
+  -webkit-transform: scale(1.25);
+  -ms-transform: scale(1.25)
+}
+
+.graph-sets {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center
+}
+
+.graph-sets>ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center
+}
+
+@media(max-width:991.98px) {
+  .graph-sets>ul {
+    display: none
+  }
+}
+
+.graph-sets>ul li {
+  margin-right: 35px
+}
+
+.graph-sets>ul li span {
+  color: #67748e;
+  font-weight: 400;
+  position: relative
+}
+
+.graph-sets>ul li span:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background-color: #28c76f;
+  border-radius: 50px;
+  position: absolute;
+  top: 3px;
+  left: -20px
+}
+
+.graph-sets>ul li:last-child span:after {
+  background-color: #ff4d4d
+}
+
+.table tbody tr td.productimgname .product-img img {
+  width: 50px;
+  height: 50px
+}
+
+.table.dashboard-recent-products tr td {
+  padding: 10px
+}
+
+.table.dashboard-recent-products tr:last-child td {
+  border-bottom: none;
+  padding-bottom: 0
+}
+
+
+
+.btn-3d {
+  background: linear-gradient(#28a745, #218838);
+  /* top to bottom gradient */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 2px 4px #1e7e34;
+  /* creates the 3D depth */
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-3d:active {
+  box-shadow: 0 2px #1e7e34;
+  /* reduce shadow for pressed effect */
+  transform: translateY(2px);
+}
+
+
+.table-name {
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.3s;
+  /* smooth hover effect */
+}
+
+.table-name:hover {
+  color: var(--primary-color) !important;
+  text-decoration: underline;
+}

@@ -1,0 +1,111 @@
+{
+  "name": "dashboard-frontend",
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "ng serve",
+    "build": "ng build --configuration production",
+    "start": "ng serve",
+    "ng-dev": "ng build",
+    "ng-build": "ng build --configuration production",
+    "ng-build-pwa": "ng build --configuration pwa",
+    "electron": "electron .",
+    "start:electron": "ng build && electron .",
+    "build:pwa": "ng build --configuration pwa && electron .",
+    "build:regular": "ng build --configuration production && electron ."
+  },
+  "build": {
+    "appId": "com.balkansitsolutions.dashboard-frontend",
+    "productName": "dashboard-frontend",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^19.2.14",
+    "@angular/cdk": "^19.2.18",
+    "@angular/common": "^19.2.14",
+    "@angular/compiler": "^19.2.14",
+    "@angular/core": "^19.2.14",
+    "@angular/forms": "^19.2.14",
+    "@angular/material": "^19.2.18",
+    "@angular/platform-browser": "^19.2.14",
+    "@angular/platform-browser-dynamic": "^19.2.14",
+    "@angular/router": "^19.2.14",
+    "@angular/service-worker": "^19.2.14",
+    "@capacitor/android": "^7.4.2",
+    "@capacitor/cli": "^7.4.2",
+    "@capacitor/core": "^7.4.2",
+    "@capacitor/status-bar": "^7.0.3",
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@ngx-translate/core": "^17.0.0",
+    "@ngx-translate/http-loader": "^17.0.0",
+    "@popperjs/core": "^2.11.8",
+    "@tailwindcss/postcss": "^4.1.10",
+    "angular-oauth2-oidc": "^17.0.2",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.5.1",
+    "emailjs-com": "^3.2.0",
+    "html2canvas": "^1.4.1",
+    "html2pdf.js": "^0.11.3",
+    "jquery": "^3.7.1",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.2",
+    "magnific-popup": "^1.2.0",
+    "ng2-charts": "^4.1.1",
+    "ngx-image-zoom": "^3.0.0",
+    "ngx-img-zoom": "^4.1.2",
+    "ngx-owl-carousel-o": "^20.0.0",
+    "ngx-pagination": "^6.0.3",
+    "ngx-toastr": "^19.0.0",
+    "rxjs": "~7.8.0",
+    "swiper": "^11.2.6",
+    "tslib": "^2.8.1",
+    "u": "^0.1.0",
+    "zone.js": "~0.15.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.15",
+    "@angular/cli": "~19.2.15",
+    "@angular/compiler-cli": "^19.2.14",
+    "@capacitor/assets": "^3.0.5",
+    "@types/chart.js": "^2.9.41",
+    "@types/jasmine": "~4.3.0",
+    "autoprefixer": "^10.4.21",
+    "electron": "^31.4.0",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2",
+    "jasmine-core": "~4.5.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.0.0",
+    "postcss": "^8.5.6",
+    "purgecss": "^7.0.2",
+    "tailwindcss": "^4.1.10",
+    "tailwindcss-cli": "^0.1.2",
+    "typescript": "~5.8.3"
+  }
+}

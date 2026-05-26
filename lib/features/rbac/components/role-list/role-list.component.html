@@ -1,0 +1,10 @@
+<div class="card">
+    <div class="card-body">
+        <app-base-table [fetchData]="fetchRoles" [tableColumns]="tableColumns" [hasEditRoles]="whoCanEditDelete"
+            [hasDeleteRoles]="whoCanEditDelete" [hasRoles]="whoCanView" [getViewFields]="getViewFields"
+            [getEditFormFields]="getEditFields" [updateItem]="updateRole" [deleteItem]="deleteRole"
+            (goToAddClicked)="openAddRole()" (editItemClicked)="goToEdit($event)" [inLineEdit]="false"
+            title="Manage Roles" subtitle="View and manage user roles" [showAddButton]="true">
+        </app-base-table>
+    </div>
+</div>

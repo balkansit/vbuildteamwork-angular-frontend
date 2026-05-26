@@ -1,0 +1,148 @@
+<div class="container-fluid content p-0">
+    <app-table-header [title]="title" [subtitle]="subtitle" [showAddButton]="showAddButton" (refresh)="refresh()"
+        [elevation]="true"  (add)="goToAdd()" [showExport]="showExport"
+        [showCloseDay]="showCloseDay" (closeDay)="closeDayClicked.emit()"
+        [showReopenDay]="showReopenDay" (reopenDay)="reopenDayClicked.emit()"
+        [showBulkDelete]="showBulkDelete && selectedItems.size > 0" (bulkDelete)="onBulkDelete()"></app-table-header>
+
+    <!-- Filter Section -->
+    <div class="filter-section px-3 py-2 mx-3 mt-2 mb-2 rounded-2 bg-light border border-light-subtle"
+        *ngIf="filterColumns.length > 0">
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <div class="d-flex align-items-center gap-2">
+                <i class="fas fa-filter text-primary" style="font-size: 0.95rem;"></i>
+                <small class="fw-600 text-secondary">Filters:</small>
+            </div>
+
+            <div class="flex-grow-1">
+                <div class="row g-2 align-items-center">
+                    <ng-container *ngFor="let col of filterColumns">
+                        <div class="col-auto">
+                            <ng-container [ngSwitch]="col.type">
+                                <!-- Text input filter -->
+                                <ng-container *ngSwitchCase="'input'">
+                                    <div class="filter-input-wrapper">
+                                        <bootstrap-form-input [placeholder]="col.label"
+                                            (keyup)="applyFilter($event, col.key)" class="filter-input-compact">
+                                        </bootstrap-form-input>
+                                    </div>
+                                </ng-container>
+
+                                <!-- Dropdown filter -->
+                                <ng-container *ngSwitchCase="'dropdown'">
+                                    <select class="form-select form-select-sm rounded-1"
+                                        style="font-size: 0.875rem; min-width: 120px;"
+                                        (change)="applyFilter($event, col.key)" [disabled]="col.disabled">
+                                        <option value="">{{ col.label }}</option>
+                                        <option *ngFor="let opt of col.options" [value]="opt">
+                                            {{ opt }}
+                                        </option>
+                                    </select>
+                                </ng-container>
+
+                                <!-- Date filter -->
+                                <ng-container *ngSwitchCase="'date'">
+                                    <input type="date" class="form-control form-control-sm rounded-1"
+                                        style="font-size: 0.875rem; min-width: 140px;"
+                                        (change)="applyFilter($event, col.key)" />
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+
+            <button class="btn btn-sm btn-outline-secondary rounded-1"
+                style="font-size: 0.8rem; padding: 0.35rem 0.75rem; white-space: nowrap;" (click)="clearAllFilters()"
+                title="Clear all filters">
+                <i class="fas fa-times me-1"></i>Clear
+            </button>
+        </div>
+    </div>
+
+    <!-- Global Search Section -->
+    <div class="search-section px-3 mb-3" *ngIf="enableGlobalSearch">
+        <app-global-search (searchChange)="applyGlobalSearch($event)"></app-global-search>
+    </div>
+
+    <!-- Action Buttons Section -->
+    <div class="action-buttons-section px-3 mb-3" *ngIf="showMoveToPoButton">
+        <app-bootstrap-button [variant]="'btn btn-primary rounded-2 shadow-sm'" [type]="'submit'"
+            [iconClass]="'bi bi-check-circle'" [iconPosition]="'prefix'" [width]="'150px'" (click)="moveToPO()">
+            <i class="fas fa-arrow-right me-2"></i>Move to PO
+        </app-bootstrap-button>
+    </div>
+
+    <!-- Main Table Section -->
+    <div class="table-section mb-3">
+        <div class="card border-0 shadow-lg rounded-3 overflow-hidden">
+            <app-data-view [show]="showModal" [title]="'Details'" [viewType]="'table'" [dataFields]="modalFields"
+                [actionButtons]="ModalActionButtons" [imageUrl]="imageUrl" (closed)="showModal = false"
+                [rowData]="selectedRow"></app-data-view>
+
+            <app-bootstrap-alert *ngIf="!useModalAlert && alert?.showAlert" [message]="alert?.description ?? null"
+                [type]="alert?.type ?? 'info'" (close)="alert = null"></app-bootstrap-alert>
+
+            <!-- Empty State -->
+            <div *ngIf="dataSource.data.length === 0"
+                class="alert alert-light border border-warning rounded-2 text-center m-4 py-5">
+                <i class="fas fa-inbox fa-3x text-muted mb-3 d-block opacity-50"></i>
+                <h5 class="text-muted">No data available</h5>
+                <p class="text-muted small">Try adjusting your filters or adding new records</p>
+            </div>
+
+            <!-- Data Table -->
+            <div *ngIf="dataSource.data.length > 0" style="overflow: auto">
+                <material-table [dataSource]="dataSource" [columns]="tableColumns" [showSelect]="true"
+                    [showActions]="showActions" [isSelected]="isSelected" (toggleRow)="toggleItem($event)"
+                    (cellButtonClick)="handleCellButtonClick($event)" (toggleAllRows)="toggleAll($event)"
+                    (cellLinkClick)="handleCellLinkClick($event)" [actionsTemplate]="actions" [imageUrl]="baseUrl">
+                </material-table>
+                <ng-template #actions let-item>
+                    <button mat-icon-button [matMenuTriggerFor]="menu" class="action-menu-button" title="Actions">
+                        <mat-icon class="text-primary">more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu" class="modern-menu">
+                        <button *hasRole="hasViewRoles" mat-menu-item (click)="viewItem(item)" class="menu-item-view">
+                            <mat-icon class="text-info">visibility</mat-icon>
+                            <span>View</span>
+                        </button>
+                        <ng-container *ngFor="let action of actionButtons">
+                            <button *hasRole="hasEditRoles" mat-menu-item (click)="action.action(item)">
+                                <mat-icon class="text-success">done</mat-icon>
+                                <span>{{ action.label }}</span>
+                            </button>
+                        </ng-container>
+                        <button *hasRole="hasEditRoles" mat-menu-item (click)="editItem(item)" class="menu-item-edit">
+                            <mat-icon class="text-warning">edit</mat-icon>
+                            <span>Edit</span>
+                        </button>
+                        <mat-divider class="my-1"></mat-divider>
+                        <button *hasRole="hasDeleteRoles" mat-menu-item (click)="confirmDelete(item)"
+                            class="menu-item-delete">
+                            <mat-icon class="text-danger">delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </ng-template>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-wrapper" *ngIf="dataSource.data.length > 0">
+                <mat-paginator *ngIf="backendPagination" [length]="pageLength" [pageSize]="pageSize"
+                    [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons
+                    (page)="onPageChange($event)"></mat-paginator>
+                <mat-paginator *ngIf="!backendPagination" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50, 100]"
+                    showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+            </div>
+        </div>
+    </div>
+    <!-- Confirmation Modal -->
+    <app-confirm-modal [show]="showConfirm" [title]="'Delete ' + resourceName"
+        [description]="'Are you sure you want to delete this ' + resourceName + '? This action cannot be undone.'"
+        [iconClass]="'fas fa-exclamation-triangle text-danger'" [buttons]="[
+      { label: 'Cancel', class: 'btn-outline-secondary', action: 'cancel' },
+      { label: 'Delete', class: 'btn-danger', action: 'confirm' }
+    ]" (action)="onDeleteConfirm($event)">
+    </app-confirm-modal>
+</div>

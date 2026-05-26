@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+        <app-base-table [title]="'User List'" [subtitle]="'Manage Users'" [resourceName]="'User'"
+            [tableColumns]="tableColumns" [fetchData]="fetchUsers" [getEditFormFields]="getEditFields"
+            [getViewFields]="getViewFields" [updateItem]="updateUser" [deleteItem]="deleteUser"
+            [filterColumns]="filterColumns" (goToAddClicked)="openAddUser()" [showExport]="false" [showAddButton]="false"></app-base-table>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="container my-4">
+    <!-- Main Product Section -->
+    <div class="row gy-4">
+        <!-- Left: Product Images -->
+        <div class="col-lg-6 col-md-6">
+            <div class="p-2">
+                <ng-content select="app-product-images"></ng-content>
+            </div>
+        </div>
+
+        <!-- Right: Product Details -->
+        <div class="col-lg-6 col-md-6">
+            <div class="p-2">
+                <ng-content select="app-product-detail"></ng-content>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Similar Products Section -->
+    <div class="mt-5">
+        <h4 class="mb-4">Similar Products</h4>
+        <div class="row g-4">
+            <ng-content select="app-similar-products"></ng-content>
+        </div>
+    </div>
+</div>

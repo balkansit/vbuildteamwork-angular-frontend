@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<mat-dialog-content>
+    <app-dynamic-form [fields]="data.fields" [buttonLabel]="data.buttonLabel || 'Submit'"
+        [cancelLabel]="data.cancelLabel || 'Cancel'" [showCancel]="true" (submitted)="onSubmit($event)"
+        (cancelled)="onCancel()"></app-dynamic-form>
+
+</mat-dialog-content>

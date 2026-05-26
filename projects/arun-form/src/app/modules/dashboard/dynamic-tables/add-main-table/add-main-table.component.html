@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-gray text-black d-flex justify-content-between align-items-center">
+      <h3 class="mb-0">Add Table Record</h3>
+      <b>Table ID: {{ tableId }}</b>
+    </div>
+
+    <app-modal-alert [show]="showAlert" [status]="alertStatus" [title]="alertTitle" [description]="alertDescription"
+      [buttons]="[{ label: 'OK', class: 'btn-primary', action: 'close' }]" [autoDismissSeconds]="5"
+      (action)="onAlertAction($event)" (closed)="onAlertClosed()">
+    </app-modal-alert>
+
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!-- Table Info Section -->
+        <div class="card mb-3 shadow-sm">
+          <div class="card-header bg-secondary text-white">
+            <strong>Table Information</strong>
+          </div>
+          <div class="card-body">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label for="table_id" class="form-label">Table ID</label>
+                <input id="table_id" type="number" class="form-control" formControlName="table_id" readonly />
+              </div>
+              <div class="col-md-4">
+                <label for="created_by" class="form-label">Created By</label>
+                <input id="created_by" type="number" class="form-control" formControlName="created_by" />
+              </div>
+              <div class="col-md-4">
+                <label for="owner_id" class="form-label">Owner ID</label>
+                <input id="owner_id" type="number" class="form-control" formControlName="owner_id" />
+              </div>
+            </div>
+
+            <div class="row g-3 mt-2">
+              <div class="col-md-4">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" class="form-select" formControlName="status">
+                  <option value="Incomplete">Incomplete</option>
+                  <option value="Complete">Complete</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Values Section -->
+        <div class="card mb-3 shadow-sm">
+          <div
+            class="card-header bg-secondary text-white d-flex justify-content-between align-items-center sticky-top"
+            style="top: 0; z-index: 10;">
+            <strong>Dynamic Values</strong>
+            <button type="button" class="btn btn-sm btn-primary" (click)="addRow()">Add Row</button>
+          </div>
+
+          <!-- Scrollable Section -->
+          <div class="card-body scrollable-values">
+            <div formArrayName="values">
+              <div *ngFor="let row of values.controls; let i = index" [formGroupName]="i"
+                class="row g-3 align-items-end mb-2">
+                <div class="col-md-5">
+                  <label class="form-label">Column ID</label>
+                  <input type="number" class="form-control" formControlName="column_id" />
+                </div>
+                <div class="col-md-5">
+                  <label class="form-label">Value</label>
+                  <input type="text" class="form-control" formControlName="value" />
+                </div>
+                <div class="col-md-2">
+                  <button type="button" class="btn btn-danger w-100" (click)="removeRow(i)">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-end">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+            <i class="bi bi-check-circle me-1"></i> Submit
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

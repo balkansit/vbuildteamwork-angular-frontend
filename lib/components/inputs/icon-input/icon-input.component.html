@@ -1,0 +1,7 @@
+<div [ngClass]="['input-group', 'custom-icon-input', customClass, disabled ? 'is-disabled' : '']">
+    <span class="input-group-text">
+        <i [class]="icon"></i>
+    </span>
+    <input [type]="type" class="form-control" [id]="id" [name]="name" [placeholder]="placeholder" [value]="value"
+        [disabled]="disabled" [readonly]="readonly" (input)="handleInput($event)" (blur)="onTouched()" />
+</div>

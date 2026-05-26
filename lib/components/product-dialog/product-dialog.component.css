@@ -1,0 +1,16 @@
+
+table {
+  width: 100%;
+  text-align: left;
+  margin-top: 20px;
+}
+
+th,td {
+  padding: 8px;
+  text-align: left;
+}
+
+tr:hover {
+  background-color: #c5e9d8 !important;
+  color: white !important;
+}

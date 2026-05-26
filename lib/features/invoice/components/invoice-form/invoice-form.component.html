@@ -1,0 +1,336 @@
+<div class="invoice-wrapper">
+    <div class="row g-0 h-100">
+        <!-- Left Side: Form Card -->
+        <div class="col-md-6">
+            <div class="form-card">
+                <!-- Card Header -->
+                <div class="card-header-clean">
+                    <div class="header-title">
+                        <i class="fas fa-pen-to-square"></i>
+                        <h5>{{ isEditMode ? 'Edit' : 'Create' }} Invoice</h5>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" title="Help">
+                        <i class="fas fa-question-circle"></i>
+                    </button>
+                </div>
+
+                <!-- Form Content -->
+                <div class="card-content">
+                    <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()">
+
+                        <!-- Type & Status -->
+                        <div class="form-section">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Invoice Type</label>
+                                    <select class="form-control" formControlName="invoice_type">
+                                        <option value="invoice">Invoice</option>
+                                        <option value="quotation">Quotation</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Status</label>
+                                    <select class="form-control" formControlName="status">
+                                        <option value="draft">Draft</option>
+                                        <option value="sent">Sent</option>
+                                        <option value="paid">Paid</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoice No & Customer ID -->
+                        <div class="form-section">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Invoice No</label>
+                                    <input type="text" class="form-control" formControlName="invoice_no"
+                                        placeholder="Auto or Custom">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Customer ID</label>
+                                    <input type="number" class="form-control" formControlName="customer_id"
+                                        placeholder="ID">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dates -->
+                        <div class="form-section">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" class="form-control" formControlName="invoice_date">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Due Date</label>
+                                    <input type="date" class="form-control" formControlName="due_date">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bill From -->
+                        <div class="form-section">
+                            <h6 class="section-title"><i class="fas fa-store"></i> Bill From (Seller)</h6>
+                            <div [formGroup]="invoiceForm" formGroupName="bill_from">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Company Name"
+                                            formControlName="name">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea class="form-control" placeholder="Address" rows="2"
+                                            formControlName="address"></textarea>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" placeholder="Phone"
+                                            formControlName="phone">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="email" class="form-control" placeholder="Email"
+                                            formControlName="email">
+                                    </div>
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Tax ID"
+                                            formControlName="tax_number">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bill To -->
+                        <div class="form-section">
+                            <h6 class="section-title"><i class="fas fa-user"></i> Bill To (Customer)</h6>
+                            <div [formGroup]="invoiceForm" formGroupName="bill_to">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <input type="text" class="form-control" placeholder="Customer Name"
+                                            formControlName="name">
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea class="form-control" placeholder="Address" rows="2"
+                                            formControlName="address"></textarea>
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" placeholder="Phone"
+                                            formControlName="phone">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="email" class="form-control" placeholder="Email"
+                                            formControlName="email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Items -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <h6 class="section-title"><i class="fas fa-list"></i> Items</h6>
+                                <button type="button" class="btn btn-sm btn-primary" (click)="addItem()">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-sm items-table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Item</th>
+                                            <th>Description</th>
+                                            <th class="text-end">Qty</th>
+                                            <th class="text-end">Price</th>
+                                            <th class="text-end">Tax %</th>
+                                            <th class="text-end">Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody formArrayName="items">
+                                        <tr *ngIf="items.controls.length === 0">
+                                            <td colspan="8" class="text-center py-3 text-muted">No items added</td>
+                                        </tr>
+                                        <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                                            <td>{{ i + 1 }}</td>
+                                            <td>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Item" formControlName="item_name">
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    placeholder="Desc" formControlName="description">
+                                            </td>
+                                            <td class="text-end">
+                                                <input type="number" class="form-control form-control-sm text-end"
+                                                    placeholder="0" formControlName="quantity">
+                                            </td>
+                                            <td class="text-end">
+                                                <input type="number" class="form-control form-control-sm text-end"
+                                                    placeholder="0.00" formControlName="unit_price">
+                                            </td>
+                                            <td class="text-end">
+                                                <input type="number" class="form-control form-control-sm text-end"
+                                                    placeholder="0" formControlName="tax_percent">
+                                            </td>
+                                            <td class="text-end fw-bold">{{ item.get('total')?.value | number:'1.2-2' }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-link text-danger p-0"
+                                                    (click)="removeItem(i)">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Additional Settings -->
+                        <div class="form-section">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">Discount</label>
+                                    <input type="number" class="form-control" formControlName="discount_total"
+                                        placeholder="0.00">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Notes</label>
+                                    <textarea class="form-control" rows="2" formControlName="notes"
+                                        placeholder="Additional notes..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Footer Text</label>
+                                    <textarea class="form-control" rows="2" formControlName="footer_text"
+                                        placeholder="This is a computer generated invoice."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg w-100" [disabled]="isLoading">
+                                <i class="fas fa-save me-2"></i>
+                                {{ isLoading ? 'Saving...' : 'Save Invoice' }}
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Preview Card -->
+        <div class="col-md-6">
+            <div class="preview-card">
+                <!-- Card Header -->
+                <div class="card-header-clean">
+                    <div class="header-title">
+                        <i class="fas fa-eye"></i>
+                        <h5>Preview</h5>
+                    </div>
+                    <div class="header-actions">
+                        <button type="button" class="btn btn-sm btn-outline-secondary" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" title="Print">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary" title="Download PDF">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Content -->
+                <div class="card-content">
+                    <div *ngIf="previewData.bill_from?.name || previewData.bill_to?.name || previewData.invoice_no">
+                        <!-- Header Info -->
+                        <div class="preview-header">
+                            <div>
+                                <small class="text-muted">FROM</small>
+                                <strong class="d-block">{{ previewData.bill_from?.name || 'Company Name' }}</strong>
+                                <small class="text-muted">{{ previewData.bill_from?.address }}</small>
+                            </div>
+                            <div class="text-end">
+                                <div class="badge bg-secondary mb-2">{{ previewData.invoice_type | uppercase }}</div>
+                                <h4>#{{ previewData.invoice_no }}</h4>
+                                <small class="text-muted">{{ previewData.invoice_date | date:'short' }}</small>
+                            </div>
+                        </div>
+
+                        <!-- Bill To -->
+                        <div class="preview-section">
+                            <small class="text-muted">BILL TO</small>
+                            <strong class="d-block">{{ previewData.bill_to?.name || 'Customer Name' }}</strong>
+                            <small class="text-muted">{{ previewData.bill_to?.address }}</small>
+                        </div>
+
+                        <!-- Items Table -->
+                        <div class="preview-table-wrapper">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th class="text-end">Qty</th>
+                                        <th class="text-end">Price</th>
+                                        <th class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of previewData.items">
+                                        <td>
+                                            <strong>{{ item.item_name }}</strong><br>
+                                            <small class="text-muted">{{ item.description }}</small>
+                                        </td>
+                                        <td class="text-end">{{ item.quantity }}</td>
+                                        <td class="text-end">{{ item.unit_price | number:'1.2-2' }}</td>
+                                        <td class="text-end fw-bold">{{ item.total | number:'1.2-2' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Totals -->
+                        <div class="preview-totals">
+                            <div class="total-row">
+                                <span>Subtotal</span>
+                                <span>{{ previewData.sub_total | number:'1.2-2' }}</span>
+                            </div>
+                            <div class="total-row" *ngIf="previewData.tax_total && previewData.tax_total > 0">
+                                <span>Tax</span>
+                                <span>{{ previewData.tax_total | number:'1.2-2' }}</span>
+                            </div>
+                            <div class="total-row" *ngIf="previewData.discount_total && previewData.discount_total > 0">
+                                <span class="text-danger">Discount</span>
+                                <span class="text-danger">-{{ previewData.discount_total | number:'1.2-2' }}</span>
+                            </div>
+                            <div class="total-row total-final">
+                                <span>Total</span>
+                                <span>{{ previewData.grand_total | number:'1.2-2' }} {{ previewData.currency_code
+                                    }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div *ngIf="previewData.notes" class="preview-notes">
+                            <small class="text-muted">NOTES</small>
+                            <p class="mb-0">{{ previewData.notes }}</p>
+                        </div>
+
+                        <!-- Footer -->
+                        <div *ngIf="previewData.footer_text" class="preview-footer">
+                            <small class="text-muted text-center d-block">{{ previewData.footer_text }}</small>
+                        </div>
+                    </div>
+                    <div *ngIf="!previewData.bill_from?.name && !previewData.invoice_no"
+                        class="text-center py-5 text-muted">
+                        <i class="fas fa-image fa-2x mb-2 d-block opacity-50"></i>
+                        Fill form to preview
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

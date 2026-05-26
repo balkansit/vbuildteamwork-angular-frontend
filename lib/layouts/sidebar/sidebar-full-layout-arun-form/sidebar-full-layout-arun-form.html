@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row p-0 m-0">
+        <div class="col-12 p-0 m-0 bg-light">
+            <div class="layout">
+
+                <!-- Sidebar -->
+                <app-arun-form-sidebar [class.collapsed]="isSidebarCollapsed" [isSidebarCollapsed]="isSidebarCollapsed"
+                    class="bits-erp-sidebar sidebar"></app-arun-form-sidebar>
+
+
+                <!-- Toggle Button -->
+                <button (click)="toggleSidebar()" class="toggle-button" [class.collapsed]="isSidebarCollapsed">
+                    <i class="fa" [ngClass]="isSidebarCollapsed ? 'fa-angle-right' : 'fa-angle-left'"
+                        aria-hidden="true">
+                    </i>
+                </button>
+
+                <!-- Main Content Area -->
+                <div [class.expanded]="isSidebarCollapsed" class="bits-erp-main-content">
+                    <app-arun-form-header [logo]="'assets/images/logo.png'" class="bits-erp-header"
+                        [class.expanded]="isSidebarCollapsed"
+                        [isSidebarCollapsed]="isSidebarCollapsed"></app-arun-form-header>
+                    <div style="height: 100vh; overflow: auto; padding-bottom: 10vh !important;">
+                        <ng-content select="router-outlet"></ng-content>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

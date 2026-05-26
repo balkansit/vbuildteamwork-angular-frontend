@@ -1,0 +1,34 @@
+<div class="p-3 text-center">
+    <div class="mb-3">
+        <i class="fas fa-lock text-warning fa-3x"></i>
+    </div>
+    <h5 class="fw-bold text-dark mb-3">Close Day Operations</h5>
+    <p class="text-muted small mb-4">You are about to lock the record entry for today. This action can only be reversed by an administrator.</p>
+
+    <div class="form-group mb-4 text-start">
+        <label class="form-label fw-600">{{ isAdmin ? 'Select User to Close Day' : 'Performing User' }}</label>
+        
+        <select *ngIf="isAdmin" class="form-select" [(ngModel)]="selectedUserId">
+            <option [value]="null" disabled>Select user...</option>
+            <option *ngFor="let user of users" [value]="user.id">
+                {{ user.name }} (ID: {{ user.id }})
+            </option>
+        </select>
+
+        <select *ngIf="!isAdmin" class="form-select bg-light" disabled>
+            <option selected>{{ currentUser?.name }} (ID: {{ currentUser?.id }})</option>
+        </select>
+        
+        <div *ngIf="isAdmin && loading" class="mt-1 small text-info">
+            <i class="fas fa-spinner fa-spin me-1"></i> Loading users...
+        </div>
+        <small class="text-muted mt-1 d-block font-italic">* This action will lock operations for the selected user.</small>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2 mt-4">
+        <button class="btn btn-outline-secondary px-4" (click)="onCancel()">Cancel</button>
+        <button class="btn btn-warning px-4" [disabled]="!selectedUserId || loading" (click)="onSubmit()">
+            <i class="fas fa-check-circle me-1"></i> Proceed to Close
+        </button>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<app-auth-layout [imageSrc]="'assets/images/intro-ben.png'" [layoutType]="'centered'" [imagePosition]="'left'">
+
+  <ng-container main-content-center>
+    <div class="container mt-4 mb-5 p-2">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6 col-xl-5">
+          <div class="card glass-card border-0">
+
+            <!-- Row 1: Logo -->
+            <div class="text-center mb-2">
+              <img src="assets/images/01.png" class="logo img-fluid" alt="Brand Logo" />
+            </div>
+
+            <!-- Row 2: Title & Subtitle -->
+            <div class="text-center mb-4">
+              <h1 class="login-title">Welcome Back</h1>
+              <p class="login-subtitle">
+                Enter your credentials to access your secure workspace.
+              </p>
+            </div>
+
+            <!-- Row 4: Form & Alerts -->
+            <div class="form-wrapper">
+              <!-- Alert -->
+              <div class="alert-container" *ngIf="errorMessage">
+                <app-bootstrap-alert [message]="errorMessage" type="danger" (close)="clearError()"></app-bootstrap-alert>
+              </div>
+
+              <!-- Login Form -->
+              <auth-form 
+                class="login-auth-form"
+                [fields]="fields" 
+                (formSubmit)="onSubmit($event)" 
+                [buttonLabel]="'Sign In'"
+                [isLoading]="isLoading" 
+                [hideForgotPassword]="true">
+              </auth-form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</app-auth-layout>
+
+
+
+
+
+
+
+

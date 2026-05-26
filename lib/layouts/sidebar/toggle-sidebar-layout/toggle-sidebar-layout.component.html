@@ -1,0 +1,39 @@
+<nav class="navbar navbar-light bg-light fixed-top d-md-none">
+    <button class="btn btn-outline-primary ms-2" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+</nav>
+
+<div class="app-container d-flex">
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-light border-end" [ngClass]="{
+      'collapsed': isSidebarCollapsed && !isMobile,
+      'd-none': !isSidebarVisible && isMobile
+    }">
+        <div class="d-flex justify-content-end p-2 border-bottom">
+            <button class="btn btn-sm" (click)="toggleSidebar()" *ngIf="!isMobile">
+                <i class="fas" [ngClass]="{
+          'fa-chevron-left': !isSidebarCollapsed,
+          'fa-chevron-right': isSidebarCollapsed
+        }"></i>
+            </button>
+            <button class="btn-close ms-auto" *ngIf="isMobile" (click)="toggleSidebar()"></button>
+        </div>
+
+        <!-- Sidebar content -->
+        <app-sidebar [isToggle]="isSidebarCollapsed"></app-sidebar>
+        <!-- Sidebar content -->
+
+    </div>
+
+    <!-- Overlay for mobile when sidebar is open -->
+    <div class="overlay" *ngIf="isSidebarVisible && isMobile" (click)="toggleSidebar()"></div>
+
+    <!-- Content -->
+    <div class="content-area flex-grow-1 p-3 overflow-auto">
+
+        <ng-content select="router-outlet"></ng-content>
+
+    </div>
+</div>

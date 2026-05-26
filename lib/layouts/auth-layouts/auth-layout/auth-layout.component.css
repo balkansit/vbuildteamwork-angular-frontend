@@ -1,0 +1,26 @@
+.col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.p-5 {
+    padding: 1rem;
+}

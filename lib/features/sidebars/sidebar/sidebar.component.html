@@ -1,0 +1,42 @@
+<div class="sidebar-content" [class.collapsed]="isToggle">
+
+    <!-- Logo -->
+    <div class="sidebar-logo d-flex align-items-center justify-content-center py-3 border-bottom">
+        <i class="fas fa-inbox fa-lg me-2"></i>
+        <span class="logo-text">Invoxa</span>
+    </div>
+    <!-- Menu Groups -->
+    <div *ngFor="let group of menuGroups; let gi = index" class="menu-group mt-3">
+        <div class="menu-heading px-3 text-uppercase small text-muted">{{ group.heading }}</div>
+
+        <hr class="my-2" />
+
+        <ul class="list-unstyled mb-0">
+            <li *ngFor="let menu of group.menus" class="menu-item">
+                <a [routerLink]="menu.routerLink" class="d-flex align-items-center px-3 py-2 text-decoration-none"
+                    [class.selected]="menu.selected" (click)="
+          menu.submenus?.length
+            ? toggleMenu(gi, menu.id)
+            : selectMenu(gi, menu.id);
+          $event.preventDefault()
+        " tabindex="0">
+                    <i class="fas me-3" [ngClass]="menu.icon"></i>
+                    <span class="menu-label">{{ menu.label }}</span>
+                    <i *ngIf="menu.submenus?.length" class="ms-auto fas fold-icon"
+                        [ngClass]="menu.expanded ? 'fa-minus' : 'fa-plus'"></i>
+                </a>
+
+                <!-- <ul *ngIf="menu.submenus?.length && menu.expanded" class="submenu list-unstyled ps-4">
+                    <li *ngFor="let submenu of menu.submenus" class="submenu-item">
+                        <a href="#" class="d-flex align-items-center px-3 py-1 text-decoration-none"
+                            [class.selected]="menu.submenuSelectedId === submenu.id"
+                            (click)="selectSubmenu(gi, menu.id, submenu.id); $event.preventDefault()" tabindex="0">
+                            <i class="fas me-2" [ngClass]="submenu.icon"></i>
+                            <span>{{ submenu.label }}</span>
+                        </a>
+                    </li>
+                </ul> -->
+            </li>
+        </ul>
+    </div>
+</div>

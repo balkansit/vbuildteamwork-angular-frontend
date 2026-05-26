@@ -1,0 +1,50 @@
+.content {
+    padding: var(--spacing-md);
+    background: var(--gray-50);
+    min-height: calc(100vh - 4.125rem);
+}
+
+.card {
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color-light);
+    background: var(--surface-color);
+}
+
+.card-body {
+    padding: var(--spacing-lg);
+}
+
+.btn {
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+}
+
+.btn-light {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-300);
+}
+
+.btn-light:hover {
+    background: var(--gray-100);
+    border-color: var(--gray-400);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-light:active {
+    transform: scale(0.98);
+}
+
+.btn img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.btn:active img {
+    transform: scale(1.1);
+}

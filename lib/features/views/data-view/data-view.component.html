@@ -1,0 +1,98 @@
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show" style="background-color: rgba(0,0,0,0.5);"
+    (click)="onClose()">
+    <div class="modal-dialog modal-dialog-centered modal-lg" (click)="$event.stopPropagation()">
+        <div class="modal-content p-4">
+
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <i *ngIf="iconClass" [class]="iconClass + ' me-2'" style="font-size: 1.5rem;"></i>
+                    <h5 class="modal-title mb-0">{{ title }}</h5>
+                </div>
+
+
+            </div>
+
+            <!-- Content View -->
+            <ng-container [ngSwitch]="viewType">
+
+                <!-- 🔹 Table View -->
+                <table *ngSwitchCase="'table'" class="table table-borderless">
+                    <tbody>
+                        <tr *ngFor="let field of dataFields">
+                            <th class="w-25 text-muted">
+                                <i *ngIf="field.labelIcon" [class]="field.labelIcon + ' me-1'"></i>
+                                {{ field.label }}
+                            </th>
+
+                            <td>
+                                <ng-container *ngIf="field.type === 'image'; else textValue">
+                                    <img *ngIf="field.value" [src]="imageUrl + field.value" alt="{{ field.label }}"
+                                        style="max-width: 150px; max-height: 150px; object-fit: contain; border-radius: 4px;" />
+                                    <span *ngIf="!field.value" class="text-muted">No image</span>
+                                </ng-container>
+                                <ng-template #textValue>{{ getDisplayValue(field) }}</ng-template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 🔹 Form View -->
+                <div *ngSwitchCase="'form'" class="read-only-form">
+                    <div class="mb-3" *ngFor="let field of dataFields">
+                        <label class="form-label">
+                            <i *ngIf="field.labelIcon" [class]="field.labelIcon + ' me-1 text-muted'"></i>
+                            {{ field.label }}
+                        </label>
+
+
+                        <ng-container [ngSwitch]="field.type">
+                            <p *ngSwitchCase="'textarea'" class="form-control-plaintext" style="white-space: pre-wrap;">
+                                {{ getDisplayValue(field) }}
+                            </p>
+
+                            <p *ngSwitchCase="'email'" class="form-control-plaintext">
+                                <a [href]="'mailto:' + field.value">{{ field.value }}</a>
+                            </p>
+
+                            <p *ngSwitchCase="'phone'" class="form-control-plaintext">
+                                <a [href]="'tel:' + field.value">{{ field.value }}</a>
+                            </p>
+
+                            <div *ngSwitchCase="'image'" class="form-control-plaintext">
+                                <img *ngIf="field.value" [src]="imageUrl + field.value" alt="{{ field.label }}"
+                                    style="max-width: 200px; max-height: 200px; object-fit: contain; border-radius: 8px; border: 1px solid #dee2e6;" />
+                                <span *ngIf="!field.value" class="text-muted">No image</span>
+                            </div>
+
+                            <p *ngSwitchDefault class="form-control-plaintext">
+                                {{ getDisplayValue(field) }}
+                            </p>
+                        </ng-container>
+                    </div>
+                </div>
+
+            </ng-container>
+
+
+            <!-- Footer -->
+            <div class="mt-4 d-flex"
+                [ngClass]="closeButtonPosition === 'center' ? 'justify-content-center' : 'justify-content-end'">
+
+                <button type="button" class="btn btn-secondary px-4 me-2" (click)="onClose()">Close</button>
+
+                <button *ngFor="let btn of actionButtons" type="button" class="btn btn-sm"
+                    [ngClass]="'btn-' + (btn.variant || 'outline-secondary')" [title]="btn.tooltip"
+                    (click)="btn.click(rowData)">
+                    <i *ngIf="btn.iconClass" [class]="btn.iconClass"></i>
+                    <span *ngIf="btn.label" class="ms-1">
+                        {{ getButtonLabel(btn, rowData) }}
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

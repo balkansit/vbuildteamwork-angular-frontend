@@ -1,0 +1,18 @@
+<div class="sidebar-inner slimscroll" [class.collapsed]="isSidebarCollapsed">
+    <div id="sidebar-navmenu" class="sidebar-navmenu">
+        <ul>
+            <li class="bs-nav-menu" *ngFor="let section of SidebarMenu">
+                <h6 class="bs-nav-menu-h6">{{ section.label }}</h6>
+                <ul>
+                    <li *ngFor="let item of section.items">
+                        <a routerLinkActive="active" [routerLink]="item.path" [matTooltip]="item.tooltip"
+                            [routerLinkActiveOptions]="{ exact: false }">
+                            <!-- exact: false allows sub-routes to keep parent active -->
+                            <i [class]="item.icon"></i><span>{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

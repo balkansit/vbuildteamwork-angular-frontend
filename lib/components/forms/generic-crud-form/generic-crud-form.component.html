@@ -1,0 +1,31 @@
+<!-- generic-crud-form.component.html -->
+<div class="content">
+    <!-- Header Card -->
+    <div class="card shadow-sm mb-3">
+        <app-form-header [title]="title" [subtitle]="subtitle" (back)="onCancel()">
+            <button class="btn btn-light me-2" type="button" (click)="resetForm()" title="Reset Form">
+                <img src="assets/images/icons/reset-new.png" class="img-icon-40" />
+            </button>
+        </app-form-header>
+    </div>
+
+    <!-- Modal Alert -->
+    <app-modal-alert *ngIf="useModalAlert && alert?.showAlert" [show]="alert?.showAlert ?? false"
+        [status]="alert?.status || 'info'" [title]="alert?.title ?? ''" [description]="alert?.description ?? ''"
+        [buttons]="alert?.buttons ?? []" [autoDismissSeconds]="alert?.autoDismissSeconds"
+        (closed)="onAlertClosed()"></app-modal-alert>
+
+    <!-- Bootstrap Alert -->
+    <app-bootstrap-alert *ngIf="!useModalAlert && alert?.showAlert" [message]="alert?.description ?? null"
+        [type]="alert?.type || 'info'" (close)="onAlertClosed()"></app-bootstrap-alert>
+
+    <!-- Form Card -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <app-dynamic-form [fields]="formFields" [buttonLabel]="buttonLabel" [showCancel]="true"
+                [cancelLabel]="'Cancel'" [buttonAlignment]="'right'" [resetTrigger]="triggerReset"
+                (submitted)="onSubmit($event)" (cancelled)="onCancel()" (openModal)="openModalClick($event)">
+            </app-dynamic-form>
+        </div>
+    </div>
+</div>

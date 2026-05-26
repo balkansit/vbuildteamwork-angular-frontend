@@ -1,0 +1,106 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "arun-form": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/arun-form",
+      "sourceRoot": "projects/arun-form/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/arun-form",
+            "index": "projects/arun-form/src/index.html",
+            "browser": "projects/arun-form/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/arun-form/tsconfig.app.json",
+            "assets": [
+              "projects/arun-form/src/favicon.ico",
+              "projects/arun-form/src/assets",
+              "projects/arun-form/src/manifest.webmanifest"
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "lib/styles/arun-form.theme.css",
+              "lib/styles/thermal-print.css",
+              "projects/arun-form/src/styles.css"
+            ],
+            "scripts": [
+              "node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/arun-form/src/environments/environment.ts",
+                  "with": "projects/arun-form/src/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "5mb",
+                  "maximumError": "10mb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "arun-form:build:production"
+            },
+            "development": {
+              "buildTarget": "arun-form:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "arun-form:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "projects/arun-form/tsconfig.spec.json",
+            "assets": [
+              "projects/arun-form/src/favicon.ico",
+              "projects/arun-form/src/assets"
+            ],
+            "styles": ["projects/arun-form/src/styles.css"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "70f9ecdc-8f01-4666-a424-22d576098cf0"
+  }
+}

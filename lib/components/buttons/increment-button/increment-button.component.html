@@ -1,0 +1,9 @@
+<div class="input-group quantity-selector">
+    <button type="button" class="btn btn-outline-secondary" (click)="decrement()" [disabled]="value <= min">
+        −
+    </button>
+    <input type="text" class="form-control text-center" [value]="value" readonly />
+    <button type="button" class="btn btn-outline-secondary" (click)="increment()" [disabled]="value >= max">
+        +
+    </button>
+</div>

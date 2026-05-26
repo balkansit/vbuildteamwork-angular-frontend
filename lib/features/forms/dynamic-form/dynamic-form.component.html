@@ -1,0 +1,136 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row">
+    <ng-container *ngFor="let field of fields; let i = index">
+      <h1 class="mb-4" *ngIf="field.title">{{ field.title }}</h1>
+      <div [ngClass]="'col-md-' + (field.colSize || 12)" *ngIf="!field.hidden">
+        <label [for]="field.name" class="form-label">{{ field.label }}
+          <span *ngIf="field.required" class="text-danger">*</span>
+        </label>
+
+        <ng-container [ngSwitch]="field.type">
+          <div class="form-group position-relative w-100" *ngSwitchCase="'lookup'">
+            <div class="input-group custom-input-group"
+              [ngClass]="{'is-disabled': field.disabled || field.openModalOnClick}">
+              <div *ngIf="field.prefixIcon" class="input-group-text border-0 bg-transparent px-2">
+                <i class="fas" [ngClass]="field.prefixIcon"></i>
+              </div>
+
+              <input [type]="field.type || 'text'" class="form-control" [placeholder]="
+                  'Press ENTER ' +
+                  (field.placeholder ?? 'Select ' + field.label)
+                " [formControlName]="field.name" [readonly]="field.openModalOnClick"
+                (keydown.enter)="handleCellClick(field, 0)" (click)="handleCellClick(field, 0)" />
+
+              <div *ngIf="field.suffixIcon" class="input-group-text border-0 bg-transparent px-2">
+                <i class="fas" [ngClass]="field.suffixIcon"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- FILE / IMAGE UPLOAD -->
+          <div class="form-group" *ngSwitchCase="'image'">
+            <input type="file" class="form-control" accept="image/*" [required]="field.required"
+              [disabled]="field.disabled" (change)="onFileSelect($event, field.name)" />
+
+            <!-- SHOW IF: preview or old image exists -->
+            <div *ngIf="filePreview[field.name] || field.previewUrl" class="mt-2">
+              <div class="position-relative d-inline-block">
+                <img [src]="filePreview[field.name] || field.previewUrl" class="img-thumbnail"
+                  style="max-height: 150px" />
+
+                <!-- REMOVE BUTTON -->
+                <button type="button" class="btn btn-danger btn-sm position-absolute" style="top: 5px; right: 5px"
+                  (click)="removeImage(field.name)">
+                  ✕
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <app-password-input *ngSwitchCase="'password'" [formControlName]="field.name"
+            [placeholder]="field.placeholder ?? ''" [prefixIcon]="field.prefixIcon ?? ''" [errorMessage]="
+              form.controls[field.name].invalid &&
+              (form.controls[field.name].dirty ||
+                form.controls[field.name].touched)
+                ? field.label + ' is required'
+                : ''
+            ">
+          </app-password-input>
+
+          <bootstrap-dropdown *ngSwitchCase="'dropdown'" [formControlName]="field.name" [options]="field.options || []"
+            [placeholder]="field.placeholder ?? 'Select...'" [errorMessage]="
+              form.controls[field.name].invalid &&
+              (form.controls[field.name].dirty ||
+                form.controls[field.name].touched)
+                ? field.label + ' is required'
+                : ''
+            ">
+          </bootstrap-dropdown>
+
+          <select *ngSwitchCase="'dropdown2'" class="form-select" [formControlName]="field.name" [ngClass]="{
+              'is-invalid':
+                form.controls[field.name].invalid &&
+                (form.controls[field.name].dirty ||
+                  form.controls[field.name].touched)
+            }">
+            <!-- <option value="">{{ field.placeholder ?? 'Select...' }}</option> -->
+            <option *ngFor="let option of field.options" [value]="option.value">
+              {{ option.label }}
+            </option>
+          </select>
+
+          <bootstrap-textarea *ngSwitchCase="'textarea'" [formControlName]="field.name"
+            [placeholder]="field.placeholder ?? ''" [rows]="field.rows || 3" [errorMessage]="
+              form.controls[field.name].invalid &&
+              (form.controls[field.name].dirty ||
+                form.controls[field.name].touched)
+                ? field.label + ' is required'
+                : ''
+            ">
+          </bootstrap-textarea>
+
+          <bootstrap-date-input *ngSwitchCase="'date'" [formControlName]="field.name"
+            [placeholder]="field.placeholder ?? ''" [errorMessage]="
+              form.controls[field.name].invalid &&
+              (form.controls[field.name].dirty ||
+                form.controls[field.name].touched)
+                ? field.label + ' is required'
+                : ''
+            ">
+          </bootstrap-date-input>
+
+          <bootstrap-form-input *ngSwitchDefault [type]="field.type" [formControlName]="field.name"
+            [required]="field.required || false" [placeholder]="field.placeholder ?? ''"
+            [prefixIcon]="field.prefixIcon ?? ''" [suffixIcon]="field.suffixIcon ?? ''"
+            [min]="field.min" [step]="field.step" [errorMessage]="
+              form.controls[field.name].invalid &&
+              (form.controls[field.name].dirty ||
+                form.controls[field.name].touched)
+                ? (form.controls[field.name].errors?.['min'] ? field.label + ' cannot be less than ' + field.min : field.label + ' is required or invalid')
+                : ''
+            ">
+          </bootstrap-form-input>
+        </ng-container>
+      </div>
+
+      <div *ngIf="field.css?.borderBottom" class="w-100 border-bottom my-2"></div>
+    </ng-container>
+  </div>
+
+  <!-- Buttons -->
+  <div *ngIf="!hideButtons" [ngClass]="{
+      'd-flex justify-content-center': buttonAlignment === 'center',
+      'd-flex justify-content-end': buttonAlignment === 'right',
+      'd-flex justify-content-start': buttonAlignment === 'left'
+    }" class="d-flex mt-4">
+    <app-bootstrap-button *ngIf="showCancel" [type]="'button'" [variant]="'outline-secondary'" class="me-2"
+      (clicked)="cancelled.emit()">
+      {{ cancelLabel }}
+    </app-bootstrap-button>
+
+    <app-bootstrap-button [type]="'submit'" [variant]="'primary'" [width]="buttonAlignment === 'full' ? '100%' : ''"
+      [loading]="isLoading" [disabled]="form.invalid">
+      {{ buttonLabel }}
+    </app-bootstrap-button>
+  </div>
+</form>

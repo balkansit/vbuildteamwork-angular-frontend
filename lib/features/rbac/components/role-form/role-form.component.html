@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="card-body">
+        <app-generic-crud-form [formFields]="formFields" buttonLabel="Save Role" (formSubmit)="handleSave($event)"
+            (formCancel)="handleCancel()">
+            <app-form-header title="Edit Role" subtitle="Update role details"></app-form-header>
+        </app-generic-crud-form>
+    </div>
+</div>

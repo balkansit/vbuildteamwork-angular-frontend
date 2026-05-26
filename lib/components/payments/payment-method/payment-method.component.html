@@ -1,0 +1,18 @@
+<div class="payment-methods row g-3" [ngClass]="layout === 'row' ? 'flex-row flex-wrap' : 'flex-column'">
+    <div class="col-12 col-md-6" *ngFor="let method of methods">
+        <div class="card h-100 payment-option p-3 d-flex align-items-center justify-content-between flex-row"
+            [class.selected]="method.id === selectedMethodId" [class.disabled]="isDisabled(method.id)"
+            (click)="selectMethod(method.id)">
+            <div class="d-flex align-items-center gap-2">
+                <img *ngIf="method.icon" [src]="method.icon" [alt]="method.name + ' icon'" class="method-icon" />
+                <span class="method-name fw-medium">{{ method.name }}</span>
+                <span *ngIf="method.isDefault" class="badge bg-primary ms-2">Default</span>
+            </div>
+
+            <div class="form-check" *ngIf="showRadio">
+                <input type="radio" class="form-check-input" [checked]="method.id === selectedMethodId"
+                    [disabled]="isDisabled(method.id)" />
+            </div>
+        </div>
+    </div>
+</div>

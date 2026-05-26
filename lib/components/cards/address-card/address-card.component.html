@@ -1,0 +1,41 @@
+<div class="container address-list">
+    <div class="address-item row align-items-center py-3 mb-3 border-primary border-1 radius-sm elevation-md hover-glow-primary"
+        *ngFor="let address of addresses">
+
+        <div class="col-auto">
+
+
+            <!-- Radio selector -->
+            <div class="address-radio" *ngIf="showSelect" style="flex-shrink: 0;" aria-label="Select address">
+                <input type="radio" [checked]="address.id === selectedAddressId" (change)="onSelect(address.id)"
+                    name="address-selection" />
+            </div>
+
+            <!-- Name -->
+            <div class="address-name ">
+                <strong>{{ address.name }}</strong>
+            </div>
+
+
+            <!-- Address details -->
+            <div class="address-details text-muted">
+                <div>{{ address.street }}</div>
+                <div>{{ address.city }}{{ address.state ? ', ' + address.state : '' }} {{ address.zip || '' }}</div>
+                <div>{{ address.country }}</div>
+            </div>
+
+
+            <!-- Actions buttons -->
+            <div class="address-actions" *ngIf="showEdit || showDelete">
+
+                <button *ngIf="showEdit" type="button" class="btn btn-success" (click)="onEdit(address.id)">
+                    Edit
+                </button>
+                <button *ngIf="showDelete" type="button" class="btn btn-danger" (click)="onDelete(address.id)">
+                    Delete
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

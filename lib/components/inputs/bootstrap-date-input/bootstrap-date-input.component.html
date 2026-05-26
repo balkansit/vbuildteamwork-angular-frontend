@@ -1,0 +1,6 @@
+<label *ngIf="label">{{ label }}</label>
+<input type="date" [placeholder]="placeholder" [disabled]="disabled" [value]="value" (input)="onInput($event)"
+    (blur)="onBlur()" class="form-control" />
+<div class="text-danger small" *ngIf="errorMessage">
+    {{ errorMessage }}
+</div>

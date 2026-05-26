@@ -1,0 +1,121 @@
+/* Bitcafe Theme CSS
+Author: Balkans IT Solutions Private Limited
+License: MIT
+*/
+
+/* ========== Root Variables ========== */
+:root {
+    --primary-color: #f58531;
+    --primary-color-dark: #c76b2b;
+    --on-primary-color: #ffffff;
+    --primary-hover-color: #f76b2b;
+
+    --secondary-color: #2196F3;
+    --secondary-color-dark: #1976d2;
+    --success-color: #4CAF50;
+    --danger-color: #F44336;
+    --warning-color: #FFC107;
+    --info-color: #2196F3;
+    --light-color: #FFFFFF;
+    --dark-color: #000000;
+    --primary-color-light: #CFF2E6;
+    --background-color: #f8f9fa;
+    --border-color: #d4d4d4;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-sm: 14px;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-base: 1.5;
+    --line-height-lg: 1.75;
+    --overview-border-color: #ced1d3;
+    --summary-bg-color: #ffc107;
+    /* Font family */
+    --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --sidebar-bg-color: #4a5863;
+    --sidebar-span-color: #fff;
+    --border-radius-base: 4px;
+    --border-radius-lg: 8px;
+    --border-radius-sm: 2px;
+    --box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-control {
+    line-height: 1;
+    font-size: var(--font-size-base);
+    border-radius: var(--border-radius-base);
+    padding: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color) !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color) !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+
+select {
+    width: auto !important;
+}
+
+
+
+/* Override Angular Material Table Styles */
+.mat-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--light-color);
+}
+
+.mat-header-row,
+.mat-row {
+    display: table-row;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mat-header-cell,
+.mat-cell {
+    padding: 16px;
+    text-align: left;
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+}
+
+.mat-header-cell {
+    font-weight: var(--font-weight-bold);
+    background-color: var(--background-color);
+    color: var(--dark-color);
+}
+
+.mat-row:hover {
+    background-color: var(--primary-color-light);
+}
+
+.mat-cell {
+    color: var(--dark-color);
+}
+
+.mat-sort-header-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mat-sort-header-arrow {
+    margin-left: 4px;
+}

@@ -1,0 +1,34 @@
+<div class="container-fluid h-100">
+    <div class="row h-100">
+        <!-- Split Layout -->
+        <ng-container *ngIf="layoutType === 'split'">
+            <ng-container *ngIf="imagePosition === 'left'">
+                <div class="col-lg-6 p-0 d-none d-md-block">
+                    <div class="fixed-banner-container h-100 w-100">
+                        <ng-content select="[banner-content-left]"></ng-content>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
+                    <ng-content select="[main-content-left]"></ng-content>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="imagePosition === 'right'">
+                <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center p-5">
+                    <ng-content select="[main-content-right]"></ng-content>
+                </div>
+                <div class="col-lg-6 p-0 d-none d-md-block">
+                    <div class="fixed-banner-container h-100 w-100">
+                        <ng-content select="[banner-content-right]"></ng-content>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+
+        <!-- Centered Layout -->
+        <ng-container *ngIf="layoutType === 'centered'">
+            <div class="col-12 d-flex justify-content-center align-items-center p-4" style="height: 100vh;">
+                <ng-content select="[main-content-center]"></ng-content>
+            </div>
+        </ng-container>
+    </div>
+</div>

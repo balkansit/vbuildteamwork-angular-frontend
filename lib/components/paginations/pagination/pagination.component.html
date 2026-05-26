@@ -1,0 +1,17 @@
+<nav aria-label="Pagination" class="flex space-x-2">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+        [ngStyle]="{'border-radius': getBorderRadius()}" [ngClass]="buttonClass()" aria-label="Previous page">
+        ‹
+    </button>
+
+    <button *ngFor="let page of pagesToShow" (click)="goToPage(page)" [ngStyle]="{'border-radius': getBorderRadius()}"
+        [ngClass]="[buttonClass(), currentPage === page ? 'active' : '']"
+        [attr.aria-current]="currentPage === page ? 'page' : null">
+        {{ page }}
+    </button>
+
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+        [ngStyle]="{'border-radius': getBorderRadius()}" [ngClass]="buttonClass()" aria-label="Next page">
+        ›
+    </button>
+</nav>

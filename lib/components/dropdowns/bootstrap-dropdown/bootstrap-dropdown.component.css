@@ -1,0 +1,61 @@
+/* Modern Dropdown Styles */
+.form-select {
+    font-size: 0.875rem;
+    padding: 0.5rem 2rem 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    appearance: none;
+    cursor: pointer;
+}
+
+.form-select:hover {
+    border-color: #d1d5db;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color);
+    border-width: 1.5px;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    outline: none;
+}
+
+.form-select:disabled {
+    background-color: #f3f4f6;
+    border-color: #e5e7eb;
+    color: #6b7280;
+    cursor: not-allowed;
+    opacity: 1;
+}
+
+.form-select option {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.dropdown-menu {
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 0.25rem;
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #d1d5db;
+    border-radius: 3px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+    background-color: #f3f4f6;
+}

@@ -1,0 +1,339 @@
+/* Arun Form Theme CSS
+Author: Balkans IT Solutions Private Limited
+License: MIT
+*/
+
+/* ========== Root Variables ========== */
+:root {
+    --primary-color: #822a23;
+    --primary-color-dark: #9e3028;
+    --secondary-color: #2196F3;
+    --secondary-color-dark: #1976d2;
+    --success-color: #4CAF50;
+    --danger-color: #F44336;
+    --warning-color: #FFC107;
+    --info-color: #2196F3;
+    --light-color: #FFFFFF;
+    --dark-color: #000000;
+    --primary-color-light: #CFF2E6;
+    --background-color: #f8f9fa;
+    --border-color: #d4d4d4;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-sm: 14px;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-base: 1.5;
+    --line-height-lg: 1.75;
+    --overview-border-color: #ced1d3;
+    --sidebar-a-bg-color: #ffffff;
+    --summary-bg-color: #ffc107;
+    /* Font family */
+    --font-family-base: system-ui, -apple-system, "Segoe UI", Roboto,
+        "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --sidebar-bg-color: #822a23;
+    --table-bg-color: #fff;
+    --table-header-color: #202020;
+    --sidebar-span-color: #fff;
+    --border-radius-base: 4px;
+    --border-radius-lg: 8px;
+    --border-radius-sm: 2px;
+    --box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== Base Styles ========== */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: var(--font-family-base);
+    background-color: var(--background-color);
+    color: var(--dark-color);
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+input,
+button,
+textarea,
+select,
+label,
+div,
+ul,
+ol,
+li,
+a,
+table,
+th,
+td {
+    font-family: var(--font-family-base) !important;
+}
+
+/* ========== Buttons ========== */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--light-color) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background-color: var(--primary-color-dark) !important;
+    border-color: var(--primary-color-dark) !important;
+    outline-offset: 2px;
+    outline: 3px solid var(--primary-color);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+    color: var(--light-color) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+    background-color: var(--secondary-color-dark) !important;
+    border-color: var(--secondary-color-dark) !important;
+    outline-offset: 2px;
+    outline: 3px solid var(--secondary-color);
+}
+
+.btn-danger {
+    background-color: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    color: var(--light-color) !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-danger:hover,
+.btn-danger:focus-visible {
+    background-color: var(--danger-color) !important;
+    border-color: var(--danger-color) !important;
+    outline-offset: 2px;
+    outline: 3px solid var(--danger-color);
+}
+
+/* ========== Form Controls ========== */
+.form-control {
+    line-height: 1;
+    font-size: var(--font-size-base);
+    border-radius: var(--border-radius-base);
+    padding: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color) !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+.form-select:focus {
+    border-color: var(--primary-color) !important;
+    border-width: 2px !important;
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+
+select {
+    width: auto !important;
+}
+
+
+/* Label style */
+.input-label {
+    font-weight: 500;
+    display: block;
+    text-align: left;
+    margin-bottom: 4px;
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* needed for absolute icon positioning */
+}
+
+.input-group input {
+    flex: 1;
+}
+
+/* Prefix icon in input group */
+.input-group-text {
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-base) 0 0 var(--border-radius-base);
+    color: rgb(153, 153, 153);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0.375rem 0.75rem;
+}
+
+
+/* Input padding right for eye icon */
+.form-control.pr-5 {
+    padding-right: 2.5rem !important;
+}
+
+/* ========== Error Styles ========== */
+.is-invalid {
+    border-color: var(--danger-color) !important;
+}
+
+.invalid-feedback {
+    color: var(--danger-color);
+    font-size: var(--font-size-sm);
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+.bits-main-table ::-webkit-scrollbar {
+    width: 5px;
+    height: 15px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e8ebed;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--sidebar-bg-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color-dark);
+}
+
+/* ========== List Styles ========== */
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ========== Table Toolbar ========== */
+.table-top-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-top-head li {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.table-top-head li:last-child {
+    margin-right: 0;
+}
+
+.table-top-head li a {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e8ebed;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.table-top-head li a:hover {
+    background: #e3e3e3;
+}
+
+.table-top-head li a svg {
+    color: #092c4c;
+}
+
+.table-top-head li a label {
+    margin-right: 10px;
+}
+
+.table-top-head li a.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    color: #fff;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.table-top-head li a.btn-secondary:hover {
+    background-color: var(--primary-color-dark) !important;
+}
+
+.table-top-head li a.btn-secondary svg {
+    width: 16px;
+    margin-right: 5px;
+    color: #fff;
+}
+
+/* ========== Responsive tweaks ========== */
+@media (max-width: 767.98px) {
+    .table-top-head li a.btn-secondary {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .table-top-head li #collapse-header {
+        display: none;
+    }
+}
+
+
+table.mat-table {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mat-header-row {
+    background-color: #f8f9fa !important;
+    font-weight: 600;
+}
+
+.mat-header-cell,
+.mat-cell {
+    border-bottom: 1px solid #dee2e6;
+    padding: 12px 16px;
+}
+
+.mat-row:hover {
+    background-color: #f5f5f5 !important;
+    cursor: pointer;
+}
+
+tr.mat-mdc-row:hover {
+    background-color: #e6e6e6 !important;
+    cursor: pointer;
+}

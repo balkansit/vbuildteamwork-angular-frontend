@@ -1,0 +1,18 @@
+<button [type]="type" [ngClass]="['btn', 'btn-' + variant, customClass, active ? 'active' : '']"
+    [ngStyle]="dynamicStyles" [disabled]="disabled || loading" (click)="onClick($event)">
+    <ng-container *ngIf="loading">
+        <span class="spinner-border spinner-border-md" role="status" aria-hidden="true"></span>
+    </ng-container>
+
+    <ng-container *ngIf="!loading">
+        <i *ngIf="iconClass && iconPosition === 'prefix'" [class]="iconClass" aria-hidden="true"
+            style="margin-right: 0.5rem;"></i>
+
+        <img *ngIf="imgSrc" [src]="imgSrc" alt="" style="width: 16px; height: 16px; margin-right: 0.5rem;">
+
+        <ng-content></ng-content>
+
+        <i *ngIf="iconClass && iconPosition === 'suffix'" [class]="iconClass" aria-hidden="true"
+            style="margin-left: 0.5rem;"></i>
+    </ng-container>
+</button>

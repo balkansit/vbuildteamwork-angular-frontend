@@ -1,0 +1,76 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <!-- 🔼 Top Dynamic Form with Reusable Inputs -->
+    <div class="row">
+        <ng-container *ngFor="let field of fields">
+            <div class="mb-3" [ngClass]="'col-md-' + (field.colSize || 12)">
+                <label [for]="field.name" class="form-label">
+                    {{ field.label }} <span *ngIf="field.required" class="text-danger">*</span>
+                </label>
+
+                <ng-container [ngSwitch]="field.type">
+                    <app-password-input *ngSwitchCase="'password'" [formControlName]="field.name"
+                        [placeholder]="field.placeholder ?? ''" [prefixIcon]="field.prefixIcon ?? ''"
+                        [errorMessage]="form.get('meta')?.get(field.name)?.invalid ? field.label + ' is required' : ''">
+                    </app-password-input>
+
+                    <bootstrap-dropdown *ngSwitchCase="'dropdown'" [formControlName]="field.name"
+                        [options]="field.options || []" [placeholder]="field.placeholder ?? 'Select...'"
+                        [errorMessage]="form.get('meta')?.get(field.name)?.invalid ? field.label + ' is required' : ''">
+                    </bootstrap-dropdown>
+
+                    <bootstrap-textarea *ngSwitchCase="'textarea'" [formControlName]="field.name"
+                        [placeholder]="field.placeholder ?? ''" [rows]="field.rows || 3"
+                        [errorMessage]="form.get('meta')?.get(field.name)?.invalid ? field.label + ' is required' : ''">
+                    </bootstrap-textarea>
+
+                    <bootstrap-date-input *ngSwitchCase="'date'" [formControlName]="field.name"
+                        [placeholder]="field.placeholder ?? ''"
+                        [errorMessage]="form.get('meta')?.get(field.name)?.invalid ? field.label + ' is required' : ''">
+                    </bootstrap-date-input>
+
+                    <bootstrap-form-input *ngSwitchDefault [type]="field.type" [formControlName]="field.name"
+                        [required]="field.required || false" [placeholder]="field.placeholder ?? ''"
+                        [prefixIcon]="field.prefixIcon ?? ''" [suffixIcon]="field.suffixIcon ?? ''"
+                        [errorMessage]="form.get('meta')?.get(field.name)?.invalid ? field.label + ' is required' : ''">
+                    </bootstrap-form-input>
+                </ng-container>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- 🔽 Table View of Items -->
+    <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th *ngFor="let field of itemFields">{{ field.label }}</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody formArrayName="items">
+                <tr *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                    <td *ngFor="let field of itemFields">
+                        <input class="form-control" [formControlName]="field.name" [type]="field.type || 'text'" />
+                        <!-- You can replace with reusable inputs here if needed -->
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-danger" (click)="removeItem(i)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ➕ Add Item + Submit -->
+    <div class="d-flex justify-content-between mt-4">
+        <app-bootstrap-button type="button" variant="outline-primary" (clicked)="addItem()">
+            <i class="fas fa-plus"></i> Add Item
+        </app-bootstrap-button>
+
+        <app-bootstrap-button type="submit" variant="primary" [disabled]="form.invalid">
+            Submit
+        </app-bootstrap-button>
+    </div>
+</form>

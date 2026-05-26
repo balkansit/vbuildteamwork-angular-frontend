@@ -1,0 +1,115 @@
+<div class="role-permission-page">
+    <div class="page-header">
+        <div>
+            <h3 class="title">Role Permissions</h3>
+            <p class="subtitle">Follow the steps: pick a role, check what it can do, and save changes.</p>
+        </div>
+        <div class="actions">
+            <!-- Navigation should be handled by the parent app if needed, or removed if generic -->
+            <!-- <button class="btn btn-outline-primary btn-sm" (click)="createNewRole()">
+                <i class="fas fa-plus me-1"></i>Create New Role
+            </button> -->
+        </div>
+    </div>
+
+    <!-- Role Selector -->
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="role-selector">
+                <div class="step-label">Step 1 — Choose a role</div>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="form-control" placeholder="Type to search roles"
+                        [(ngModel)]="roleSearchTerm" (input)="searchRoles(roleSearchTerm)">
+                </div>
+                <div class="role-list" *ngIf="roles.length">
+                    <button class="role-pill" *ngFor="let r of roles" [class.active]="selectedRole?.id === r.id"
+                        (click)="selectRole(r)">
+                        <i class="fas fa-user-tag me-1"></i>{{ r.name }}
+                    </button>
+                </div>
+                <div class="text-muted small" *ngIf="!roles.length && !rolesLoading">No roles found.</div>
+                <div class="text-muted small" *ngIf="rolesLoading">Loading roles...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info" *ngIf="!selectedRole">
+        Select a role to view and assign permissions.
+    </div>
+
+    <div class="permission-layout" *ngIf="selectedRole">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Step 2 — Review what this role can do</h5>
+                    <span class="badge bg-primary">{{ assignedPermissionIds.size }} selected</span>
+                </div>
+                <div class="role-summary" *ngIf="selectedRole">
+                    <div class="role-chip"><i class="fas fa-user-shield me-1"></i>{{ selectedRole.name }}</div>
+                    <div class="text-muted small">Toggle items on the right to add or remove access. Changes are saved
+                        when you click “Save Changes”.</div>
+                </div>
+                <div class="module-list" *ngIf="permissionModules.length">
+                    <div class="module-card" *ngFor="let module of permissionModules">
+                        <div class="module-header">
+                            <span class="module-name">{{ module.module }}</span>
+                            <span class="module-count">{{ selectedCount(module) }} / {{ module.permissions.length
+                                }}</span>
+                        </div>
+                        <ng-container *ngFor="let perm of module.permissions">
+                            <div class="permission-chip" *ngIf="isPermissionSelected(perm.id)" [class.selected]="true">
+                                <i class="fas fa-check-circle me-1 text-success"></i>{{ perm.label || perm.name }}
+                            </div>
+                        </ng-container>
+                        <div class="text-muted small" *ngIf="selectedCount(module) === 0">
+                            No permissions selected in this module.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5 class="mb-0">Step 3 — Add or remove permissions</h5>
+                    <button class="btn btn-sm btn-primary" [disabled]="saving" (click)="saveChanges()">
+                        <i class="fas fa-save me-1"></i>{{ saving ? 'Saving...' : 'Save Changes' }}
+                    </button>
+                </div>
+                <p class="text-muted small mb-3">Check a module to select everything, or pick individual items. Use Save
+                    when done.</p>
+
+                <div class="module-grid" *ngIf="permissionModules.length">
+                    <div class="module-panel" *ngFor="let module of permissionModules">
+                        <div class="module-panel-header">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox"
+                                    [checked]="moduleSelectionState(module.module) === 'all'"
+                                    [indeterminate]="moduleSelectionState(module.module) === 'some'"
+                                    (change)="toggleModule(module.module)">
+                                <label class="form-check-label">{{ module.module }}</label>
+                            </div>
+                            <span class="text-muted small">{{ module.permissions.length }} perms</span>
+                        </div>
+                        <div class="permission-list">
+                            <div class="form-check" *ngFor="let perm of module.permissions">
+                                <input class="form-check-input" type="checkbox"
+                                    [checked]="isPermissionSelected(perm.id)" (change)="togglePermission(perm.id)">
+                                <label class="form-check-label">
+                                    <span class="perm-label">{{ perm.label || perm.name }}</span>
+                                    <span class="perm-name text-muted">{{ perm.name }}</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-muted small" *ngIf="permissionsLoading">Loading permissions...</div>
+                <div class="text-muted small" *ngIf="!permissionsLoading && !permissionModules.length">No permissions
+                    found.</div>
+            </div>
+        </div>
+    </div>
+</div>

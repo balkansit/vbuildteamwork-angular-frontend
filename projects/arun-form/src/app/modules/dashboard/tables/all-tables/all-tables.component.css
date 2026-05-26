@@ -1,0 +1,133 @@
+.bits-toolbox h4 {
+  font-weight: 700;
+  color: #092c4c;
+  font-size: 18px;
+  margin-bottom: 5px
+}
+
+.bits-toolbox h6 {
+  font-size: 14px;
+  color: #495057;
+  font-weight: 400
+}
+
+.table-top-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center
+}
+
+.table-top-head li {
+  margin-right: 10px;
+  flex-shrink: 0
+}
+
+
+.bits-toolbox .btn-added {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  background: var(--primary-color);
+  padding: 8px 11px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 8px
+}
+
+.table-top-head li a {
+  height: 38px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  border: 1px solid #e8ebed;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+td,
+th {
+  border-color: #eff4f9 !important;
+}
+
+/* Even rows (light grey background) */
+table tr:nth-child(even) {
+  background-color: var(--background-color);
+  /* Light grey */
+}
+
+/* Odd rows (white background) */
+table tr:nth-child(odd) {
+  background-color: #ffffff;
+  /* White */
+}
+
+/* Hover effect for rows */
+table tr:hover {
+  background-color: var(--primary-color-light);
+  /* Light grey on hover */
+  cursor: pointer;
+  /* Change the cursor to indicate interactivity */
+}
+
+.actions-column-header,
+.actions-column-cell {
+  width: 80px;
+  position: sticky;
+  right: 0;
+  /* Stick to the right side */
+  background-color: rgb(235, 235, 235);
+  /* Ensure the background is solid behind the sticky column */
+  z-index: 1;
+  /* Ensure it stays above the rest of the columns */
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  #printSection,
+  #printSection * {
+    visibility: visible !important;
+  }
+
+  #printSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .actions,
+  mat-paginator,
+  .pagination-container,
+  .sidebar,
+  .btn,
+  .mat-column-actions {
+    display: none !important;
+  }
+}

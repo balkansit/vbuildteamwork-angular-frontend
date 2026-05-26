@@ -1,0 +1,6 @@
+<span class="tag-badge" [class.removable]="removable" [class.sm]="size === 'sm'" [class.md]="size === 'md'"
+    [ngClass]="'bg-' + variant + ' text-white'">
+    {{ text }}
+    <button *ngIf="removable" type="button" class="btn-close btn-close-white btn-sm ms-2" aria-label="Remove"
+        (click)="onRemove($event)"></button>
+</span>

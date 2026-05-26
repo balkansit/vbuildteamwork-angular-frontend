@@ -1,0 +1,147 @@
+.logo-div
+{
+  justify-content: center;
+  display: flex;
+}
+
+.carousel-inner img {
+  height: 920px;
+  object-fit: cover;
+}
+
+
+.login-title {
+    font-size: 2rem;
+    font-weight: 650;
+    margin-bottom: 20px;
+    color: #333;
+    
+
+}
+
+.logo {
+    width: 400px;
+    height: auto;
+    display: block;
+    padding-bottom: 40px;
+    margin: 0 auto;
+    padding-left: 119px;
+    padding-right: 90px;
+    
+    
+}
+
+.login-subtitle-container {
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.login-subtitle {
+    font-size: 0.875rem;
+    color: #555;
+    padding-left: 116px;
+}
+
+
+.color-a {
+    color: #69418B; /* or any color you prefer */
+}
+
+.mt-3 {
+    margin-top: 1rem;
+    
+}
+
+.ms-1 {
+    margin-left: 0.25rem;
+    color: #69418B; /* or any color you prefer */
+}
+
+a {
+    color: #69418B;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 600;
+}
+
+a:hover {
+    color: #8842c5;
+    text-decoration: underline;
+}
+
+
+
+.col-md-10 {
+    width: 100%;
+    margin: 0 auto 15px auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -8px;
+    margin-left: -8px;
+    margin-bottom: 10px;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.col-md-11 {
+    width: 83%;
+    padding-left: 123px;
+    
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eyeicon {
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  cursor: pointer;
+}
+
+.eyeicon i {
+  font-size: 16px;
+  color: #444;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-group .form-control {
+    padding-right: 40px;
+    border-radius: 4px;
+    font-size: 1rem;
+    border: 2px 0 2px solid #e7e4e4;
+    box-shadow: none;
+}
+
+.input-group-text {
+    border: none;
+    background: transparent;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #69418B;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+

@@ -1,0 +1,33 @@
+<app-auth-layout [imageSrc]="'assets/images/intro-ben.png'" [imagePosition]="'left'" [layoutType]="'split'">
+    <div maincontent class="login-container w-75 ">
+        <!-- Logo -->
+        <div class="mb-4">
+            <img [src]="imageSrc" class="logo img-fluid mb-3" alt="Logo" />
+            <h3 class="login-title">OTP <span class="color-a">Verification</span></h3>
+            <p class="login-subtitle">Please enter the OTP (One-Time Password) sent to
+                your registered email/phone number to complete
+                your verification.</p>
+        </div>
+        <app-modal-alert [show]="!!errorMessage" status="error" title="Error" [description]="errorMessage ?? ''"
+            [buttons]="[
+    { label: 'Cancel', class: 'btn-secondary', action: 'cancel' }]" [autoDismissSeconds]="10"
+            (action)="handleModalAction($event)" (closed)="errorMessage = ''">
+        </app-modal-alert>
+
+        <auth-form [fields]="fields" (formSubmit)="onSubmit($event)" [buttonLabel]="'Verify OTP'"
+            [isLoading]="isLoading"></auth-form>
+
+        <div class="remain mt-3">
+            <button class="p-0" [disabled]="remainingTime > 0" (click)="resendOtp()">
+                <span>Didn’t got the code?</span> <span class=" btn-link color-a">Resend</span>
+            </button>
+            <span class="main" *ngIf="remainingTime > 0"><span class="tile">Remaining time:</span> 00:{{ remainingTime
+                }}s</span>
+        </div>
+
+        <div class="mt-3">
+            <span>Already have an account?</span>
+            <a routerLink="/auth/login" class="ms-1">Login</a>
+        </div>
+    </div>
+</app-auth-layout>

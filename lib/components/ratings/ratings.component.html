@@ -1,0 +1,13 @@
+<div class="star-rating d-flex gap-1" [title]="rating + ' out of ' + maxStars" [ngClass]="size">
+    <ng-container *ngFor="let star of stars; index as i">
+        <span class="star" [class.clickable]="!readOnly" [class.hovered]="!readOnly" (click)="setRating(i)">
+            <ng-container [ngSwitch]="star">
+                <i *ngSwitchCase="'full'" class="bi bi-star-fill text-warning"></i>
+                <i *ngSwitchCase="'half'" class="bi bi-star-half text-warning"></i>
+                <i *ngSwitchCase="'empty'" class="bi bi-star text-secondary"></i>
+            </ng-container>
+        </span>
+    </ng-container>
+</div>
+
+<p>Review nwo</p>

@@ -1,0 +1,5 @@
+
+/* Hide Refresh button in reports section */
+:host ::ng-deep .header-btn--muted {
+    display: none !important;
+}

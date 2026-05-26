@@ -1,0 +1,73 @@
+<div class="container-fluid py-4">
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-bold" style="color: #000000;">Dynamic Reports</h5>
+        </div>
+        <div class="card-body bg-light">
+            <form (ngSubmit)="fetchReport()" class="row g-3 align-items-end">
+                
+                <!-- Table Selection -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Select Table</label>
+                    <select class="form-select" [(ngModel)]="selectedTableId" name="tableId" required>
+                        <option [value]="null" disabled>Choose a table...</option>
+                        <option *ngFor="let table of tables" [value]="table.id">{{ table.title }}</option>
+                    </select>
+                </div>
+
+                <!-- User Selection -->
+                <div class="col-md-4">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Select User</label>
+                    <select class="form-select" [(ngModel)]="selectedUserId" name="userId" [disabled]="!(isAdmin || isGuest)" required>
+                        <option *ngIf="isAdmin || isGuest" [value]="null" disabled>Choose a user...</option>
+                        <option *ngIf="!(isAdmin || isGuest)" [value]="currentUser?.id">{{ currentUser?.name }}</option>
+                        <ng-container *ngIf="isAdmin || isGuest">
+                            <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+
+                <!-- Date Selection -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-muted small text-uppercase">Select Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="selectedDate" name="date" required>
+                </div>
+
+                <!-- Run Button -->
+                <div class="col-md-2 text-end">
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="!selectedTableId || !selectedUserId || !selectedDate">
+                        <i class="fas fa-search me-1"></i> Generate
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Alert -->
+    <app-bootstrap-alert *ngIf="alert?.showAlert" [message]="alert?.description ?? null" [type]="alert?.type ?? 'info'" (close)="alert = null">
+    </app-bootstrap-alert>
+
+    <!-- Results Table -->
+    <div class="card shadow-sm border-0 rounded-3" *ngIf="filteredRecords.length > 0">
+        <div class="card-body p-0">
+         <app-base-table
+  [title]="tableData?.title? tableData.title + ' Report' : 'Report Results'"
+  [resourceName]="'Record'"
+  [data]="filteredRecords"
+  [tableColumns]="tableColumns"
+  [fetchData]="fetchTableData"
+  [getViewFields]="getViewFields"
+  [getEditFormFields]="getEditFormFields"
+  [updateItem]="updateItem"
+  [deleteItem]="deleteItem"
+  [showActions]="!isGuest"
+  [showAddButton]="false"
+  [showBulkDelete]="false"
+  [showExport]="false"
+  [inLineEdit]="!isGuest"
+>
+</app-base-table>
+        </div>
+    </div>
+</div>

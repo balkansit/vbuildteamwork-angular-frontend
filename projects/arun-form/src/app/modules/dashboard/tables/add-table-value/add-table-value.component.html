@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card p-3">
+          <h3 class="card-header">Add Table Value</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-3">
+      <div class="col-6 mb-3">
+        <div class="card">
+          <div *ngIf="submissionSuccess" class="alert alert-success mt-2">
+            {{ submissionMessage }}
+          </div>
+
+          <app-chip-selector [dropdownOptions]="dropdownTableOptions" [dropdownOptions2]="dropdownRoleOptions2"
+            [prefillData]="prefillData" [resetTrigger]="resetTrigger" placeholder="Enter custom value"
+            buttonLabel="Save Selection" (formSubmit)="onChipSelection($event)"
+            (dropdown1Selected)="onDropdown1Selected($event)">
+          </app-chip-selector>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

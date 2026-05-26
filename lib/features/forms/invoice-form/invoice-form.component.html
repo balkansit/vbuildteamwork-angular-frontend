@@ -1,0 +1,158 @@
+<form [formGroup]="invoiceForm" class="p-3">
+    <!-- Company Info -->
+    <div class="mb-3">
+        <label>Company Logo URL</label>
+        <app-icon-input [icon]="'fas fa-image'" [placeholder]="'Enter logo URL'" [type]="'text'"
+            [customClass]="'mt-3 mb-3'" [id]="'logo-url-input'" [name]="'logoUrl'" [disabled]="false" [readonly]="false"
+            formControlName="logoUrl">
+        </app-icon-input>
+    </div>
+    <div class="mb-3">
+        <label>Company Name</label>
+        <app-icon-input [icon]="'fas fa-building'" [placeholder]="'Enter company name'" [type]="'text'"
+            [customClass]="'mb-3'" [id]="'company-name-input'" [name]="'companyName'" [disabled]="false"
+            [readonly]="false" formControlName="companyName">
+        </app-icon-input>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Invoice Number</label>
+            <app-icon-input [icon]="'fas fa-file-invoice'" [placeholder]="'Enter invoice number'" [type]="'text'"
+                [customClass]="'mb-3'" [id]="'invoice-number-input'" [name]="'invoiceNumber'" [disabled]="false"
+                [readonly]="false" formControlName="invoiceNumber">
+            </app-icon-input>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Title</label>
+            <app-icon-input [icon]="'fas fa-heading'" [placeholder]="'Enter title'" [type]="'text'"
+                [customClass]="'mb-3'" [id]="'title-input'" [name]="'title'" [disabled]="false" [readonly]="false"
+                formControlName="title">
+            </app-icon-input>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label>Issue Date</label>
+            <app-icon-input [icon]="'fas fa-calendar-alt'" [placeholder]="'Select issue date'" [type]="'date'"
+                [customClass]="'mb-3'" [id]="'issue-date-input'" [name]="'issueDate'" [disabled]="false"
+                [readonly]="false" formControlName="issueDate">
+            </app-icon-input>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label>Due Date</label>
+            <app-icon-input [icon]="'fas fa-calendar-check'" [placeholder]="'Select due date'" [type]="'date'"
+                [customClass]="'mb-3'" [id]="'due-date-input'" [name]="'dueDate'" [disabled]="false" [readonly]="false"
+                formControlName="dueDate">
+            </app-icon-input>
+        </div>
+    </div>
+
+    <!-- Bill From -->
+    <h5>Bill From</h5>
+    <div formGroupName="billFrom" class="mb-3">
+        <app-icon-input [icon]="'fas fa-user'" [placeholder]="'Name'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-from-name'" [name]="'billFromName'" [disabled]="false" [readonly]="false"
+            formControlName="name">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-map-marker-alt'" [placeholder]="'Address'" [type]="'text'"
+            [customClass]="'mb-1'" [id]="'bill-from-address'" [name]="'billFromAddress'" [disabled]="false"
+            [readonly]="false" formControlName="address">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-city'" [placeholder]="'City'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-from-city'" [name]="'billFromCity'" [disabled]="false" [readonly]="false"
+            formControlName="city">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-flag-usa'" [placeholder]="'State'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-from-state'" [name]="'billFromState'" [disabled]="false" [readonly]="false"
+            formControlName="state">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-mail-bulk'" [placeholder]="'Zip'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-from-zip'" [name]="'billFromZip'" [disabled]="false" [readonly]="false" formControlName="zip">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-globe'" [placeholder]="'Country'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-from-country'" [name]="'billFromCountry'" [disabled]="false" [readonly]="false"
+            formControlName="country">
+        </app-icon-input>
+    </div>
+
+    <!-- Bill To -->
+    <h5>Bill To</h5>
+    <div formGroupName="billTo" class="mb-3">
+        <app-icon-input [icon]="'fas fa-user'" [placeholder]="'Name'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-to-name'" [name]="'billToName'" [disabled]="false" [readonly]="false" formControlName="name">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-map-marker-alt'" [placeholder]="'Address'" [type]="'text'"
+            [customClass]="'mb-1'" [id]="'bill-to-address'" [name]="'billToAddress'" [disabled]="false"
+            [readonly]="false" formControlName="address">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-city'" [placeholder]="'City'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-to-city'" [name]="'billToCity'" [disabled]="false" [readonly]="false" formControlName="city">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-flag-usa'" [placeholder]="'State'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-to-state'" [name]="'billToState'" [disabled]="false" [readonly]="false" formControlName="state">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-mail-bulk'" [placeholder]="'Zip'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-to-zip'" [name]="'billToZip'" [disabled]="false" [readonly]="false" formControlName="zip">
+        </app-icon-input>
+        <app-icon-input [icon]="'fas fa-globe'" [placeholder]="'Country'" [type]="'text'" [customClass]="'mb-1'"
+            [id]="'bill-to-country'" [name]="'billToCountry'" [disabled]="false" [readonly]="false"
+            formControlName="country">
+        </app-icon-input>
+    </div>
+
+    <!-- Items -->
+    <h5>Items</h5>
+    <div formArrayName="items" class="mb-3">
+        <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="d-flex mb-2 gap-2">
+            <app-icon-input [icon]="'fas fa-box'" [placeholder]="'Name'" [type]="'text'" [customClass]="'me-1'"
+                [id]="'item-name-'+i" [name]="'itemName'+i" [disabled]="false" [readonly]="false"
+                formControlName="name">
+            </app-icon-input>
+            <app-icon-input [icon]="'fas fa-sort-numeric-up'" [placeholder]="'Qty'" [type]="'number'"
+                [customClass]="'me-1'" [id]="'item-qty-'+i" [name]="'itemQty'+i" [disabled]="false" [readonly]="false"
+                formControlName="qty">
+            </app-icon-input>
+            <app-icon-input [icon]="'fas fa-dollar-sign'" [placeholder]="'Price'" [type]="'number'"
+                [customClass]="'me-1'" [id]="'item-price-'+i" [name]="'itemPrice'+i" [disabled]="false"
+                [readonly]="false" formControlName="price">
+            </app-icon-input>
+
+            <app-bootstrap-button [type]="'button'" [variant]="'danger'" [iconClass]="'fas fa-trash-alt'"
+                [iconPosition]="'suffix'">
+            </app-bootstrap-button>
+
+        </div>
+        <app-bootstrap-button [type]="'button'" [variant]="'outline-primary'" (click)="addItem()">
+            Add Item
+        </app-bootstrap-button>
+    </div>
+
+    <!-- Summary -->
+    <div class="mb-3">
+        <label>Tax Rate (%)</label>
+        <app-icon-input [icon]="'fas fa-percentage'" [placeholder]="'Tax Rate (%)'" [type]="'number'"
+            [customClass]="'mb-3'" [id]="'tax-rate-input'" [name]="'taxRate'" [disabled]="false" [readonly]="false"
+            formControlName="taxRate">
+        </app-icon-input>
+    </div>
+    <div class="mb-3">
+        <label>Discount</label>
+        <app-icon-input [icon]="'fas fa-tag'" [placeholder]="'Discount'" [type]="'number'" [customClass]="'mb-3'"
+            [id]="'discount-input'" [name]="'discount'" [disabled]="false" [readonly]="false"
+            formControlName="discount">
+        </app-icon-input>
+    </div>
+
+    <!-- Payment Info -->
+    <div class="mb-3">
+        <label>Payment Information</label>
+        <textarea formControlName="paymentInfo" class="form-control" rows="3"></textarea>
+    </div>
+
+    <!-- Terms -->
+    <div class="mb-3">
+        <label>Terms & Conditions</label>
+        <textarea formControlName="terms" class="form-control" rows="3"></textarea>
+    </div>
+</form>

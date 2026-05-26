@@ -1,0 +1,22 @@
+<button type="button" (click)="onClick($event)" [class.primary]="variant === 'primary'"
+    [class.secondary]="variant === 'secondary'" [class.outline]="variant === 'outline'"
+    [class.text]="variant === 'text'" [class.no-border]="noBorder" [class.disabled]="isDisabled"
+    [class.icon-only]="icon && iconPosition === 'only'" [class.border-radius-small]="borderRadius === 'small'"
+    [class.border-radius-medium]="borderRadius === 'medium'" [class.border-radius-large]="borderRadius === 'large'"
+    [attr.aria-disabled]="isDisabled" [disabled]="isDisabled">
+    <ng-container *ngIf="loading">
+        <span class="spinner" role="status" aria-live="polite" aria-label="Loading"></span>
+    </ng-container>
+
+    <ng-container *ngIf="!loading">
+        <ng-container *ngIf="icon && iconPosition === 'prefix'">
+            <app-icon name="home" iconSet="mat"></app-icon>
+        </ng-container>
+
+        <span *ngIf="label">{{ label }}</span>
+
+        <ng-container *ngIf="icon && iconPosition === 'suffix'">
+            <app-icon name="home" iconSet="mat"></app-icon>
+        </ng-container>
+    </ng-container>
+</button>

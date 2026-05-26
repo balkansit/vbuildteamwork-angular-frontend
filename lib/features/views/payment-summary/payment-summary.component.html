@@ -1,0 +1,28 @@
+<div class="col-12">
+    <div class="payment-info">
+        <div class="card" style="border: none;">
+            <!-- <div class="card-header text-center">
+                <h2 class="mb-0">{{ title }}</h2>
+            </div> -->
+            <div class="card-body">
+                <div class="list-group no-border">
+                    <div *ngFor="let item of items" class="d-flex justify-content-between align-items-center py-2"
+                        [ngClass]="{
+                 'fw-bold': item.isBold,
+                 'text-primary fs-5': item.isHighlight
+               }">
+                        <span class="fw-normal">{{ item.label }}</span>
+                        <span class="text-secondary">{{ item.value }}</span>
+                    </div>
+                </div>
+                <hr style="border: none; border-top: 2px dotted #a3a3a3; margin: 1rem 0;">
+                <div class="d-flex justify-content-between align-items-center py-2">
+                    <span class="fw-bold" style="font-size: 30px;">Total: </span>
+                    <span class="text-secondary" style="font-size: 30px;">{{ total | currency:'INR':'symbol':'1.2-2'
+                        }}</span>
+                </div>
+                <hr style="border: none; border-top: 2px dotted #a3a3a3; margin: 1rem 0;">
+            </div>
+        </div>
+    </div>
+</div>

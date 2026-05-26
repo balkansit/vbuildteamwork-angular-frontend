@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="card p-3">
+                    <h3 class="card-header">Add Role Permission</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row p-3">
+            <div class="col-6 mb-3">
+                <h2>Select Role</h2>
+                <div class="card">
+                    <select [(ngModel)]="selectedRoleId" (ngModelChange)="onDropdownValueChange($event)"
+                        class="form-select">
+                        <option [value]="null" disabled>Select Role</option>
+                        <option *ngFor="let option of dropdownRoleOptions" [value]="option.value">
+                            {{ option.label }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="p-3">
+            <h4>Selected Permissions</h4>
+            <div class="d-flex flex-wrap">
+                <mat-chip *ngFor="let perm of selectedPermissions" [removable]="true"
+                    (removed)="removePermissionChip(perm)" class="m-1">
+                    {{ perm.name }}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </div>
+            <p *ngIf="selectedPermissions.length === 0">
+                No permissions selected yet.
+            </p>
+        </div>
+
+
+        <div class="col p-3">
+            <app-base-table #permissionTable [title]="'Permission List'" [subtitle]="'Select permissions for this role'"
+                [resourceName]="'Permission'" [tableColumns]="tableColumns" [fetchData]="fetchPermissions"
+                [getViewFields]="getViewFields" [updateItem]="updatePermission" [deleteItem]="deletePermission"
+                [hasRoles]="whoCanEditDelete" [showActions]="false" [showAddButton]="false" [showExport]="false"
+                [showBulkDelete]="false" [filterColumns]="filterColumns">
+            </app-base-table>
+
+        </div>
+
+        <div class="col mt-2">
+            <div class="text-end">
+
+                <app-bootstrap-button [variant]="'primary'" [type]="'submit'" [iconClass]="'fa fa-paper-plane'"
+                    [iconPosition]="'prefix'" [customClass]="'my-custom-btn'" [width]="'150px'" (clicked)="onSubmit()">
+                    Submit
+                </app-bootstrap-button>
+
+            </div>
+        </div>
+    </div>
+</div>

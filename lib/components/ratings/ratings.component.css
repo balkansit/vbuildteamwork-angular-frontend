@@ -1,0 +1,25 @@
+.star-rating.sm .star {
+    font-size: 1rem;
+}
+
+.star-rating.md .star {
+    font-size: 1.4rem;
+}
+
+.star-rating.lg .star {
+    font-size: 2rem;
+}
+
+.star {
+    transition: transform 0.2s ease;
+    cursor: default;
+}
+
+.star.clickable {
+    cursor: pointer;
+}
+
+.star.hovered:hover {
+    transform: scale(1.25);
+    filter: brightness(1.2);
+}

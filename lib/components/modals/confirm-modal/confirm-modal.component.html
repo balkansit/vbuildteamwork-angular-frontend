@@ -1,0 +1,29 @@
+<div class="modal fade show d-block animated-modal" tabindex="-1" *ngIf="show"
+  style="background-color: rgba(0, 0, 0, 0.5);" (click)="handleAction('backdrop')">
+  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+    <div class="modal-content text-center p-4 position-relative animate__animated animate__fadeInDown">
+
+      <!-- Top Right Close Button -->
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+        (click)="handleAction('close')"></button>
+
+      <!-- Icon -->
+      <div class="mb-3">
+        <i [class]="iconClass" style="font-size: 4rem;"></i>
+      </div>
+
+      <!-- Title -->
+      <h4 class="mb-2">{{ title }}</h4>
+
+      <!-- Description -->
+      <p class="text-muted">{{ description }}</p>
+
+      <!-- Dynamic Buttons -->
+      <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
+        <button *ngFor="let btn of buttons" class="btn" [ngClass]="btn.class" (click)="handleAction(btn.action)">
+          {{ btn.label }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

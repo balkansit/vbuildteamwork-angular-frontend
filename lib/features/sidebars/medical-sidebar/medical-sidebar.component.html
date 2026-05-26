@@ -1,0 +1,68 @@
+<div class="sidebar-inner slimscroll" [class.collapsed]="isSidebarCollapsed">
+    <div id="sidebar-navmenu" class="sidebar-navmenu">
+        <div style="margin-bottom: 0; padding-bottom: 0;">
+            <!-- <div class="sidebar-logo" *ngIf="!isSidebarCollapsed">
+                <img src="assets/images/logo.png" alt="Logo" class="img-fluid" style="display:block; max-height:80px; height:auto; margin:0 auto;">
+            </div>
+            <div class="sidebar-logo collapsed-logo" *ngIf="isSidebarCollapsed">
+                <img src="assets/images/logo-collapsed.png" alt="Logo" class="img-fluid" style="display:block; max-height:80px; height:auto; margin:0 auto;">
+            </div> -->
+        </div>
+        <ul>
+            <li class="bs-nav-menu" *ngFor="let section of SidebarMenu; let i = index"
+                [class.expanded]="expandedSection === i && !isSidebarCollapsed">
+                <h6 class="bs-nav-menu-h6 d-flex align-items-center justify-content-between sidebar-sec-title"
+                    (click)="toggleSection(i)">
+                    <!-- Left side: image + text -->
+                    <div class="d-flex align-items-center gap-2">
+                        <img [src]="section.image" alt="{{ section.label }}" class="img-fluid"
+                            style="width: 30px; height: 30px; object-fit: contain;" />
+
+                        <span class="sidebar-sec-title" style="color: white !important;">{{ section.label }}</span>
+                    </div>
+
+                    <!-- Right side: chevron icon -->
+                    <i *ngIf="!isSidebarCollapsed" class="fas" [ngClass]="{
+       'fa-chevron-down': expandedSection === i,
+       'fa-chevron-right': expandedSection !== i
+     }">
+                    </i>
+                </h6>
+
+                <hr style="margin:  0; border-top: 1px solid #ccc;">
+                <ul *ngIf="!section.collapsed || isSidebarCollapsed === true">
+                    <li *ngFor="let item of section.items">
+                        <a routerLinkActive="active" [routerLink]="item.path" [matTooltip]="item.tooltip"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            <img [src]="item.image" alt="{{ section.label }}" class="img-fluid"
+                                style="width: 30px; height: 30px; object-fit: contain; justify-items: 10px;" />
+                            <!-- <i [class]="item.icon"></i> -->
+                            <span>{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!-- <div class="sidebar-inner slimscroll" [class.collapsed]="isSidebarCollapsed">
+    <div id="sidebar-navmenu" class="sidebar-navmenu">
+        <ul>
+            <li class="bs-nav-menu" *ngFor="let section of SidebarMenu">
+                <h6 class="bs-nav-menu-h6">{{ section.label }}</h6>
+                <ul>
+                    <li *ngFor="let item of section.items" [ngIf]="canSee(item)">
+                        <a routerLinkActive="active" [routerLink]="item.path" [matTooltip]="item.tooltip"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            <i [class]="item.icon"></i><span>{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div> -->

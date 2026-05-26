@@ -1,0 +1,354 @@
+/* ========== Wrapper ========== */
+.invoice-wrapper {
+    background: #fff;
+    height: 100%;
+    display: flex;
+}
+
+.row {
+    width: 100%;
+    height: 100%;
+}
+
+/* ========== Cards ========== */
+.form-card,
+.preview-card {
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    margin: 12px;
+}
+
+/* ========== Card Headers ========== */
+.card-header-clean {
+    padding: 1.25rem;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: #f9f9f9;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+}
+
+.header-title i {
+    font-size: 1.3rem;
+    color: #333;
+}
+
+.header-title h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.header-actions .btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+}
+
+/* ========== Card Content ========== */
+.card-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}
+
+/* ========== Form Sections ========== */
+.form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.section-title i {
+    font-size: 1rem;
+    color: #666;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-header .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+/* ========== Form Controls ========== */
+.form-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.form-control,
+select.form-control {
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #666;
+    box-shadow: none;
+    background-color: #fff;
+}
+
+/* ========== Items Table ========== */
+.items-table {
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.items-table thead {
+    background: #f5f5f5;
+}
+
+.items-table th {
+    padding: 0.75rem;
+    border: 1px solid #e5e5e5;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.items-table td {
+    padding: 0.75rem;
+    border: 1px solid #e5e5e5;
+}
+
+.items-table .form-control-sm {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.85rem;
+    border: 1px solid #d0d0d0;
+}
+
+.items-table .btn-link {
+    font-size: 0.9rem;
+}
+
+/* ========== Form Actions ========== */
+.form-actions {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.form-actions .btn {
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+}
+
+/* ========== Preview Card ========== */
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.preview-header h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.preview-header .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+}
+
+.preview-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.preview-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.preview-section small {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* ========== Preview Table ========== */
+.preview-table-wrapper {
+    margin: 1.5rem 0;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.preview-table-wrapper .table {
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.preview-table-wrapper thead {
+    background: #f5f5f5;
+}
+
+.preview-table-wrapper th {
+    padding: 0.75rem;
+    border: none;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.preview-table-wrapper td {
+    padding: 0.75rem;
+    border: none;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.preview-table-wrapper tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========== Preview Totals ========== */
+.preview-totals {
+    background: #f9f9f9;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.total-row:last-child {
+    border-bottom: none;
+}
+
+.total-final {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #333;
+    padding-top: 1rem;
+    padding-bottom: 0;
+}
+
+/* ========== Preview Notes & Footer ========== */
+.preview-notes {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #fffbf0;
+    border: 1px solid #f0e6d2;
+    border-radius: 4px;
+}
+
+.preview-notes small {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #999;
+}
+
+.preview-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1024px) {
+    .card-content {
+        padding: 1.25rem;
+    }
+
+    .form-section {
+        margin-bottom: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .form-card,
+    .preview-card {
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .items-table th,
+    .items-table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .preview-header {
+        flex-direction: column;
+    }
+
+    .preview-header h4 {
+        font-size: 1.2rem;
+    }
+}

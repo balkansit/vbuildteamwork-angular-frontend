@@ -1,0 +1,95 @@
+.sidebar-content {
+    transition: all 0.3s ease;
+    width: 240px;
+    /* full width */
+    overflow: hidden;
+}
+
+.sidebar-content.collapsed {
+    width: 60px;
+    /* collapsed width */
+}
+
+.sidebar-content.collapsed .logo-text,
+.sidebar-content.collapsed .menu-label,
+.sidebar-content.collapsed .menu-heading,
+.sidebar-content.collapsed .submenu span,
+.sidebar-content.collapsed .submenu,
+.sidebar-content.collapsed .fold-icon {
+    display: none;
+}
+
+.sidebar-content.collapsed i {
+    margin-right: 0;
+    text-align: center;
+    width: 100%;
+}
+
+
+.sidebar-logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    user-select: none;
+}
+
+.menu-group {
+    margin-bottom: 1rem;
+}
+
+.menu-heading {
+    letter-spacing: 0.1em;
+}
+
+.menu-item>a {
+    color: #495057;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: 0.25rem;
+    user-select: none;
+}
+
+.menu-item>a:hover,
+.submenu-item>a:hover {
+    background-color: #e9ecef;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.menu-item>a.selected {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.menu-item>a.selected span {
+    color: var(--on-primary-color);
+}
+
+.submenu {
+    margin-top: 0.25rem;
+}
+
+.submenu-item>a {
+    color: #6c757d;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    border-radius: 0.25rem;
+    user-select: none;
+}
+
+
+.submenu-item>a.selected {
+    background-color: var(--primary-color);
+    color: var(--on-primary-color);
+}
+
+.submenu-item>a.selected span {
+    color: var(--on-primary-color);
+}
+
+@media (max-width: 767.98px) {
+    .menu-label {
+        display: none;
+    }
+}

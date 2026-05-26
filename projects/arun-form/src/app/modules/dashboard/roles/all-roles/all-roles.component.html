@@ -1,0 +1,10 @@
+<div class="card">
+    <div class="card-body">
+        <app-base-table [title]="'Role List'" [subtitle]="'Manage Roles'" [resourceName]="'Role'"
+            [tableColumns]="tableColumns" [fetchData]="fetchRoles" [getEditFormFields]="getEditFields"
+            [getViewFields]="getViewFields" [updateItem]="updateRole" [deleteItem]="deleteRole"
+            [hasRoles]="whoCanEditDelete" [inLineEdit]="false" (editItemClicked)="navigateToEdit($event)"
+            (goToAddClicked)="openAddRole()" [showExport]="false" [filterColumns]="filterColumns" [data]="roles">
+        </app-base-table>
+    </div>
+</div>

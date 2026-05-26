@@ -1,0 +1,20 @@
+.flex {
+   margin: 5PX;
+}
+
+button {
+    border: 1px solid #d1d5db; /* border, Tailwind gray-300 */
+    background-color: #fff;
+    color: #418fcf; /* Tailwind gray-700 */
+    cursor: pointer;
+   font-weight: 600;
+}
+
+button:hover {
+    background-color: #f3f4f6; /* Tailwind gray-100 */
+}
+
+
+.text-white {
+    color: #3acc52 !important;
+}

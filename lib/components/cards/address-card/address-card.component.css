@@ -1,0 +1,15 @@
+.address-radio input[type='radio'] {
+    cursor: pointer;
+}
+
+.address-item {
+    cursor: pointer;
+}
+
+.address-item:hover {
+    background-color: #f8f9fa;
+}
+
+.address-details {
+    word-wrap: break-word;
+}

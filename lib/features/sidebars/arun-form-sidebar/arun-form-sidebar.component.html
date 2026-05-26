@@ -1,0 +1,22 @@
+<div class="sidebar-inner slimscroll" [class.collapsed]="isSidebarCollapsed">
+    <div class="row" style="margin-bottom: 0; padding-bottom: 0;">
+        <div class="col-12 text-center" style="margin-bottom: 0; padding-bottom: 0;">
+            <img src="assets/images/01.png" class="logo img-fluid" alt="Logo" style="display: block; max-height: 100px; height: 200px; margin: 15px auto;" />
+        </div>
+    </div>
+    <div id="sidebar-navmenu" class="sidebar-navmenu">
+        <ul>
+            <li class="bs-nav-menu" *ngFor="let section of SidebarMenu">
+                <h6 class="bs-nav-menu-h6">{{ section.label }}</h6>
+                <ul>
+                    <li *ngFor="let item of section.items">
+                        <a routerLinkActive="active" [routerLink]="item.path" [matTooltip]="item.tooltip"
+                            [routerLinkActiveOptions]="{ exact: true }">
+                            <i [class]="item.icon"></i><span>{{ item.label }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

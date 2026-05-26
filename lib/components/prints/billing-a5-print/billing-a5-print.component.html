@@ -1,0 +1,136 @@
+<div class="a5-print-container" id="a5-print-section">
+  <div class="a5-bill-box">
+    <!-- Header -->
+    <div class="bill-header">
+      <div class="logo-section" *ngIf="printData?.settings?.showLogo && printData?.brandInfo?.logo">
+        <img [src]="printData?.brandInfo?.logo" alt="Logo" class="shop-logo" />
+      </div>
+      <div class="brand-info">
+        <h2 class="brand-name">{{ printData?.brandInfo?.name | uppercase }}</h2>
+        <p class="brand-address">{{ printData?.brandInfo?.address }}</p>
+        <div class="brand-contacts">
+          <span *ngIf="printData?.brandInfo?.phone">📞 {{ printData?.brandInfo?.phone }}</span>
+          <span *ngIf="printData?.brandInfo?.email">📧 {{ printData?.brandInfo?.email }}</span>
+        </div>
+        <div class="brand-licenses">
+          <span *ngIf="printData?.brandInfo?.gstin"><strong>GSTIN:</strong> {{ printData?.brandInfo?.gstin }}</span>
+          <span *ngIf="printData?.brandInfo?.dlNo"><strong>DL:</strong> {{ printData?.brandInfo?.dlNo }}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Bill Info -->
+    <div class="bill-info-section">
+      <div class="info-item">
+        <span class="label">Bill No:</span>
+        <span class="value">{{ printData?.billInfo?.billNo }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Date:</span>
+        <span class="value">{{ printData?.billInfo?.date }}</span>
+      </div>
+      <div class="info-item" *ngIf="printData?.billInfo?.cashierName">
+        <span class="label">Cashier:</span>
+        <span class="value">{{ printData?.billInfo?.cashierName }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Payment:</span>
+        <span class="value">{{ printData?.billInfo?.paymentMode }}</span>
+      </div>
+    </div>
+
+    <div class="customer-section" *ngIf="printData?.billInfo?.customerName">
+      <div class="info-item">
+        <span class="label">Customer:</span>
+        <span class="value">{{ printData?.billInfo?.customerName }}</span>
+      </div>
+      <div class="info-item" *ngIf="printData?.billInfo?.customerPhone">
+        <span class="label">Phone:</span>
+        <span class="value">{{ printData?.billInfo?.customerPhone }}</span>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <!-- Items Table -->
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th class="text-left">Item</th>
+          <th class="text-center" *ngIf="printData?.items?.[0]?.hsnCode">HSN</th>
+          <th class="text-right">Qty</th>
+          <th class="text-right">Rate</th>
+          <th class="text-right" *ngIf="isTaxEnabled">Tax%</th>
+          <th class="text-right">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of printData?.items">
+          <td class="text-left">
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-meta" *ngIf="item.batchNo || item.expiryDate">
+              <small *ngIf="item.batchNo">B:{{ item.batchNo }}</small>
+              <small *ngIf="item.expiryDate">Exp:{{ item.expiryDate }}</small>
+            </div>
+          </td>
+          <td class="text-center" *ngIf="item.hsnCode"><small>{{ item.hsnCode }}</small></td>
+          <td class="text-right">{{ item.qty }}</td>
+          <td class="text-right">₹{{ item.rate | number:'1.2-2' }}</td>
+          <td class="text-right" *ngIf="isTaxEnabled">{{ item.taxRate }}%</td>
+          <td class="text-right"><strong>₹{{ item.amount | number:'1.2-2' }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="section-divider" />
+
+    <!-- Summary -->
+    <div class="bill-summary">
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span>₹{{ subtotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row" *ngIf="discountAmount > 0">
+        <span>Discount:</span>
+        <span class="discount">- ₹{{ discountAmount | number:'1.2-2' }}</span>
+      </div>
+      <div class="summary-row taxable" *ngIf="isTaxEnabled">
+        <span>Taxable Amount:</span>
+        <span>₹{{ taxableAmount | number:'1.2-2' }}</span>
+      </div>
+
+      <!-- Tax Details -->
+      <div class="tax-section" *ngIf="isTaxEnabled">
+        <div class="summary-row" *ngIf="printData?.taxInfo?.cgstAmount">
+          <span>CGST &#64; {{ printData?.taxInfo?.cgstPercent }}%:</span>
+          <span>₹{{ printData?.taxInfo?.cgstAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.taxInfo?.sgstAmount">
+          <span>SGST &#64; {{ printData?.taxInfo?.sgstPercent }}%:</span>
+          <span>₹{{ printData?.taxInfo?.sgstAmount | number:'1.2-2' }}</span>
+        </div>
+        <div class="summary-row" *ngIf="printData?.taxInfo?.igstAmount">
+          <span>IGST &#64; {{ printData?.taxInfo?.igstPercent }}%:</span>
+          <span>₹{{ printData?.taxInfo?.igstAmount | number:'1.2-2' }}</span>
+        </div>
+      </div>
+
+      <hr class="total-divider" />
+
+      <div class="summary-row grand-total">
+        <span>Grand Total:</span>
+        <span>₹{{ grandTotal | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bill-footer" *ngIf="printData?.settings?.showFooter">
+      <hr class="section-divider" />
+      <p class="footer-text">{{ printData?.settings?.footerText || 'Thank you for your purchase!' }}</p>
+      <p class="visit-text">Visit Again!</p>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="card shadow-sm billing-card">
+  <div class="card-header d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3">
+    <div class="d-flex flex-column gap-1">
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-file-invoice-dollar text-primary"></i>
+        <span class="fw-semibold text-dark">Billing Items</span>
+      </div>
+      <small class="text-muted">F2 adds a new line; press P inside product fields to open the selector.</small>
+    </div>
+    <div class="d-flex flex-wrap gap-2 billing-actions">
+      <button class="btn btn-primary btn-sm" type="button" (click)="addNewRow()">
+        <i class="fas fa-plus me-1"></i>
+        Add Item (F2)
+      </button>
+      <button *ngIf="showSelectReturnButton" class="btn btn-outline-primary btn-sm" type="button"
+        (click)="selectReturnItems()">
+        <i class="fas fa-undo-alt me-1"></i>
+        Select Return Items
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <form [formGroup]="formGroup">
+      <div class="table-responsive billing-table-scroll">
+        <table class="table table-bordered table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th *ngFor="let col of columns" [hidden]="col.hidden" class="text-center">
+                <span class="d-inline-flex align-items-center gap-2">
+                  <i *ngIf="col.headerIcon" [class]="col.headerIcon"></i>
+                  {{ col.label }}
+                </span>
+              </th>
+              <th class="text-center">Action</th>
+            </tr>
+          </thead>
+
+          <tbody formArrayName="formArray">
+            <tr *ngFor="let row of controls; let i = index" [formGroupName]="i"
+              [ngClass]="{ 'first-row': i === 0, 'else-row': i !== 0 }">
+              <ng-container *ngFor="let col of columns">
+                <td *ngIf="!col.hidden" class="align-middle">
+                  <input *ngIf="col.type !== 'select'" [type]="col.type || 'text'" class="form-control form-control-sm"
+                    [hidden]="col.hidden" [formControlName]="col.key" [readonly]="col.openModalOnClick"
+                    (click)="handleCellClick(col, i)" [placeholder]="col.openModalOnClick ? 'Press P' : ''"
+                    (keydown.p)="col.openModalOnClick && handleCellClick(col, i)"
+                    [attr.id]="'field-' + col.key + '-' + i" [attr.name]="col.key" />
+
+                  <select *ngIf="col.type === 'select'" class="form-select form-select-sm" [formControlName]="col.key">
+                    <ng-container *ngIf="col.options as options">
+                      <option *ngFor="let option of options" [value]="option.value">
+                        {{ option.label }}
+                      </option>
+                    </ng-container>
+
+                    <ng-container *ngIf="row.get('allowed_units_options') as options">
+                      <option *ngFor="let option of options.value" [value]="option.value">
+                        {{ option.label }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </td>
+              </ng-container>
+              <td class="text-center align-middle">
+                <button class="btn btn-sm btn-outline-danger" type="button" (click)="removeRow(i)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </form>
+  </div>
+</div>

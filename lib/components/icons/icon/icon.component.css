@@ -1,0 +1,20 @@
+mat-icon,
+i.fa {
+    font-size: inherit;
+    vertical-align: middle;
+    line-height: 1;
+    display: inline-block;
+}
+
+/* Optional spacing classes if needed */
+.prefix-icon {
+    margin-right: 0.5rem;
+}
+
+.suffix-icon {
+    margin-left: 0.5rem;
+}
+
+.icon-only {
+    /* customize size if icon only */
+}

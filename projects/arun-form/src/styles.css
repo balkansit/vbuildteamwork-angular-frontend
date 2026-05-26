@@ -1,0 +1,162 @@
+.payment-btn {
+    height: 70px !important;
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    background-color: var(--sidebar-bg-color) !important;
+}
+
+::ng-deep .mat-mdc-table {
+    background-color: #f8f9fa !important;
+}
+
+::ng-deep .mat-mdc-paginator {
+    background-color: #f8f9fa !important;
+}
+
+
+.card-title {
+    font-size: 18px !important;
+    font-weight: 500 !important;
+
+}
+
+
+
+.bits-erp-header {
+    background: #fff;
+    border-bottom: 1px solid #dbe0e6;
+    height: 66px;
+    z-index: 999;
+    position: fixed;
+    transition: left 0.3s ease;
+    top: 0;
+    right: 0;
+    left: 260px;
+}
+
+.bits-erp-sidebar {
+    display: flex;
+    background-color: var(--background-color);
+    border-right: 1px solid #dbe0e6;
+    margin-top: 0;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 260px;
+    /* Default width */
+    transition: width 0.3s ease;
+    /* Smooth transition when toggling */
+}
+
+/* Shrinked sidebar when toggled */
+.bits-erp-sidebar.collapsed {
+    width: 70px;
+    z-index: 0;
+}
+
+.bits-erp-main-content {
+    margin-bottom: 10vh;
+    margin-right: 15px;
+    margin-top: 76px;
+    /* Offset to start below the header */
+    margin-left: 260px;
+    /* Default sidebar width */
+    transition: margin-left 0.3s ease;
+    /* Smooth transition for main content */
+    padding-top: 10px;
+    /* padding: 20px; Adjust as needed */
+    min-height: calc(100vh - 66px);
+    /* Full height minus header */
+}
+
+/* Adjust main content margin when sidebar is collapsed */
+.bits-erp-main-content.expanded {
+    margin-left: 70px;
+}
+
+.bits-erp-header.expanded {
+    left: 70px;
+
+    /* Adjust header position when sidebar is collapsed */
+
+
+}
+
+
+.toggle-button {
+    position: fixed;
+    top: 8px;
+    left: 265px;
+    z-index: 1000 !important;
+    color: white;
+    background-color: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 2;
+    border: none;
+    cursor: pointer;
+    border-radius: 30py;
+    transition: left 0.3s ease;
+}
+
+.toggle-button i-feather {
+    width: 20px;
+    height: 20px;
+}
+
+/* Move button closer when sidebar is collapsed */
+.toggle-button.collapsed {
+    left: 78px;
+    /* Positioned near the collapsed sidebar edge */
+}
+
+#thermal-print-section {
+    visibility: hidden;
+}
+
+.card {
+    border: none !important;
+}
+
+.bg-light {
+    background-color: #e9ecef !important;
+}
+
+
+/* Table
+ */
+
+th,
+td {
+    white-space: nowrap !important;
+    /* Prevent text from wrapping */
+    overflow: hidden !important;
+    /* Hide overflow */
+    text-overflow: ellipsis !important;
+    /* Add ... if content is too long */
+}
+
+.form-select {
+    width: 100% !important;
+}
+
+/* Global loading dialog (lib LoadingSpinnerModal): theme primary for card, spinner, and message
+   --primary-color comes from :root in lib/styles/arun-form.theme.css (same token as lib/styles/theme.css) */
+.cdk-overlay-pane.custom-spinner-dialog .spinner-card,
+.custom-spinner-dialog .spinner-card {
+    background: color-mix(in srgb, var(--primary-color) 7%, #ffffff) !important;
+    border: 1px solid color-mix(in srgb, var(--primary-color) 22%, #ffffff) !important;
+}
+
+.cdk-overlay-pane.custom-spinner-dialog .loading-message,
+.custom-spinner-dialog .loading-message {
+    color: var(--primary-color) !important;
+}

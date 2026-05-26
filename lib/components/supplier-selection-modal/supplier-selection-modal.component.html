@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+<div mat-dialog-content>
+  <!-- Display the list of suppliers -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Supplier Name</th>
+        <th>Invoice Number</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of data.items" (click)="selectSupplier(supplier)">
+        <td>{{ supplier.supplier_name }}</td>  <!-- Show Supplier Name -->
+        <td>{{ supplier.invoice_number }}</td>  <!-- Show Invoice Number -->
+        <td>{{ supplier.status }}</td>  <!-- Show Status -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="primary" (click)="close()">Close</button>
+</div>

@@ -1,0 +1,69 @@
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #thermal-print-section,
+    #thermal-print-section * {
+        visibility: visible;
+    }
+
+    #thermal-print-section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: monospace;
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .print-btn {
+        display: none !important;
+    }
+
+    .thermal-bill-box {
+        width: 300px;
+        margin: auto;
+    }
+
+    .thermal-centered {
+        text-align: center;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .small {
+        font-size: 11px;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    .flex-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        margin: 2px 0;
+    }
+
+    .thermal-bill-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+
+    .thermal-bill-table th,
+    .thermal-bill-table td {
+        padding: 2px 4px;
+    }
+
+    .thermal-hr {
+        border: none;
+        border-top: 1px dashed #000;
+        margin: 6px 0;
+    }
+}

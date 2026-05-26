@@ -1,0 +1,178 @@
+<div>
+
+  <app-bootstrap-button (click)="downloadInvoicePdf()">Download PDF</app-bootstrap-button>
+  <app-bootstrap-button class="ms-2" (click)="printInvoice()">Print PDF</app-bootstrap-button>
+
+  <div id="invoice-preview">
+    <div class="py-4">
+
+      <!-- HEADER -->
+      <div class="px-14 py-6">
+        <table class="w-full border-collapse border-spacing-0">
+          <tbody>
+            <tr>
+              <td class="w-full align-top">
+                <div>
+                  <img src="https://via.placeholder.com/150x50" class="h-12" alt="Company Logo" />
+                </div>
+              </td>
+
+              <td class="align-top">
+                <div class="text-sm">
+                  <table class="border-collapse border-spacing-0">
+                    <tbody>
+                      <tr>
+                        <td class="border-r pr-4">
+                          <div>
+                            <p class="whitespace-nowrap text-slate-400 text-right">Date</p>
+                            <p class="whitespace-nowrap font-bold text-main text-right">
+                              2025-01-12
+                            </p>
+                          </div>
+                        </td>
+                        <td class="pl-4">
+                          <div>
+                            <p class="whitespace-nowrap text-slate-400 text-right">Invoice #</p>
+                            <p class="whitespace-nowrap font-bold text-main text-right">
+                              INV-1001
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SUPPLIER / CUSTOMER -->
+      <div class="bg-slate-100 px-14 py-6 text-sm">
+        <table class="w-full border-collapse border-spacing-0">
+          <tbody>
+            <tr>
+              <td class="w-1/2 align-top">
+                <div class="text-sm text-neutral-600">
+                  <p class="font-bold">ABC Suppliers Ltd</p>
+                  <p>Number: SUP-123</p>
+                  <p>VAT: VAT123456</p>
+                  <p>Street 1</p>
+                  <p>Street 2</p>
+                  <p>India</p>
+                </div>
+              </td>
+
+              <td class="w-1/2 align-top text-right">
+                <div class="text-sm text-neutral-600">
+                  <p class="font-bold">XYZ Enterprises Pvt Ltd</p>
+                  <p>Number: CUST-789</p>
+                  <p>VAT: VAT654321</p>
+                  <p>Main Road</p>
+                  <p>Business Park</p>
+                  <p>India</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ITEMS TABLE -->
+      <div class="px-14 py-10 text-sm text-neutral-700">
+        <table class="w-full border-collapse border-spacing-0">
+          <thead>
+            <tr>
+              <td class="border-b-2 border-main pb-3 pl-3 font-bold text-main">#</td>
+              <td class="border-b-2 border-main pb-3 pl-2 font-bold text-main">Product details</td>
+              <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Price</td>
+              <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">Qty.</td>
+              <td class="border-b-2 border-main pb-3 pl-2 text-center font-bold text-main">VAT</td>
+              <td class="border-b-2 border-main pb-3 pl-2 text-right font-bold text-main">Subtotal</td>
+              <td class="border-b-2 border-main pb-3 pl-2 pr-3 text-right font-bold text-main">Subtotal + VAT</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td class="border-b py-3 pl-3">1.</td>
+              <td class="border-b py-3 pl-2">Laptop</td>
+              <td class="border-b py-3 pl-2 text-right">₹50,000</td>
+              <td class="border-b py-3 pl-2 text-center">1</td>
+              <td class="border-b py-3 pl-2 text-center">18%</td>
+              <td class="border-b py-3 pl-2 text-right">₹50,000</td>
+              <td class="border-b py-3 pl-2 pr-3 text-right">₹59,000</td>
+            </tr>
+
+            <tr>
+              <td colspan="7">
+                <table class="w-full border-collapse border-spacing-0">
+                  <tbody>
+                    <tr>
+                      <td class="w-full"></td>
+                      <td>
+                        <table class="w-full border-collapse border-spacing-0">
+                          <tbody>
+                            <tr>
+                              <td class="border-b p-3">
+                                <div class="whitespace-nowrap text-slate-400">Net total:</div>
+                              </td>
+                              <td class="border-b p-3 text-right">
+                                <div class="whitespace-nowrap font-bold text-main">₹50,000</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="p-3">
+                                <div class="whitespace-nowrap text-slate-400">VAT total:</div>
+                              </td>
+                              <td class="p-3 text-right">
+                                <div class="whitespace-nowrap font-bold text-main">₹9,000</div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="bg-main p-3">
+                                <div class="whitespace-nowrap font-bold text-white">Total:</div>
+                              </td>
+                              <td class="bg-main p-3 text-right">
+                                <div class="whitespace-nowrap font-bold text-white">₹59,000</div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PAYMENT DETAILS -->
+      <div class="px-14 text-sm text-neutral-700">
+        <p class="text-main font-bold">PAYMENT DETAILS</p>
+        <p>HDFC Bank</p>
+        <p>Bank/Sort Code: 1100</p>
+        <p>Account Number: 1234567890</p>
+        <p>Payment Reference: INV-1001</p>
+      </div>
+
+      <!-- NOTES -->
+      <div class="px-14 py-10 text-sm text-neutral-700">
+        <p class="text-main font-bold">Notes</p>
+        <p class="italic">Payment due within 7 days.</p>
+      </div>
+
+      <!-- FOOTER (will be fixed in print) -->
+      <footer class="fixed bottom-0 left-0 bg-slate-100 w-full text-neutral-600 text-center text-xs py-3">
+        ABC Suppliers Ltd |
+        gmail.com |
+        +91 9876543210
+      </footer>
+
+    </div>
+  </div>
+</div>

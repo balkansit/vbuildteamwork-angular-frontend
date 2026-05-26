@@ -1,0 +1,141 @@
+<div class="container-fluid py-4">
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-bold text-primary">Day Closing Management</h5>
+            <button class="btn btn-sm btn-outline-primary" (click)="fetchClosings()">
+                <i class="fas fa-sync-alt me-1"></i> Refresh
+            </button>
+        </div>
+
+        <div class="card-body">
+            <app-bootstrap-alert *ngIf="alert?.showAlert" [message]="alert?.description ?? null" [type]="alert?.type ?? 'info'" (close)="alert = null">
+            </app-bootstrap-alert>
+
+            <!-- Filter Section -->
+            <div class="row align-items-end mt-3 mb-4 bg-light p-3 rounded-3 border g-3 mx-0">
+                
+                <!-- Table Selection -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-muted small text-uppercase mb-1">Select Table</label>
+                    <select class="form-select" [(ngModel)]="selectedTableId" name="tableId" (ngModelChange)="currentPage = 1">
+                        <option [value]="null">All Tables</option>
+                        <option *ngFor="let table of tables" [value]="table.id">{{ table.title || table.name }}</option>
+                    </select>
+                </div>
+
+                <!-- User Selection -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-muted small text-uppercase mb-1">Select User</label>
+                    <select class="form-select" [(ngModel)]="selectedUserId" name="userId" [disabled]="!isAdmin" (ngModelChange)="currentPage = 1">
+                        <option *ngIf="isAdmin" [value]="null">All Users</option>
+                        <option *ngIf="!isAdmin" [value]="currentUser?.id">{{ currentUser?.name }}</option>
+                        <ng-container *ngIf="isAdmin">
+                            <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                        </ng-container>
+                    </select>
+                </div>
+
+                <!-- Date Selection -->
+                <div class="col-md-3">
+                    <label class="form-label fw-bold text-muted small text-uppercase mb-1">Select Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="selectedDate" name="date" (ngModelChange)="currentPage = 1">
+                </div>
+
+                <div class="col-md-3 d-flex flex-column justify-content-end align-items-end" style="height: 100%;">
+                    <div>
+                        <button class="btn btn-outline-secondary btn-sm me-2" (click)="selectedTableId=null; selectedDate=''; (isAdmin ? selectedUserId=null : null); currentPage = 1" *ngIf="selectedTableId || selectedDate || (isAdmin && selectedUserId)">
+                            Clear Filters
+                        </button>
+                        <span class="badge bg-soft-info text-info border">
+                            {{ filteredClosings.length }} records found
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>User</th>
+                            <th>Table</th>
+                            <th>Status</th>
+                            <th>Closed By</th>
+                            <th>Reopened By</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let closing of paginatedClosings">
+                            <td>{{ closing.date | date:'mediumDate' }}</td>
+                            <td>
+                                <div class="fw-600">{{ closing.user?.name }}</div>
+                                <!-- <small class="text-muted">ID: {{ closing.user_id }}</small> -->
+                            </td>
+                            <td><span class="badge bg-light text-dark border">{{ closing.table?.name }}</span></td>
+                            <td>
+                                <span *ngIf="closing.is_closed" class="badge rounded-pill bg-danger">Closed</span>
+                                <span *ngIf="!closing.is_closed" class="badge rounded-pill bg-success">Open</span>
+                            </td>
+                            <td>
+                                <div *ngIf="closing.closer">
+                                    <div class="fw-500 text-dark">{{ closing.closer?.name }}</div>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;">
+                                        <i class="far fa-clock me-1"></i>{{ getLocalTime(closing.closed_at) }}
+                                    </small>
+                                </div>
+                                <span *ngIf="!closing.closer" class="text-muted small">-</span>
+                            </td>
+                            <td>
+                                <div *ngIf="closing.reopener">
+                                    <div class="fw-500 text-dark">{{ closing.reopener?.name }}</div>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;">
+                                        <i class="far fa-calendar-alt me-1"></i>{{ getLocalTime(closing.reopened_at) }}
+                                    </small>
+                                </div>
+                                <span *ngIf="!closing.reopener" class="text-muted small">-</span>
+                            </td>
+                            <td>
+                                <button *ngIf="closing.is_closed" class="btn btn-sm btn-primary" (click)="reopen(closing)"
+                                    title="Reopen for this user">
+                                    <i class="fas fa-unlock me-1"></i> Reopen
+                                </button>
+                                <span *ngIf="!closing.is_closed" class="text-muted small">Active</span>
+                            </td>
+                        </tr>
+                        <tr *ngIf="closings.length === 0">
+                            <td colspan="7" class="text-center py-5 text-muted">
+                                <i class="fas fa-info-circle me-1"></i> No day closing logs found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination Controls -->
+            <nav *ngIf="totalPages > 1" class="mt-4 border-top pt-3">
+                <ul class="pagination pagination-sm justify-content-center mb-0">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <button class="page-link shadow-none" (click)="currentPage = currentPage - 1" [disabled]="currentPage === 1">
+                            <i class="fas fa-chevron-left small"></i>
+                        </button>
+                    </li>
+                    
+                    <li class="page-item" *ngFor="let p of pages" [class.active]="currentPage === p">
+                        <button class="page-link shadow-none" (click)="currentPage = p">{{ p }}</button>
+                    </li>
+                    
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                        <button class="page-link shadow-none" (click)="currentPage = currentPage + 1" [disabled]="currentPage === totalPages">
+                            <i class="fas fa-chevron-right small"></i>
+                        </button>
+                    </li>
+                </ul>
+                <div class="text-center text-muted mt-2 small">
+                    Page {{ currentPage }} of {{ totalPages }}
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

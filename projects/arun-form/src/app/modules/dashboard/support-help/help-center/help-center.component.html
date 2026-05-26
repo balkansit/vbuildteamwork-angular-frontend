@@ -1,0 +1,43 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Help Center</h2>
+
+  <!-- Tabs -->
+  <div class="flex gap-3 mb-6">
+    <button class="px-4 py-2 rounded-md border" [class.bg-blue-600]="activeTab()==='faq'"
+      [class.text-white]="activeTab()==='faq'" (click)="setTab('faq')">
+      FAQ
+    </button>
+    <button class="px-4 py-2 rounded-md border" [class.bg-blue-600]="activeTab()==='kb'"
+      [class.text-white]="activeTab()==='kb'" (click)="setTab('kb')">
+      Knowledge Base
+    </button>
+  </div>
+
+  <!-- FAQ -->
+  <div *ngIf="activeTab()==='faq'" class="space-y-3">
+    <div *ngFor="let f of faqs" class="border rounded-lg">
+      <details class="p-3">
+        <summary class="cursor-pointer font-medium">{{ f.q }} </summary>
+        <p class="mt-2 text-gray-600">{{ f.a }} <a *ngIf="f.route" [routerLink]="f.route">Go to Support</a></p>
+
+      </details>
+    </div>
+  </div>
+
+  <!-- Knowledge Base -->
+  <div *ngIf="activeTab()==='kb'" class="grid md:grid-cols-2 gap-4">
+    <div>
+      <div *ngFor="let a of articles" class="border rounded-lg p-3 mb-3 shadow-sm hover:bg-gray-50 cursor-pointer"
+        (click)="openArticle(a)">
+        <h3 class="font-semibold">{{ a.title }}</h3>
+        <p class="text-sm text-gray-500 truncate">{{ a.content }}</p>
+      </div>
+    </div>
+    <div *ngIf="activeArticle" class="border rounded-lg p-4 shadow-sm">
+      <h3 class="font-bold mb-2">{{ activeArticle.title }}</h3>
+      <p class="whitespace-pre-line text-gray-700">{{ activeArticle.content }}</p>
+    </div>
+  </div>
+
+
+</div>
