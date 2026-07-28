@@ -55,7 +55,7 @@ export class BaseTableComponent<T> implements OnInit {
   @Input() pageLength: number = 0;
   @Input() pageSize: number = 10;
   @Input() data?: any[] = [];
-  @Input() fetchData!: () => any;
+  @Input() fetchData!: (params?: any) => any;
   @Input() getEditFormFields!: (item: T) => FormField[];
   @Input() getViewFields!: (item: T) => any[];
   @Input() addFormFields: FormField<T>[] = [];
@@ -205,18 +205,13 @@ export class BaseTableComponent<T> implements OnInit {
     }
   }
 
-  refresh() {
-    // if (this.data && this.data.length > 0) {
-    //   this.loadTable(this.data);
-    //   return;
-    // }
-
+  refresh(params?: any) {
     if (!this.fetchData) {
       console.error('fetchData function is not provided.');
       return;
     }
 
-    this.fetchData()
+    this.fetchData(params)
       .pipe(
         withLoadingAndAlert(this.spinner, (a) => (this.alert = a), {
           useModal: this.useModalAlert,
@@ -228,14 +223,25 @@ export class BaseTableComponent<T> implements OnInit {
       )
       .subscribe((res: ApiResponse) => {
         if (res.success && res.data) {
-          this.loadTable(res.data);
-        } else {
+          let items = res.data;
+          
+          if (res.data && typeof res.data === 'object' && 'data' in res.data && Array.isArray(res.data.data)) {
+            items = res.data.data;
+            if (this.backendPagination && this.paginator) {
+              this.paginator.length = res.data.total || 0;
+            }
+          }
+          
+          this.loadTable(items);
         }
       });
   }
 
   onPageChange(event: any) {
     this.pageChange.emit(event);
+    if (this.backendPagination) {
+      this.refresh({ page: event.pageIndex + 1, per_page: event.pageSize });
+    }
   }
 
   onBulkDelete() {

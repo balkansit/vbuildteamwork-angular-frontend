@@ -18,7 +18,7 @@ import { TableModalService } from 'projects/arun-form/src/app/services/modals/ta
 import { ReopenDayModalComponent } from './reopen-day-modal/reopen-day-modal.component';
 import { CloseDayModalComponent } from './close-day-modal/close-day-modal.component';
 import { DayClosingService } from 'projects/arun-form/src/app/services/utils/day-closing.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, tap, map } from 'rxjs';
 import { StandardConfirmDialogComponent } from '@lib/components/modals/standard-confirm-dialog/standard-confirm-dialog.component';
 
 interface TableColumn {
@@ -128,11 +128,30 @@ export class MainTableComponent {
     this.currentDateDisplay = `Date: ${mStr}/${dStr}/${yStr}`;
 
     this.getTables();
-    if (tableId) {
-      this.getTableData(+tableId);
-      this.fetchTableData = () => this.getTableData(+tableId);
-      // this.getStatusController(+tableId);
-    }
+
+    this.route.paramMap.subscribe((params) => {
+      const tableId = params.get('id');
+      if (tableId) {
+        this.loadTableData(+tableId);
+      }
+    });
+  }
+
+  loadTableData(id: number): void {
+    this.tableId = id;
+    this.fetchTableData = (params?: any) => this.getTableData(id, params);
+
+    // Fetch table schema to populate columns and render app-base-table
+    this.service.getById(id).subscribe({
+      next: (res: ApiResponse) => {
+        if (res?.success && res.data) {
+          this.assignTableData(res.data);
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load table schema:', err);
+      }
+    });
   }
 
   checkDayClosedStatus() {
@@ -199,38 +218,24 @@ getTableOwnerId(): void {
 }
 
   // --------------------------------------------------- API Calls --------------------------------------------------- //
-  getTableData(id: number): void {
-    const resourceName = 'Table';
-    this.service
-      .getById(id)
-      .pipe(
-        withLoadingAndAlert(this.spinner, (a) => (this.alert = a), {
-          useModal: false,
-          showSuccess: false,
-          color: '',
-          loadingMessage: `Loading tables...`,
-          successMessage: `${resourceName}s loaded successfully!`,
-          errorMessage: `Failed to load ${resourceName}s.`,
-        })
-      )
-      .subscribe({
-        next: (response: ApiResponse) => {
-          if (response?.success && response.data) {
-            const { data } = response;
-
-            this.assignTableData(data);
-            this.tableOwnerId = data.owner_id;
-            this.getTableOwnerId();
-          } else {
-            console.warn(
-              'Table data response was not successful or data is missing'
-            );
+  getTableData(id: number, params?: any): any {
+    return this.recordService.getAll({ table_id: id, per_page: 15, ...params }).pipe(
+      tap((recordResponse: ApiResponse) => {
+        if (this.tableData) {
+          const rawRecords = recordResponse.data?.data || recordResponse.data || [];
+          this.assignTableData({ ...this.tableData, records: rawRecords });
+        }
+      }),
+      map((recordResponse: ApiResponse) => {
+        return {
+          ...recordResponse,
+          data: {
+            ...(typeof recordResponse.data === 'object' ? recordResponse.data : {}),
+            data: this.selectedTableData
           }
-        },
-        error: (err) => {
-          console.error('Error fetching table data:', err);
-        },
-      });
+        };
+      })
+    );
   }
 
   getTables() {
