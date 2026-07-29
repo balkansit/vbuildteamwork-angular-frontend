@@ -125,7 +125,7 @@ export class MainTableComponent {
     const dStr = String(today.getDate()).padStart(2, '0');
     const mStr = String(today.getMonth() + 1).padStart(2, '0');
     const yStr = String(today.getFullYear()).slice(-2);
-    this.currentDateDisplay = `Date: ${mStr}/${dStr}/${yStr}`;
+    this.currentDateDisplay = `Date: ${dStr}/${mStr}/${yStr}`;
 
     this.getTables();
 
@@ -241,7 +241,8 @@ getTableOwnerId(): void {
   getTables() {
     this.service.getAll().subscribe((data: ApiResponse) => {
       if (data && data.success) {
-        this.tables = data.data;
+        // Handle both paginated and unpaginated responses
+        this.tables = data.data?.data || data.data; 
       } else {
         console.error('Failed to fetch tables');
       }
@@ -284,7 +285,19 @@ getTableOwnerId(): void {
     // Normalize records to handle all variations of userId/user_id/username/user_name
     const todayStr = new Date().toISOString().split('T')[0];
 
-    this.selectedTableData = (data.records || [])
+    const flattenedRecords = (data.records || []).map((record: any) => {
+      const flatRecord = { ...record };
+      if (Array.isArray(record.values)) {
+        record.values.forEach((v: any) => {
+          if (v.column && v.column.name) {
+            flatRecord[v.column.name] = v.value;
+          }
+        });
+      }
+      return flatRecord;
+    });
+
+    this.selectedTableData = flattenedRecords
       .filter((record: any) => {
         const keys = Object.keys(record);
 
@@ -395,7 +408,8 @@ getTableOwnerId(): void {
             title: 'Success',
           };
           // Optionally refresh table
-          this.fetchTableData();
+          const obs: any = this.fetchTableData();
+          if (obs && obs.subscribe) { obs.subscribe(); }
         },
         error: (err) => {
           console.error('Failed to add record:', err);
@@ -427,7 +441,8 @@ getTableOwnerId(): void {
             title: 'Success',
           };
           // Optionally refresh table
-          this.fetchTableData();
+          const obs: any = this.fetchTableData();
+          if (obs && obs.subscribe) { obs.subscribe(); }
         },
         error: (err) => {
           console.error('Failed to update record:', err);
@@ -470,7 +485,8 @@ getTableOwnerId(): void {
               status: 'success',
               title: 'Success',
             };
-            this.fetchTableData();
+            const obs: any = this.fetchTableData();
+            if (obs && obs.subscribe) { obs.subscribe(); }
             this.spinner.hide();
           },
           error: (err) => {

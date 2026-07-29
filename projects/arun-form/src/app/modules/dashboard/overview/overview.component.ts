@@ -25,7 +25,7 @@ export class OverviewComponent implements OnInit {
   getTables() {
     this.tableService.getAll().subscribe((response: ApiResponse) => {
       if (response.success && response.data) {
-        this.tables = response.data;
+        this.tables = response.data.data || response.data;
       } else {
         console.error(response.message);
       }

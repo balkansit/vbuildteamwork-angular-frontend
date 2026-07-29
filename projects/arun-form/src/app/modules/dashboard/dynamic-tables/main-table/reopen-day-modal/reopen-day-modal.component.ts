@@ -29,7 +29,7 @@ export class ReopenDayModalComponent implements OnInit {
     this.loading = true;
     this.userService.getAll().subscribe({
       next: (res) => {
-        this.users = res.data || res;
+        this.users = res.data?.data || res.data || res;
         this.loading = false;
       },
       error: (err) => {

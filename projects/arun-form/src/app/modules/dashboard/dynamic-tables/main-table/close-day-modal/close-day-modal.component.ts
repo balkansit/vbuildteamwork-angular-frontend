@@ -38,7 +38,7 @@ export class CloseDayModalComponent implements OnInit {
     this.loading = true;
     this.userService.getAll().subscribe({
       next: (res) => {
-        this.users = res.data || res;
+        this.users = res.data?.data || res.data || res;
         this.selectedUserId = this.currentUser?.id; // Default to current user
         this.loading = false;
       },

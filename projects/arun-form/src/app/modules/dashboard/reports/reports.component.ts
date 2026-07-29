@@ -61,12 +61,13 @@ ngOnInit(): void {
   fetchUsers() {
     this.userService.getAll().subscribe({
       next: (res: any) => {
-        let allUsers = res.data || res;
+        let allUsers = res.data?.data || res.data || res;
         
         // Filter out Super Admin and Guest roles for the dropdown
         this.users = allUsers.filter((u: any) => {
-           const slug = u.role_slug || (u.role ? u.role.slug : '');
-           return slug !== 'super_admin' && slug !== 'guest';
+           const slug = u.role_slug || u.role_name || (u.role ? u.role.slug || u.role.name : '');
+           const normalizedSlug = String(slug).toLowerCase().trim().replace(' ', '_');
+           return normalizedSlug !== 'super_admin' && normalizedSlug !== 'guest';
         });
       },
       error: (err: any) => console.error('Failed to fetch users', err)
@@ -80,7 +81,7 @@ ngOnInit(): void {
   fetchTables() {
     this.tableService.getAll().subscribe({
       next: (res: any) => {
-        this.tables = res.data || [];
+        this.tables = res.data?.data || res.data || [];
       },
       error: (err: any) => console.error('Failed to fetch tables', err)
     });

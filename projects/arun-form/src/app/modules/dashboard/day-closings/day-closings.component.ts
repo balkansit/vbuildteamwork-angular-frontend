@@ -128,7 +128,7 @@ export class DayClosingsComponent implements OnInit {
   fetchUsers() {
     this.userService.getAll().subscribe({
       next: (res: any) => {
-        this.users = res.data || res;
+        this.users = res.data?.data || res.data || res;
       },
       error: (err: any) => console.error('Failed to fetch users', err),
     });
@@ -137,7 +137,7 @@ export class DayClosingsComponent implements OnInit {
   fetchTables() {
     this.tableService.getAll().subscribe({
       next: (res: any) => {
-        this.tables = res.data || [];
+        this.tables = res.data?.data || res.data || [];
       },
       error: (err: any) => console.error('Failed to fetch tables', err),
     });
@@ -147,7 +147,7 @@ export class DayClosingsComponent implements OnInit {
     this.spinner.show('Loading closings...');
     this.dayClosingService.getAllClosings().subscribe({
       next: (res) => {
-        this.closings = res.data;
+        this.closings = res.data?.data || res.data || [];
         this.spinner.hide();
       },
       error: (err) => {
