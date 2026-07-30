@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseTableComponent } from '@lib/components/tables/base-table/base-table.component';
 import { DynamicFormWrapperDialogComponent } from '@lib/layouts/wrappers/dynamic-form-wrapper-dialog/dynamic-form-wrapper-dialog.component';
 import { AlertData } from '@lib/models/Alert.model';
 import { ApiResponse } from '@lib/models/ApiResponse.model';
@@ -61,6 +62,9 @@ export class MainTableComponent {
   hasEditRoles: string[] = ['admin', 'super_admin', 'user'];
   hasDeleteRoles: string[] = ['admin', 'super_admin'];
   isAdmin: boolean = false;
+  
+  @ViewChild(BaseTableComponent) baseTable!: BaseTableComponent<any>;
+  currentFilters: any = {};
   // --------------------------------------------------- META Data --------------------------------------------------- //
   tableId: number = 0;
   tableData: TableData | null = null;
@@ -218,8 +222,26 @@ getTableOwnerId(): void {
 }
 
   // --------------------------------------------------- API Calls --------------------------------------------------- //
+  onFilterApply(event: { value: string; columnKey: string }) {
+    if (event.columnKey === 'all') {
+       this.currentFilters = {};
+    } else {
+       if (event.value) {
+           this.currentFilters[event.columnKey] = event.value;
+       } else {
+           delete this.currentFilters[event.columnKey];
+       }
+    }
+    if (this.baseTable) {
+      this.baseTable.refresh();
+    }
+  }
+
   getTableData(id: number, params?: any): any {
-    return this.recordService.getAll({ table_id: id, per_page: 15, ...params }).pipe(
+    const today = new Date().toISOString().split('T')[0];
+    const queryParams = { table_id: id, per_page: 15, date: today, ...params, ...this.currentFilters };
+    
+    return this.recordService.getAll(queryParams).pipe(
       tap((recordResponse: ApiResponse) => {
         if (this.tableData) {
           const rawRecords = recordResponse.data?.data || recordResponse.data || [];
@@ -258,29 +280,31 @@ getTableOwnerId(): void {
     this.checkDayClosedStatus();
     this.updateAddButtonVisibility();
 
-    this.columns = this.checkEditPermissions(data.columns);
-    this.tableColumns = buildTableColumns(data.columns);
-    this.filterColumns = buildFilterColumns(data.columns);
+    if (this.tableId !== data.id || this.columns.length === 0) {
+      this.columns = this.checkEditPermissions(data.columns);
+      this.tableColumns = buildTableColumns(data.columns);
+      this.filterColumns = buildFilterColumns(data.columns);
 
-    // Add previous day date to Old Stock column header
-    const todayObj = new Date();
-    const prevDateObj = new Date(todayObj);
-    prevDateObj.setDate(todayObj.getDate() - 1);
-    const pdStr = String(prevDateObj.getDate()).padStart(2, '0');
-    const pmStr = String(prevDateObj.getMonth() + 1).padStart(2, '0');
-    const pyStr = String(prevDateObj.getFullYear()).slice(-2);
-    const prevDateStr = `${pmStr}/${pdStr}/${pyStr}`;
+      // Add previous day date to Old Stock column header
+      const todayObj = new Date();
+      const prevDateObj = new Date(todayObj);
+      prevDateObj.setDate(todayObj.getDate() - 1);
+      const pdStr = String(prevDateObj.getDate()).padStart(2, '0');
+      const pmStr = String(prevDateObj.getMonth() + 1).padStart(2, '0');
+      const pyStr = String(prevDateObj.getFullYear()).slice(-2);
+      const prevDateStr = `${pmStr}/${pdStr}/${pyStr}`;
 
-    this.tableColumns.forEach((col) => {
-      const headerName = (col.header || '').toLowerCase();
-      if (
-        headerName === 'old stock' ||
-        headerName === 'old_stock' ||
-        headerName === 'oldstock'
-      ) {
-        col.header = `${col.header} (${prevDateStr})`;
-      }
-    });
+      this.tableColumns.forEach((col) => {
+        const headerName = (col.header || '').toLowerCase();
+        if (
+          headerName === 'old stock' ||
+          headerName === 'old_stock' ||
+          headerName === 'oldstock'
+        ) {
+          col.header = `${col.header} (${prevDateStr})`;
+        }
+      });
+    }
 
     // Normalize records to handle all variations of userId/user_id/username/user_name
     const todayStr = new Date().toISOString().split('T')[0];
@@ -298,35 +322,6 @@ getTableOwnerId(): void {
     });
 
     this.selectedTableData = flattenedRecords
-      .filter((record: any) => {
-        const keys = Object.keys(record);
-
-        // Date Filter: ensure record belongs to today using 'created_at' field
-        const createdAtKey = keys.find((k) => k.toLowerCase() === 'created_at');
-        if (createdAtKey && record[createdAtKey]) {
-          const recordDate = new Date(record[createdAtKey])
-            .toISOString()
-            .split('T')[0];
-          if (recordDate !== todayStr) {
-            return false;
-          }
-        }
-
-        const user = this.authService.getUser();
-        const isAdmin = this.authService.isAdmin();
-        const isSuperAdmin = this.authService.isSuperAdmin();
-        const isGuest = this.authService.isGuest();
-
-        if (isAdmin || isSuperAdmin || isGuest) return true;
-
-        const userIdKey = keys.find(
-          (k) => k.toLowerCase() === 'userid' || k.toLowerCase() === 'user_id'
-        );
-
-        const recordUserId = userIdKey ? record[userIdKey] : null;
-
-        return recordUserId == user?.id;
-      })
       .map((record: any) => {
         const normalized = { ...record };
         const keys = Object.keys(record);

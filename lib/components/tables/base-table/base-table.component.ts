@@ -227,8 +227,11 @@ export class BaseTableComponent<T> implements OnInit {
           
           if (res.data && typeof res.data === 'object' && 'data' in res.data && Array.isArray(res.data.data)) {
             items = res.data.data;
-            if (this.backendPagination && this.paginator) {
-              this.paginator.length = res.data.total || 0;
+            if (this.backendPagination) {
+              this.pageLength = res.data.total || 0;
+              if (this.paginator) {
+                this.paginator.length = this.pageLength;
+              }
             }
           }
           
