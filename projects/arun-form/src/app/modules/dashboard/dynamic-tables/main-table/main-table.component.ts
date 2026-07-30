@@ -158,13 +158,21 @@ export class MainTableComponent {
     });
   }
 
+  getTodayDateString(): string {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   checkDayClosedStatus() {
     if (!this.currentUserId || !this.tableId) return;
 
     if (this.isAdmin) {
       // For Admins: isDayClosed should be true if ANYONE has this table closed today
       this.dayClosingService.getAllClosings().subscribe((res) => {
-        const today = new Date().toISOString().split('T')[0];
+        const today = this.getTodayDateString();
         const closingsForThisTable = (res.data || []).filter(
           (c: any) =>
             c.table_id === this.tableId && c.date === today && c.is_closed
@@ -238,7 +246,7 @@ getTableOwnerId(): void {
   }
 
   getTableData(id: number, params?: any): any {
-    const today = new Date().toISOString().split('T')[0];
+    const today = this.getTodayDateString();
     const queryParams = { table_id: id, per_page: 15, date: today, ...params, ...this.currentFilters };
     
     return this.recordService.getAll(queryParams).pipe(
@@ -307,7 +315,7 @@ getTableOwnerId(): void {
     }
 
     // Normalize records to handle all variations of userId/user_id/username/user_name
-    const todayStr = new Date().toISOString().split('T')[0];
+    const todayStr = this.getTodayDateString();
 
     const flattenedRecords = (data.records || []).map((record: any) => {
       const flatRecord = { ...record };
@@ -402,9 +410,13 @@ getTableOwnerId(): void {
             status: 'success',
             title: 'Success',
           };
-          // Optionally refresh table
-          const obs: any = this.fetchTableData();
-          if (obs && obs.subscribe) { obs.subscribe(); }
+          // Refresh table
+          if (this.baseTable) {
+            this.baseTable.refresh();
+          } else {
+            const obs: any = this.fetchTableData();
+            if (obs && obs.subscribe) { obs.subscribe(); }
+          }
         },
         error: (err) => {
           console.error('Failed to add record:', err);
@@ -435,9 +447,13 @@ getTableOwnerId(): void {
             status: 'success',
             title: 'Success',
           };
-          // Optionally refresh table
-          const obs: any = this.fetchTableData();
-          if (obs && obs.subscribe) { obs.subscribe(); }
+          // Refresh table
+          if (this.baseTable) {
+            this.baseTable.refresh();
+          } else {
+            const obs: any = this.fetchTableData();
+            if (obs && obs.subscribe) { obs.subscribe(); }
+          }
         },
         error: (err) => {
           console.error('Failed to update record:', err);
