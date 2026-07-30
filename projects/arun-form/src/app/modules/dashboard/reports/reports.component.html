@@ -30,12 +30,12 @@
                 <!-- Date Selection -->
                 <div class="col-md-3">
                     <label class="form-label fw-bold text-muted small text-uppercase">Select Date</label>
-                    <input type="date" class="form-control" [(ngModel)]="selectedDate" name="date" required>
+                    <input type="date" class="form-control" [(ngModel)]="selectedDate" name="date">
                 </div>
 
                 <!-- Run Button -->
                 <div class="col-md-2 text-end">
-                    <button type="submit" class="btn btn-primary w-100" [disabled]="!selectedTableId || !selectedUserId || !selectedDate">
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="!selectedTableId || !selectedUserId">
                         <i class="fas fa-search me-1"></i> Generate
                     </button>
                 </div>
@@ -49,15 +49,15 @@
     </app-bootstrap-alert>
 
     <!-- Results Table -->
-    <div class="card shadow-sm border-0 rounded-3" *ngIf="filteredRecords.length > 0">
+    <div class="card shadow-sm border-0 rounded-3" *ngIf="showTable">
         <div class="card-body p-0">
          <app-base-table
-  [title]="tableData?.title? tableData.title + ' Report' : 'Report Results'"
-  [resourceName]="'Record'"
-  [data]="filteredRecords"
-  [tableColumns]="tableColumns"
-  [fetchData]="fetchTableData"
-  [getViewFields]="getViewFields"
+          [backendPagination]="true"
+          [title]="tableData?.title? tableData.title + ' Report' : 'Report Results'"
+          [resourceName]="'Record'"
+          [tableColumns]="tableColumns"
+          [fetchData]="fetchTableData"
+          [getViewFields]="getViewFields"
   [getEditFormFields]="getEditFormFields"
   [updateItem]="updateItem"
   [deleteItem]="deleteItem"

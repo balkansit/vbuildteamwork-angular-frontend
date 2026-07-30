@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BaseTableComponent } from '@lib/components/tables/base-table/base-table.component';
 import { TableService } from 'projects/arun-form/src/app/services/apis/table.service';
 import { UserService } from 'projects/arun-form/src/app/services/apis/user.service';
 import { AuthService } from '@lib/services/auth/auth.service';
@@ -7,7 +8,7 @@ import { AlertData } from '@lib/models/Alert.model';
 import { buildTableColumns, buildColumnsWithFilters } from 'projects/arun-form/src/app/models/dbschema/tables.model';
 import { TableRecordsService } from 'projects/arun-form/src/app/services/apis/table-record.service';
 import { FormField } from '@lib/models/FormField.model';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
@@ -24,7 +25,7 @@ export class ReportsComponent implements OnInit {
   // Filters
   selectedUserId: number | null = null;
   selectedTableId: number | null = null;
-  selectedDate: string = new Date().toISOString().split('T')[0];
+  selectedDate: string = '';
 
   // Auth Info
   currentUser: any = null;
@@ -34,7 +35,9 @@ export class ReportsComponent implements OnInit {
   // Data
   tableData: any = null;
   tableColumns: any[] = [];
-  filteredRecords: any[] = [];
+  showTable: boolean = false;
+  
+  @ViewChild(BaseTableComponent) table!: BaseTableComponent<any>;
 
   constructor(
     private tableService: TableService,
@@ -100,89 +103,15 @@ ngOnInit(): void {
        return of({ success: false, message: 'Missing filters' });
     }
 
-    this.spinner.show('Generating Report...');
-    return this.tableService.getById(this.selectedTableId).pipe(
-      tap((res: any) => {
-        this.spinner.hide();
-        if (res.success && res.data) {
-          const data = res.data;
-          this.tableData = data;
-          
-          let columns = buildTableColumns(data.columns).filter((col: any) => col.key !== 'actions');
-          
-          // Inject created_at and user reference to the report view
-          columns = [
-            { key: 'created_at', header: 'Date', type: 'date' },
-            ...columns
-          ];
-          
-          this.tableColumns = columns;
-          this.filterRecords(data.records || []);
-        }
-      })
-    );
+    if (this.showTable && this.table) {
+        this.table.refresh();
+    }
+    this.showTable = true;
+    return of({ success: true });
   }
 
   filterRecords(records: any[]) {
-    const filtered = records.filter(record => {
-       let recordUserId = null;
-       const keys = Object.keys(record);
-       const userIdKey = keys.find(k => k.toLowerCase() === 'userid' || k.toLowerCase() === 'user_id');
-       if (userIdKey) {
-          recordUserId = record[userIdKey];
-       } else {
-          recordUserId = record.owner_id || record.created_by;
-       }
-
-       if (String(recordUserId) !== String(this.selectedUserId)) {
-          return false;
-       }
-
-       if (this.selectedDate) {
-          let recordDate = '';
-          if (record.created_at) {
-             const d = new Date(record.created_at);
-             recordDate = d.toISOString().split('T')[0];
-          }
-          if (recordDate !== this.selectedDate) {
-             return false;
-          }
-       }
-       return true;
-    });
-
-    this.filteredRecords = filtered.map(record => {
-      let formattedDate = '-';
-      if (record.created_at) {
-         const d = new Date(record.created_at);
-         if (!isNaN(d.getTime())) {
-             formattedDate = d.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-         }
-      }
-
-      // Flatten dynamic values into the record object so material-table can find them by column name
-      const flattened = { ...record, created_at: formattedDate };
-      if (record.values && Array.isArray(record.values)) {
-        record.values.forEach((v: any) => {
-          if (v.column && v.column.name) {
-            flattened[v.column.name] = v.value;
-          } else if (v.column_name) {
-             flattened[v.column_name] = v.value;
-          }
-        });
-      }
-
-      return flattened;
-    });
-
-    if (this.filteredRecords.length === 0) {
-       this.alert = {
-           showAlert: true, type: 'info', status: 'info', title: 'No Data',
-           description: 'No records found for the selected filters.'
-       };
-    } else {
-        this.alert = null;
-    }
+    // Frontend filtering is removed, filtering is now handled by the backend API.
   }
 
   // To display the view format for the table
@@ -246,8 +175,79 @@ updateItem = (id: number, formValue: any) => {
   return this.recordService.update(id, formData);
 };
   
-  // Dummy method since base-table expects it
-  fetchTableData = () => {
-    return this.getReportObservable();
+  // Method called by base-table for backend pagination
+  fetchTableData = (params?: any) => {
+    if (!this.selectedTableId) return of({ success: false });
+
+    const queryParams: any = { ...params };
+    
+    if (this.selectedUserId) {
+        queryParams.user_id = this.selectedUserId;
+    }
+    
+    if (this.selectedDate) {
+        queryParams.date = this.selectedDate;
+    }
+
+    return this.tableService.getById(this.selectedTableId, queryParams).pipe(
+      tap((res: any) => {
+         if (res.success && res.data) {
+             const tableData = res.data;
+             this.tableData = tableData;
+             
+             let columns = buildTableColumns(tableData.columns).filter((col: any) => col.key !== 'actions');
+             columns = [
+               { key: 'created_at', header: 'Date', type: 'date' },
+               ...columns
+             ];
+             this.tableColumns = columns;
+             
+             if (tableData.records && tableData.records.length === 0) {
+                 this.alert = {
+                     showAlert: true, type: 'info', status: 'info', title: 'No Data',
+                     description: 'No records found for the selected filters.'
+                 };
+             } else {
+                 this.alert = null;
+             }
+         }
+      }),
+      map((res: any) => {
+         if (res.success && res.data) {
+             const tableData = res.data;
+             
+             const mappedRecords = (tableData.records || []).map((record: any) => {
+                 let formattedDate = '-';
+                 if (record.created_at) {
+                     const d = new Date(record.created_at);
+                     if (!isNaN(d.getTime())) {
+                         const year = d.getFullYear();
+                         const month = String(d.getMonth() + 1).padStart(2, '0');
+                         const day = String(d.getDate()).padStart(2, '0');
+                         formattedDate = `${year}-${month}-${day}`;
+                     }
+                 }
+                 
+                 const flattened = { ...record, created_at: formattedDate };
+                 if (record.values && Array.isArray(record.values)) {
+                   record.values.forEach((v: any) => {
+                     if (v.column && v.column.name) flattened[v.column.name] = v.value;
+                     else if (v.column_name) flattened[v.column_name] = v.value;
+                   });
+                 }
+                 return flattened;
+             });
+
+             return {
+                 success: true,
+                 data: {
+                     data: mappedRecords,
+                     total: tableData.pagination?.total || mappedRecords.length
+                 }
+             };
+         }
+         return res;
+      })
+    );
   };
 }

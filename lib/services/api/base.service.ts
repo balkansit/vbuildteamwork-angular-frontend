@@ -11,8 +11,8 @@ export abstract class BaseService<T> {
     return this.http.get<ApiResponse>(this.baseUrl, { params });
   }
 
-  getById(id: number | string): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.baseUrl}/${id}`);
+  getById(id: number | string, params?: any): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.baseUrl}/${id}`, { params });
   }
 
   create(data: T): Observable<ApiResponse> {
